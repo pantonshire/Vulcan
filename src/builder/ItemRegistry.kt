@@ -1,0 +1,4 @@
+package builder
+
+object ItemRegistry {
+}
