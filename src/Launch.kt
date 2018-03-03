@@ -1,6 +1,8 @@
+import builder.ItemBuilder
 import io.JavaWriter
 import language.BlankLine
 import language.Events
+import language.Line
 import parser.VulcanParser
 import java.io.File
 
@@ -9,6 +11,7 @@ fun main(args : Array<String>) {
     val parser = VulcanParser()
     var lineNo = 0
     var validEvents = Events.none
+    val lineList: MutableList<Line> = mutableListOf()
 
     reader.readLines().asSequence().forEach {
         if(lineNo == 0) {
@@ -21,11 +24,14 @@ fun main(args : Array<String>) {
             val line = parser.parseLine(lineNo, it, validEvents)
             if(line !is BlankLine) {
                 println("Line ${line.lineNo + 1}: ${line.pseudocode()}")
+                lineList += line
             }
         }
         ++lineNo //Always increment, as this is only used for referencing erroneous lines
     }
     reader.close()
+
+    ItemBuilder(lineList.toTypedArray()).build()
 
 //    JavaWriter().writeFile("testdata${File.separator}javatest.java",
 //            "public class Test {¶   public static void main(String[] args) {¶" +

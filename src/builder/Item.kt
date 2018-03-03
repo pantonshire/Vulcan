@@ -5,11 +5,11 @@ class Item(val name: String, val description: String, val stackSize: Int, val sh
     fun registryName(): String = name.replace(" ", "_").toLowerCase()
 
     fun toJava(): String {
-        var java = "MCMod.items.addItem(${registryName()}, new GenericItem($stackSize, $shiny)"
+        var java = "MCMod.items.addItem(${registryName()}, new GenericItem($description, $stackSize, $shiny)"
         if(overrides.isNotEmpty()) {
-            java += "¶{¶"
+            java += " {¶"
             overrides.keys.asSequence().forEach {
-                java += "@Override¶$it{¶${overrides[it]}¶}"
+                java += "@Override¶$it {¶${overrides[it]}¶}"
             }
             java += "¶}"
         }
