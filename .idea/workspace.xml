@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/builder/Builder.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/builder/Builder.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" />
-      <change beforePath="$PROJECT_DIR$/src/Launch.kt" afterPath="$PROJECT_DIR$/src/Launch.kt" />
-      <change beforePath="$PROJECT_DIR$/src/builder/Builder.kt" afterPath="$PROJECT_DIR$/src/builder/Builder.kt" />
-      <change beforePath="$PROJECT_DIR$/src/builder/Item.kt" afterPath="$PROJECT_DIR$/src/builder/Item.kt" />
       <change beforePath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -53,17 +47,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ItemBuilder.kt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ItemBuilder.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="28" column="135" lean-forward="false" selection-start-line="28" selection-start-column="135" selection-end-line="28" selection-end-column="135" />
+            <state relative-caret-position="342">
+              <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Item.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Item.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/builder/Item.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
@@ -150,8 +144,8 @@
         <option value="$PROJECT_DIR$/src/builder/BuildError.kt" />
         <option value="$PROJECT_DIR$/src/builder/Builder.kt" />
         <option value="$PROJECT_DIR$/src/Launch.kt" />
-        <option value="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
         <option value="$PROJECT_DIR$/src/builder/Item.kt" />
+        <option value="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
       </list>
     </option>
   </component>
@@ -370,6 +364,14 @@
       <option name="presentableId" value="Default" />
       <updated>1520009613525</updated>
     </task>
+    <task id="LOCAL-00001" summary="Test output for generated items">
+      <created>1520116105763</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1520116105763</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -402,6 +404,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Test output for generated items" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test output for generated items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -653,14 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/Builder.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-sources.jar!/generated/_Sequences.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
@@ -695,6 +693,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/parser/VulcanParser.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Launch.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -705,26 +711,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parser/VulcanParser.kt">
+    <entry file="file://$PROJECT_DIR$/src/builder/Item.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+        <state relative-caret-position="198">
+          <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/Builder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-sources.jar!/generated/_Strings.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="840" column="31" lean-forward="false" selection-start-line="840" selection-start-column="31" selection-end-line="840" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="28" column="135" lean-forward="false" selection-start-line="28" selection-start-column="135" selection-end-line="28" selection-end-column="135" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/Item.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+        <state relative-caret-position="342">
+          <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
           <folding />
         </state>
       </provider>
