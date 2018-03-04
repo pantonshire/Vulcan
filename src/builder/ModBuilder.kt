@@ -33,6 +33,7 @@ object ModBuilder {
         javaFileFromTemplate("ItemManager")
         javaFileFromTemplate("VulcanItem")
         itemModelFiles()
+        langFile()
     }
 
     private fun projectSkeleton() {
@@ -56,7 +57,12 @@ object ModBuilder {
     }
 
     private fun modItemsFile() {
-        var content: String = "package com.$modID;¶»¶public final class ModItems {¶»public static void makeItems() {"
+        var content: String = "package com.$modID;¶»¶" +
+                        "import net.minecraft.world.World;¶" +
+                        "import net.minecraft.util.EnumHand;¶" +
+                        "import net.minecraft.entity.player.EntityPlayer;¶" +
+                        "»¶public final class ModItems {¶»public static void makeItems() {"
+
         items.asSequence().forEach {
             content += "¶" + it.toJava()
         }
@@ -65,10 +71,18 @@ object ModBuilder {
     }
 
     private fun itemModelFiles() {
-        val jsonContent = "{¶»\"parent\": \"item/generated\",¶»\"textures\": { \"layer0\": \"$modID:item/~TEXTURE~\" }¶}"
+        val jsonContent = "{¶»\"parent\": \"item/generated\",¶»\"textures\": {¶»»\"layer0\": \"$modID:item/~TEXTURE~\"¶»}¶}"
         items.asSequence().forEach {
             FileWriter.writeFile(Directories.getDirectory(assets, "models", "item", "${it.registryName()}.json"),
                     jsonContent.replace("~TEXTURE~", it.registryName()))
         }
+    }
+
+    private fun langFile() {
+        var content = ""
+        items.asSequence().forEach {
+            content += "item.${it.registryName()}.name=${it.name}¶"
+        }
+        FileWriter.writeFile(Directories.getDirectory(assets, "lang", "en_us.lang"), content)
     }
 }
