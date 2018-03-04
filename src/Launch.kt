@@ -1,5 +1,5 @@
 import builder.ItemBuilder
-import io.JavaWriter
+import builder.ModBuilder
 import language.BlankLine
 import language.Events
 import language.Line
@@ -33,7 +33,5 @@ fun main(args : Array<String>) {
 
     ItemBuilder(lineList.toTypedArray()).build()
 
-//    JavaWriter().writeFile("testdata${File.separator}javatest.java",
-//            "public class Test {¶   public static void main(String[] args) {¶" +
-//                    "       System.out.println(\"Hello world!\");¶   }¶}")
+    ModBuilder.build()
 }

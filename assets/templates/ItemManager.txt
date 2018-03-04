@@ -1,0 +1,47 @@
+package com.~MODID~;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
+
+import java.util.HashMap;
+
+public final class ItemManager {
+
+    private HashMap<String, Item> items;
+
+    public ItemManager() {
+        items = new HashMap<String, Item>();
+    }
+
+    public Item getItem(String name) {
+        if(items.containsKey(name)) {
+            return items.get(name);
+        } else {
+            System.err.println("Could not find an item called \'" + name + "\'.");
+            return Items.APPLE;
+        }
+    }
+
+    public Item addItem(String name, Item item) {
+        items.put(name, item);
+        Vulcan.registry.scheduleRegisterItem(item, name);
+        return item;
+    }
+
+    public void registerModels() {
+        net.minecraft.client.renderer.RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+        for(String itemName : items.keySet()) {
+            System.out.println("Registering model for " + itemName);
+            renderItem.getItemModelMesher().register(items.get(itemName), 0, new ModelResourceLocation("~MODID~:" + itemName, "inventory"));
+        }
+    }
+}

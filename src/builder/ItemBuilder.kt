@@ -28,33 +28,36 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
         val item = Item(name, description, stackSize, shiny, mapOf(
                 Pair("public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)", "player.jump()")
         )) //Add method overrides later
-        val java = item.toJava()
-        println()
 
-        var indentation = 0
-        java.split("¶").forEach {
-            var indentationString = ""
-            for(x in 0 until indentation) {
-                indentationString += "  "
-            }
+        ModBuilder.registerItem(item)
 
-            println(indentationString + it)
-
-            for(char in it) {
-                when(char) {
-                    '{' -> ++indentation
-                    '}' -> --indentation
-                }
-            }
-        }
+//        val java = item.toJava()
+//        println()
+//
+//        var indentation = 0
+//        java.split("¶").forEach {
+//            var indentationString = ""
+//            for(x in 0 until indentation) {
+//                indentationString += "  "
+//            }
+//
+//            println(indentationString + it)
+//
+//            for(char in it) {
+//                when(char) {
+//                    '{' -> ++indentation
+//                    '}' -> --indentation
+//                }
+//            }
+//        }
     }
 
     private fun processLine(line: Line) {
         if(context == "constructor") {
             if(line is SetLine) {
                 when(line.field) {
-                    "name" -> name = line.value
-                    "description" -> description = line.value
+                    "name" -> name = line.value.replace("\"", "")
+                    "description" -> description = line.value.replace("\"", "")
                     "stackSize" -> stackSize = line.value.toInt()
                     "shiny" -> shiny = line.value.toBoolean()
                 }

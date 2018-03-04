@@ -1,4 +1,0 @@
-package builder
-
-object ItemRegistry {
-}
