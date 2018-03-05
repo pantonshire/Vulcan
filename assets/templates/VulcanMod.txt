@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = "~MODID~", version = "~VERSION~", name = "~NAME~")
-public final class PEasyModLib {
+public final class VulcanMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
