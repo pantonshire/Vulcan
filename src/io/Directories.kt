@@ -30,4 +30,10 @@ object Directories {
         }
         return directory
     }
+
+    fun parseExternalDirectory(path: String): String {
+        val home = System.getProperty("user.home")
+        val separator = File.separator
+        return home + separator + path.replace("/", separator).removePrefix(home)
+    }
 }
