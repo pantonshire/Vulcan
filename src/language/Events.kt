@@ -12,6 +12,10 @@ object Events {
             Event("eaten", "player")
     )
 
+    val toolEvents = arrayOf(
+            Event("block_broken", "player")
+    )
+
     val blockEvents = arrayOf(
             Event("walked_on", "entity"),
             Event("destroyed"),

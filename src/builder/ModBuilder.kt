@@ -12,8 +12,25 @@ object ModBuilder {
     var version = "no version provided"
     private val items: MutableList<Item> = mutableListOf()
 
-    val src = "java${File.separator}com${File.separator}$modID"
-    val assets = "resources${File.separator}assets${File.separator}$modID"
+    var src = "java${File.separator}com${File.separator}$modID"
+    var assets = "resources${File.separator}assets${File.separator}$modID"
+
+    fun setModSettings(lines: Array<String>) {
+        lines.asSequence().forEach {
+            val split = it.split(":")
+            if(split.size == 2) {
+                val value = split[1].trim()
+                when(split[0].trim().toLowerCase()) {
+                    "id" -> modID = value
+                    "name" -> modName = value
+                    "version" -> version = value
+                }
+            }
+        }
+
+        src = "java${File.separator}com${File.separator}$modID"
+        assets = "resources${File.separator}assets${File.separator}$modID"
+    }
 
     fun registerItem(item: Item) {
         items += item
@@ -32,6 +49,7 @@ object ModBuilder {
         javaFileFromTemplate("RegistryManager")
         javaFileFromTemplate("ItemManager")
         javaFileFromTemplate("VulcanItem")
+        javaFileFromTemplate("MessageUtils")
         itemModelFiles()
         langFile()
     }

@@ -1,0 +1,20 @@
+package com.~MODID~;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+
+public final class MessageUtils {
+
+    public static void attack(EntityPlayer player, int damage) {
+        player.attackEntityFrom(DamageSource.GENERIC, damage);
+    }
+
+    public static void swingArm(EntityPlayer player, boolean main) {
+        player.swingArm(main ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND);
+    }
+
+    public static void kill(EntityPlayer player) {
+        player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 10000);
+    }
+}

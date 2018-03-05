@@ -23,8 +23,12 @@ class VulcanParser {
             }
 
             "tell" -> {
-                if(words.size == 4 && words[2] == "to") {
-                    MessageLine(lineNo, words[1], words[3])
+                if(words.size >= 4 && words[2] == "to") {
+                    val args: MutableList<String> = mutableListOf()
+                    for(word in 4 until words.size) {
+                        args += words[word]
+                    }
+                    MessageLine(lineNo, words[1], words[3], args.toTypedArray())
                 } else {
                     BlankLine(lineNo)
                 }

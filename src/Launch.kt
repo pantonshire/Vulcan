@@ -1,5 +1,6 @@
 import builder.ItemBuilder
 import builder.ModBuilder
+import io.FileReader
 import language.BlankLine
 import language.Events
 import language.Line
@@ -7,6 +8,10 @@ import parser.VulcanParser
 import java.io.File
 
 fun main(args : Array<String>) {
+
+    val settings = FileReader.readTextFile("settings.vmod")
+    ModBuilder.setModSettings(settings)
+
     val reader = File("testdata${File.separator}banana.vlcn").bufferedReader()
     val parser = VulcanParser()
     var lineNo = 0
