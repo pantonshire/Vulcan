@@ -26,7 +26,7 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
         }
 
         val item = Item(name, description, stackSize, shiny, mapOf(
-                Pair("public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)", "player.jump()")
+                Pair("public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)", "player.jump(); return super.onItemRightClick(world, player, hand);")
         )) //Add method overrides later
 
         ModBuilder.registerItem(item)

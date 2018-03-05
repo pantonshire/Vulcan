@@ -86,6 +86,8 @@ object ModBuilder {
                         "import net.minecraft.world.World;¶" +
                         "import net.minecraft.util.EnumHand;¶" +
                         "import net.minecraft.entity.player.EntityPlayer;¶" +
+                        "import net.minecraft.util.ActionResult;¶" +
+                        "import net.minecraft.item.ItemStack;¶" +
                         "»¶public final class ModItems {¶»public static void makeItems() {"
 
         items.asSequence().forEach {

@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/language/objects/Player.kt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/language/objects/VulcanObject.kt" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/settings.vmod" afterPath="$PROJECT_DIR$/assets/settings.vmod" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/Vulcan.txt" afterPath="$PROJECT_DIR$/assets/templates/Vulcan.txt" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" />
-      <change beforePath="$PROJECT_DIR$/src/Launch.kt" afterPath="$PROJECT_DIR$/src/Launch.kt" />
+      <change beforePath="$PROJECT_DIR$/assets/templates/VulcanItem.txt" afterPath="$PROJECT_DIR$/assets/templates/VulcanItem.txt" />
+      <change beforePath="$PROJECT_DIR$/assets/templates/VulcanMod.txt" afterPath="$PROJECT_DIR$/assets/templates/VulcanMod.txt" />
+      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/language/Event.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/language/Event.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/language/Events.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/language/Events.class" />
       <change beforePath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
       <change beforePath="$PROJECT_DIR$/src/builder/ModBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
-      <change beforePath="$PROJECT_DIR$/src/io/Directories.kt" afterPath="$PROJECT_DIR$/src/io/Directories.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/Event.kt" afterPath="$PROJECT_DIR$/src/language/Event.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/Events.kt" afterPath="$PROJECT_DIR$/src/language/Events.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/VulcanObject.kt" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,6 +29,16 @@
               <folding>
                 <element signature="e#0#233#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemBuilder.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="402">
+              <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,8 +68,8 @@
       <file leaf-file-name="ModBuilder.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="63" column="35" lean-forward="false" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
+            <state relative-caret-position="337">
+              <caret line="89" column="65" lean-forward="true" selection-start-line="89" selection-start-column="65" selection-end-line="89" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -81,11 +85,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Player.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/language/objects/Player.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="426">
               <caret line="83" column="64" lean-forward="false" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VulcanMod.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/templates/VulcanMod.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="19" column="64" lean-forward="true" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -132,9 +146,7 @@
         <option value="$PROJECT_DIR$/src/language/SetLine.kt" />
         <option value="$PROJECT_DIR$/src/builder/Builder.kt" />
         <option value="$PROJECT_DIR$/src/builder/ItemRegistry.kt" />
-        <option value="$PROJECT_DIR$/assets/templates/VulcanItem.txt" />
         <option value="$PROJECT_DIR$/assets/templates/ModItems.txt" />
-        <option value="$PROJECT_DIR$/assets/templates/VulcanMod.txt" />
         <option value="$PROJECT_DIR$/assets/templates/RegistryManager.txt" />
         <option value="$PROJECT_DIR$/assets/templates/ItemManager.txt" />
         <option value="$PROJECT_DIR$/assets/testdata/banana.vlcn" />
@@ -156,11 +168,13 @@
         <option value="$PROJECT_DIR$/src/language/Events.kt" />
         <option value="$PROJECT_DIR$/src/language/objects/Player.kt" />
         <option value="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" />
-        <option value="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
         <option value="$PROJECT_DIR$/src/Launch.kt" />
-        <option value="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
         <option value="$PROJECT_DIR$/src/io/Directories.kt" />
         <option value="$PROJECT_DIR$/assets/templates/Vulcan.txt" />
+        <option value="$PROJECT_DIR$/assets/templates/VulcanMod.txt" />
+        <option value="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
+        <option value="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
+        <option value="$PROJECT_DIR$/assets/templates/VulcanItem.txt" />
       </list>
     </option>
   </component>
@@ -438,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520280968016</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Files are now outputted to directory specified in settings file">
+      <created>1520290871283</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1520290871283</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -480,7 +501,8 @@
     <MESSAGE value="Language file generation, errors now show correct line number" />
     <MESSAGE value="Started work on sending messages to objects" />
     <MESSAGE value="External directories can now be referenced" />
-    <option name="LAST_COMMIT_MESSAGE" value="External directories can now be referenced" />
+    <MESSAGE value="Files are now outputted to directory specified in settings file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Files are now outputted to directory specified in settings file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -521,26 +543,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/templates/VulcanItem.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="20" lean-forward="true" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/templates/ModItems.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/templates/ItemManager.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -573,14 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/templates/VulcanMod.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -689,14 +687,6 @@
             <element signature="e#3553#3554#0" expanded="false" />
             <element signature="e#3619#3620#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/Item.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="97" lean-forward="false" selection-start-line="7" selection-start-column="97" selection-end-line="7" selection-end-column="97" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,14 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/language/Events.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
@@ -857,14 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="17" column="66" lean-forward="false" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="63" column="35" lean-forward="false" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -885,16 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Launch.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="37" column="36" lean-forward="false" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/templates/Vulcan.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -907,6 +871,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="426">
           <caret line="83" column="64" lean-forward="false" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/templates/ItemManager.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/Item.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="67" lean-forward="true" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/templates/VulcanMod.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="64" lean-forward="true" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="89" column="65" lean-forward="true" selection-start-line="89" selection-start-column="65" selection-end-line="89" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Launch.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="37" column="36" lean-forward="false" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/templates/VulcanItem.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="38" lean-forward="true" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
           <folding />
         </state>
       </provider>

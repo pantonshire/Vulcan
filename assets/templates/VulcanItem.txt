@@ -8,12 +8,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class GenericItem extends Item {
+public class VulcanItem extends Item {
 
     private boolean enchantedEffect;
     protected String description;
 
-    public GenericItem(String description, int stackSize, boolean enchantedEffect) {
+    public VulcanItem(String description, int stackSize, boolean enchantedEffect) {
         super();
         this.description = description;
         this.enchantedEffect = enchantedEffect;

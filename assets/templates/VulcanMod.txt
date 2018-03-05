@@ -12,12 +12,12 @@ public final class PEasyModLib {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(Vulcan.registry);
-        ModItems.makeItems()
+        ModItems.makeItems();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new EventManager());
+        //MinecraftForge.EVENT_BUS.register(new EventManager());
 
         if(event.getSide() == Side.CLIENT) {
             Vulcan.items.registerModels();
