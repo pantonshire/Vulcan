@@ -10,6 +10,7 @@ object ModBuilder {
     var modID = "my_vulcan_mod"
     var modName = "My Vulcan Mod"
     var version = "no version provided"
+    var outputPath = ""
     private val items: MutableList<Item> = mutableListOf()
 
     var src = "java${File.separator}com${File.separator}$modID"
@@ -24,12 +25,13 @@ object ModBuilder {
                     "id" -> modID = value
                     "name" -> modName = value
                     "version" -> version = value
+                    "output" -> outputPath = Directories.parseExternalDirectory(value)
                 }
             }
         }
 
-        src = "java${File.separator}com${File.separator}$modID"
-        assets = "resources${File.separator}assets${File.separator}$modID"
+        src = "$outputPath${File.separator}java${File.separator}com${File.separator}$modID"
+        assets = "$outputPath${File.separator}resources${File.separator}assets${File.separator}$modID"
     }
 
     fun registerItem(item: Item) {
@@ -39,6 +41,11 @@ object ModBuilder {
     fun build() {
         if(modID.isEmpty()) {
             println("Build failed: invalid mod ID")
+            return
+        }
+
+        if(!Directories.exists(outputPath)) {
+            println("Build failed: output path does not exist")
             return
         }
 

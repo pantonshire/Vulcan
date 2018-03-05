@@ -30,26 +30,6 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
         )) //Add method overrides later
 
         ModBuilder.registerItem(item)
-
-//        val java = item.toJava()
-//        println()
-//
-//        var indentation = 0
-//        java.split("¶").forEach {
-//            var indentationString = ""
-//            for(x in 0 until indentation) {
-//                indentationString += "  "
-//            }
-//
-//            println(indentationString + it)
-//
-//            for(char in it) {
-//                when(char) {
-//                    '{' -> ++indentation
-//                    '}' -> --indentation
-//                }
-//            }
-//        }
     }
 
     private fun processLine(line: Line) {

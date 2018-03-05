@@ -1,6 +1,6 @@
 package com.~MODID~;
 
-public final class MCMod {
+public final class Vulcan {
 
     public static ItemManager items = new ItemManager();
     public static RegistryManager registry = new RegistryManager();

@@ -1,25 +1,28 @@
 package language
 
+import language.objects.LivingEntity
+import language.objects.Player
+
 object Events {
 
     val itemEvents = arrayOf(
-            Event("right_click", "player"),
-            Event("update", "player"),
-            Event("held", "player")
+            Event("right_click", Player("player")),
+            Event("update", Player("player")),
+            Event("held", Player("player"))
     )
 
     val foodEvents = arrayOf(
-            Event("eaten", "player")
+            Event("eaten", Player("player"))
     )
 
     val toolEvents = arrayOf(
-            Event("block_broken", "player")
+            Event("block_broken", Player("player"))
     )
 
     val blockEvents = arrayOf(
-            Event("walked_on", "entity"),
+            Event("walked_on", LivingEntity("entity")),
             Event("destroyed"),
-            Event("right_clicked", "player"),
+            Event("right_clicked", Player("player")),
             Event("placed")
     )
 
@@ -27,7 +30,7 @@ object Events {
             Event("update"),
             Event("jump"),
             Event("sleep"),
-            Event("hurt", "attacker"),
+            Event("hurt", LivingEntity("attacker")),
             Event("spawn")
     )
 
