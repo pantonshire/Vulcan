@@ -1,11 +1,11 @@
 package com.~MODID~;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import java.util.List;
 
 public class VulcanItem extends Item {
@@ -20,9 +20,9 @@ public class VulcanItem extends Item {
         setMaxStackSize(stackSize);
     }
 
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedTooltips) {
+    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flag) {
         if(description != null && !description.equals("")) {
-            list.add(description);
+            tooltip.add(description);
         }
     }
 
