@@ -1,4 +1,0 @@
-Foo
-Baa
-Testing, testing
-Goodbye!

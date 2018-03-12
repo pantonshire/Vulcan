@@ -1,6 +1,11 @@
 package io
 
+import application.UIHandler
 import java.io.File
+import java.io.InputStreamReader
+import java.io.BufferedReader
+import java.lang.Exception
+
 
 object FileReader {
 
@@ -11,6 +16,8 @@ object FileReader {
             val reader = file.bufferedReader()
             reader.readLines().asSequence().forEach { lines.add(it) }
             reader.close()
+        } else {
+            UIHandler.error("File not found: $directory")
         }
         return lines.toTypedArray()
     }
@@ -24,5 +31,19 @@ object FileReader {
         }
 
         return files.toTypedArray()
+    }
+
+    fun readResourceFile(name: String): Array<String> {
+        val lines: MutableList<String> = mutableListOf()
+        try {
+            val inputStream = javaClass.getResourceAsStream(name)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            reader.readLines().asSequence().forEach { lines.add(it) }
+            reader.close()
+        } catch(exception: Exception) {
+            UIHandler.message("Error reading internal file $name")
+        }
+
+        return lines.toTypedArray()
     }
 }

@@ -1,9 +1,0 @@
-type: item
-
-attributes:
-    set name to "Banana"
-    set description to "Right-click to jump!"
-    set shiny to true
-
-right_click:
-    tell player to jump

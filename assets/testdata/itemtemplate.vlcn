@@ -1,9 +1,0 @@
-type: item
-
-attributes:
-    set name to "Foo"
-    set description to "Lorem ipsum"
-    set shiny to true
-
-right_click:
-    tell player to jump

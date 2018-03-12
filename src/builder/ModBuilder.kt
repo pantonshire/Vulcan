@@ -49,12 +49,10 @@ object ModBuilder {
     fun build() {
         if(modID.isEmpty()) {
             throw IllegalArgumentException("Build failed: invalid mod ID")
-            return
         }
 
         if(!Directories.exists(outputPath)) {
             throw IllegalArgumentException("Build failed: output path does not exist")
-            return
         }
 
         projectSkeleton()
@@ -81,7 +79,7 @@ object ModBuilder {
     }
 
     private fun javaFileFromTemplate(name: String) {
-        val templateLines = FileReader.readTextFile(Directories.getDirectory("templates", "$name.txt"))
+        val templateLines = FileReader.readResourceFile("/templates/$name.txt")
         val javaFileLines: MutableList<String> = mutableListOf()
         templateLines.asSequence().forEach {
             javaFileLines += it.replace("~MODID~", modID).replace("~NAME~", modName).replace("~VERSION~", version)
