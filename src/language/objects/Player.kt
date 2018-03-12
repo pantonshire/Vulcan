@@ -11,7 +11,7 @@ class Player(name: String): VulcanObject(name) {
             Pair("swing", 2), //Swing arm
             Pair("heal", 2), //Recover health
             Pair("die", 0), //Take unblockable fatal damage
-            Pair("mount", 1) //Ride an entity
+            Pair("ride", 1) //Ride an entity
     )
 
     override fun convertMessage(message: String, parameters: Array<String>, others: Map<String, VulcanObject>): String {
@@ -78,7 +78,7 @@ class Player(name: String): VulcanObject(name) {
             "die" -> return "MessageUtils.kill($name);"
 
             //Set riding entity
-            "mount" -> {
+            "ride" -> {
                 if(others.containsKey(parameters[0])) {
                     val mountEntity = others[parameters[0]]!!
                     if(mountEntity is LivingEntity || mountEntity is Player) {

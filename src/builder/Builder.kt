@@ -2,13 +2,12 @@ package builder
 
 import language.*
 
-abstract class Builder(type: String, val lines: Array<Line>) {
+abstract class Builder(val fileName: String, type: String, val lines: Array<Line>) {
 
     val validEvents = Events.getValidEventNames(type)
     val validEventNameMap: Map<String, Event>
     var context = "default"
     val eventContent: HashMap<String, MutableList<String>> = hashMapOf()
-    val errors: MutableList<BuildError> = mutableListOf()
 
     init {
         val map = hashMapOf<String, Event>()
@@ -24,25 +23,25 @@ abstract class Builder(type: String, val lines: Array<Line>) {
 
     internal fun checkForErrors(line: Line) {
         if(line is BlankLine) {
-            errors += BuildError(line, "internal error (this is bad!)")
+            line.throwError(fileName,"internal error (this is bad!)")
         }
 
         else when(context) {
             "default" -> {
                 if(!(line is ConstructorLine || line is EventLine)) {
-                    errors += BuildError(line, "no context defined")
+                    line.throwError(fileName,"no context defined")
                 }
             }
 
             "constructor" -> {
                 if(line is MessageLine) {
-                    errors += BuildError(line, "cannot send messages in the current context")
+                    line.throwError(fileName,"cannot send messages in the current context")
                 }
             }
 
             in validEvents -> {
                 if(line is SetLine) {
-                    errors += BuildError(line, "cannot set attributes in the current context")
+                    line.throwError(fileName,"cannot set attributes in the current context")
                 }
             }
         }
@@ -56,7 +55,7 @@ abstract class Builder(type: String, val lines: Array<Line>) {
             if(event in validEvents) {
                 context = event
             } else {
-                errors += BuildError(line, "unrecognised event \"$event\"")
+                line.throwError(fileName,"unrecognised event \"$event\"")
             }
         }
     }

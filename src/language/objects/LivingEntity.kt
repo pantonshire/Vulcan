@@ -3,7 +3,6 @@ package language.objects
 class LivingEntity(name: String): VulcanObject(name) {
 
     override val validMessages: Map<String, Int> = mapOf(
-            Pair("jump", 0), //Make entity jump
             Pair("take", 2), //Damage entity
             Pair("burn", 3), //Set entity on fire
             Pair("teleport", 2), //Set entity's position
@@ -11,14 +10,11 @@ class LivingEntity(name: String): VulcanObject(name) {
             Pair("breathe", 0), //Restore entity's air
             Pair("heal", 2), //Recover health
             Pair("die", 0), //Take unblockable fatal damage
-            Pair("mount", 1) //Ride an entity
+            Pair("ride", 1) //Ride an entity
     )
 
     override fun convertMessage(message: String, parameters: Array<String>, others: Map<String, VulcanObject>): String {
         when(message) {
-            //Jump
-            "jump" -> return "if(${name}.onGround){ ${name}.jump(); }"
-
             //Damage
             "take" -> {
                 if(parameters[1] == "damage") {
@@ -68,7 +64,7 @@ class LivingEntity(name: String): VulcanObject(name) {
             "die" -> return "MessageUtils.kill($name);"
 
             //Set riding entity
-            "mount" -> {
+            "ride" -> {
                 if(others.containsKey(parameters[0])) {
                     val mountEntity = others[parameters[0]]!!
                     if(mountEntity is LivingEntity || mountEntity is Player) {

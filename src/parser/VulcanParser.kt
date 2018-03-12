@@ -5,7 +5,7 @@ import language.*
 object VulcanParser {
 
     fun parseLine(lineNo: Int, raw: String, validEvents: Array<Event>): Line {
-        val words = split(raw)
+        val words = split(raw.trim())
 
         if(words.isEmpty()) {
             return BlankLine(lineNo)

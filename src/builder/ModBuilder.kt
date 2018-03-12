@@ -1,5 +1,6 @@
 package builder
 
+import application.UIHandler
 import io.Directories
 import io.FileReader
 import io.FileWriter
@@ -40,12 +41,12 @@ object ModBuilder {
 
     fun build() {
         if(modID.isEmpty()) {
-            println("Build failed: invalid mod ID")
+            throw IllegalArgumentException("Build failed: invalid mod ID")
             return
         }
 
         if(!Directories.exists(outputPath)) {
-            println("Build failed: output path does not exist")
+            throw IllegalArgumentException("Build failed: output path does not exist")
             return
         }
 

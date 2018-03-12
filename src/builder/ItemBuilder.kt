@@ -3,7 +3,7 @@ package builder
 import console.VConsole
 import language.*
 
-class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
+class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
 
     private val rightClick = "public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)"
     private val update = "public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)"
@@ -18,14 +18,6 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
         for(line in lines) {
             checkForErrors(line)
             updateContext(line)
-            if(errors.isNotEmpty()) {
-                VConsole.out("Build failed with ${errors.size} error(s):")
-                errors.asSequence().forEach {
-                    VConsole.out(it.getErrorLog())
-                }
-                break
-            }
-
             processLine(line)
         }
 
@@ -38,7 +30,7 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
                 when(line.field) {
                     "name" -> name = line.value.replace("\"", "")
                     "description" -> description = line.value.replace("\"", "")
-                    "stackSize" -> stackSize = line.value.toInt()
+                    "stack" -> stackSize = line.value.toInt()
                     "shiny" -> shiny = line.value.toBoolean()
                 }
             }
@@ -55,17 +47,17 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
                             try {
                                 javaFunctionCall = target.messageToJava(line.method, line.arguments, event.parameters)
                             } catch(exception: IllegalArgumentException) {
-                                errors += BuildError(line, exception.message ?: "no error message was provided")
+                                line.throwError(fileName,exception.message ?: "no error message was provided")
                             }
 
                             if(javaFunctionCall.isNotEmpty()) {
                                eventContent[context]?.add(javaFunctionCall)
                             }
                         } else {
-                            errors += BuildError(line, "invalid message \"${line.method}\"")
+                            line.throwError(fileName,"invalid message \"${line.method}\"")
                         }
                     } else {
-                        errors += BuildError(line, "invalid target for message \"${line.target}\"")
+                        line.throwError(fileName,"invalid target for message \"${line.target}\"")
                     }
                 }
             }

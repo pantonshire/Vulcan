@@ -7,6 +7,7 @@ import language.BlankLine
 import language.Events
 import language.Line
 import parser.VulcanParser
+import java.io.File
 
 fun main(args: Array<String>) {
 
@@ -35,6 +36,12 @@ private fun build(sourceDirectory: String) {
 }
 
 private fun parseVulcanFile(vulcanFileDirectory: String) {
+    val directory = vulcanFileDirectory.split(File.separator)
+    var fileName = ""
+    if(directory.isNotEmpty()) {
+        fileName = directory[directory.size - 1]
+    }
+
     var lineNo = 0
     var validEvents = Events.none
     var type = ""
@@ -59,7 +66,7 @@ private fun parseVulcanFile(vulcanFileDirectory: String) {
     val lines = lineList.toTypedArray()
 
     when(type) {
-        "item" -> ItemBuilder(lines).build()
+        "item" -> ItemBuilder(fileName, lines).build()
         else -> VConsole.out("Unrecognised type: \"$type\". Skipping...")
     }
 }
