@@ -6,17 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="Added a .gitignore file finally">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Launch.kt" afterPath="$PROJECT_DIR$/src/Launch.kt" />
+      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" />
       <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change beforePath="$PROJECT_DIR$/src/application/VulcanBuild.kt" afterPath="$PROJECT_DIR$/src/application/VulcanBuild.kt" />
-      <change beforePath="$PROJECT_DIR$/src/builder/Item.kt" afterPath="$PROJECT_DIR$/src/builder/Item.kt" />
-      <change beforePath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
       <change beforePath="$PROJECT_DIR$/src/builder/ModBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
-      <change beforePath="$PROJECT_DIR$/src/io/Directories.kt" afterPath="$PROJECT_DIR$/src/io/Directories.kt" />
-      <change beforePath="$PROJECT_DIR$/src/io/FileReader.kt" afterPath="$PROJECT_DIR$/src/io/FileReader.kt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +36,8 @@
       <file leaf-file-name="ModBuilder.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="120" column="45" lean-forward="true" selection-start-line="120" selection-start-column="45" selection-end-line="120" selection-end-column="45" />
+            <state relative-caret-position="341">
+              <caret line="113" column="108" lean-forward="false" selection-start-line="113" selection-start-column="108" selection-end-line="113" selection-end-column="108" />
               <folding />
             </state>
           </provider>
@@ -177,8 +172,8 @@
         <option value="$PROJECT_DIR$/src/application/VulcanBuild.kt" />
         <option value="$PROJECT_DIR$/src/Launch.kt" />
         <option value="$PROJECT_DIR$/src/io/FileReader.kt" />
-        <option value="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
         <option value="$PROJECT_DIR$/src/io/Directories.kt" />
+        <option value="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
       </list>
     </option>
   </component>
@@ -566,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520886538343</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added support for item textures">
+      <created>1520888984914</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1520888984914</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -618,7 +620,8 @@
     <MESSAGE value="Improved GUI, added buttons to generate settings file and an example mod" />
     <MESSAGE value="Project now properly builds to jar and can be executed. Fix for reading resource files inside jar file." />
     <MESSAGE value="Added a .gitignore file finally" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a .gitignore file finally" />
+    <MESSAGE value="Added support for item textures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added support for item textures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -963,14 +966,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io/FileWriter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1003,17 +998,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/JavaFXApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="51" column="60" lean-forward="true" selection-start-line="51" selection-start-column="60" selection-end-line="51" selection-end-column="60" />
-          <folding>
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#741#742#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io/FileReader.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="602">
@@ -1030,14 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/VulcanBuild.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="46" column="84" lean-forward="true" selection-start-line="46" selection-start-column="84" selection-end-line="46" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io/Directories.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
@@ -1048,10 +1024,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/JavaFXApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="51" column="60" lean-forward="true" selection-start-line="51" selection-start-column="60" selection-end-line="51" selection-end-column="60" />
+          <folding>
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/VulcanBuild.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="46" column="84" lean-forward="true" selection-start-line="46" selection-start-column="84" selection-end-line="46" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="120" column="45" lean-forward="true" selection-start-line="120" selection-start-column="45" selection-end-line="120" selection-end-column="45" />
+        <state relative-caret-position="341">
+          <caret line="113" column="108" lean-forward="false" selection-start-line="113" selection-start-column="108" selection-end-line="113" selection-end-column="108" />
           <folding />
         </state>
       </provider>

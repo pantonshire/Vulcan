@@ -111,7 +111,7 @@ object ModBuilder {
         val jsonContent = "{¶»\"parent\": \"item/generated\",¶»\"textures\": {¶»»\"layer0\": \"$modID:item/~TEXTURE~\"¶»}¶}"
         items.asSequence().forEach {
             FileWriter.writeFile(Directories.getDirectory(assets, "models", "item", "${it.registryName()}.json"),
-                    jsonContent.replace("~TEXTURE~", it.registryName()))
+                    jsonContent.replace("~TEXTURE~", if(it.texture.isNotEmpty()) it.texture else "unknown"))
         }
     }
 
