@@ -1,4 +1,5 @@
-/.idea/*
-/src/META-INF/*
+**/.idea/workspace.xml
+**/.idea/tasks.xml
 /out/*
 /Vulcan.iml
+.DS_Store

@@ -11,6 +11,7 @@ object ModBuilder {
     var modID = "my_vulcan_mod"
     var modName = "My Vulcan Mod"
     var version = "no version provided"
+    var inputPath = ""
     var outputPath = ""
     private val items: MutableList<Item> = mutableListOf()
 
@@ -64,6 +65,7 @@ object ModBuilder {
         javaFileFromTemplate("VulcanItem")
         javaFileFromTemplate("MessageUtils")
         itemModelFiles()
+        itemTextures()
         langFile()
     }
 
@@ -110,6 +112,17 @@ object ModBuilder {
         items.asSequence().forEach {
             FileWriter.writeFile(Directories.getDirectory(assets, "models", "item", "${it.registryName()}.json"),
                     jsonContent.replace("~TEXTURE~", it.registryName()))
+        }
+    }
+
+    private fun itemTextures() {
+        items.asSequence().filter { it.texture.isNotEmpty() }.forEach {
+            val texture = Directories.getDirectory(inputPath, "${it.texture}.png")
+            if(Directories.exists(texture)) {
+                Directories.copy(texture, Directories.getDirectory(assets, "textures", "item", it.texture + ".png"), true)
+            } else {
+                UIHandler.error("Could not find ${it.texture}.png")
+            }
         }
     }
 

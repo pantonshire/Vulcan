@@ -41,7 +41,7 @@ object FileReader {
             reader.readLines().asSequence().forEach { lines.add(it) }
             reader.close()
         } catch(exception: Exception) {
-            UIHandler.message("Error reading internal file $name")
+            UIHandler.error("Error reading internal file $name")
         }
 
         return lines.toTypedArray()

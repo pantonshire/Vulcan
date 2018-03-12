@@ -16,6 +16,7 @@ object VulcanBuild {
     fun build(sourceDirectory: String) {
         try {
             val source = Directories.parseExternalDirectory(sourceDirectory)
+            ModBuilder.inputPath = source
             val sourceFiles = FileReader.getFilesInFolder(source)
             val vmod = "settings.vmod"
 

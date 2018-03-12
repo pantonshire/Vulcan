@@ -1,6 +1,6 @@
 package builder
 
-class Item(val name: String, val description: String, val stackSize: Int, val shiny: Boolean, val overrides: Map<String, String>) {
+class Item(val name: String, val texture: String, val description: String, val stackSize: Int, val shiny: Boolean, val overrides: Map<String, String>) {
 
     fun registryName(): String = name.replace(" ", "_").toLowerCase()
 

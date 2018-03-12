@@ -1,5 +1,6 @@
 package io
 
+import application.UIHandler
 import java.io.File
 
 object Directories {
@@ -25,6 +26,16 @@ object Directories {
         }
 
         return true
+    }
+
+    fun copy(fromPath: String, toPath: String, overwrite: Boolean) {
+        if(fromPath.isNotEmpty() && toPath.isNotEmpty()) {
+            val fromFile = File(fromPath)
+            val toFile = File(toPath)
+            if(fromFile.exists()) {
+                fromFile.copyTo(toFile, overwrite)
+            }
+        }
     }
 
     fun getDirectory(vararg parts: String): String {

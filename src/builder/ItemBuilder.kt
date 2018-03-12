@@ -13,6 +13,7 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
     private var description: String = ""
     private var stackSize: Int = 64
     private var shiny: Boolean = false
+    private var texture: String = ""
 
     override fun build() {
         for(line in lines) {
@@ -21,7 +22,7 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
             processLine(line)
         }
 
-        ModBuilder.registerItem(Item(name, description, stackSize, shiny, makeOverrideMap()))
+        ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, makeOverrideMap()))
     }
 
     private fun processLine(line: Line) {
@@ -29,6 +30,7 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
             if(line is SetLine) {
                 when(line.field) {
                     "name" -> name = line.value.replace("\"", "")
+                    "texture" -> texture = line.value.replace("\"", "").removePrefix(".png")
                     "description" -> description = line.value.replace("\"", "")
                     "stack" -> stackSize = line.value.toInt()
                     "shiny" -> shiny = line.value.toBoolean()
