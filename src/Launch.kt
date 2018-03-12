@@ -1,49 +1,64 @@
 import builder.ItemBuilder
 import builder.ModBuilder
+import console.VConsole
 import io.Directories
 import io.FileReader
-import io.FileWriter
 import language.BlankLine
 import language.Events
 import language.Line
 import parser.VulcanParser
-import java.io.File
 
-fun main(args : Array<String>) {
+fun main(args: Array<String>) {
 
-//    val path = Directories.parseExternalDirectory("Documents/test2.txt")
-//    FileWriter.writeFile(path,
-//            "Hello there",
-//            "world! How are",
-//            "you doing today?"
-//    )
+    build("Desktop/TestInput")
 
-    val settings = FileReader.readTextFile("settings.vmod")
-    ModBuilder.setModSettings(settings)
+}
 
-    val reader = File("testdata${File.separator}banana.vlcn").bufferedReader()
-    val parser = VulcanParser()
+private fun build(sourceDirectory: String) {
+    val source = Directories.parseExternalDirectory(sourceDirectory)
+    val sourceFiles = FileReader.getFilesInFolder(source)
+    val vmod = "settings.vmod"
+
+    if(sourceFiles.contains(vmod)) {
+        val settings = FileReader.readTextFile(Directories.getDirectory(source, vmod))
+        ModBuilder.setModSettings(settings)
+    } else {
+        VConsole.out("Warning: no settings.vmod file was found. This file is necessary for setting your mod\'s name and id. Default values will be used.")
+    }
+
+    sourceFiles.asSequence().filter { it.endsWith(".vlcn") }.forEach {
+        parseVulcanFile(Directories.getDirectory(source, it))
+    }
+
+    ModBuilder.build()
+}
+
+private fun parseVulcanFile(vulcanFileDirectory: String) {
     var lineNo = 0
     var validEvents = Events.none
+    var type = ""
     val lineList: MutableList<Line> = mutableListOf()
 
-    reader.readLines().asSequence().forEach {
+    FileReader.readTextFile(vulcanFileDirectory).forEach {
         if(lineNo == 0) {
             val words = it.split(Regex("\\s+"))
             if(words.size == 2 && words[0] == "type:") {
-                validEvents = Events.getValidEvents(words[1])
+                type = words[1].toLowerCase().trim()
+                validEvents = Events.getValidEvents(type)
             }
         } else {
-            val line = parser.parseLine(lineNo, it, validEvents)
+            val line = VulcanParser.parseLine(lineNo, it, validEvents)
             if(line !is BlankLine) {
                 lineList += line
             }
         }
-        ++lineNo //Always increment, as this is only used for referencing erroneous lines
+        ++lineNo
     }
-    reader.close()
 
-    ItemBuilder(lineList.toTypedArray()).build()
+    val lines = lineList.toTypedArray()
 
-    ModBuilder.build()
+    when(type) {
+        "item" -> ItemBuilder(lines)
+        else -> VConsole.out("Unrecognised type: \"$type\". Skipping...")
+    }
 }

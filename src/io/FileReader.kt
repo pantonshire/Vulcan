@@ -14,4 +14,15 @@ object FileReader {
         }
         return lines.toTypedArray()
     }
+
+    fun getFilesInFolder(directory: String): Array<String> {
+        val folder = File(directory)
+        val files: MutableList<String> = mutableListOf()
+
+        if(folder.exists() && folder.isDirectory) {
+            folder.listFiles().asSequence().filter { it.isFile }.mapTo(files, { it.name })
+        }
+
+        return files.toTypedArray()
+    }
 }

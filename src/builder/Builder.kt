@@ -12,7 +12,7 @@ abstract class Builder(type: String, val lines: Array<Line>) {
 
     internal fun checkForErrors(line: Line) {
         if(line is BlankLine) {
-            errors += BuildError(line, "internal compilation error (this is bad!)")
+            errors += BuildError(line, "internal error (this is bad!)")
         }
 
         else when(context) {

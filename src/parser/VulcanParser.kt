@@ -2,7 +2,7 @@ package parser
 
 import language.*
 
-class VulcanParser {
+object VulcanParser {
 
     fun parseLine(lineNo: Int, raw: String, validEvents: Array<Event>): Line {
         val words = split(raw)

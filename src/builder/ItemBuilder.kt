@@ -1,5 +1,6 @@
 package builder
 
+import console.VConsole
 import language.Line
 import language.SetLine
 
@@ -15,9 +16,9 @@ class ItemBuilder(lines: Array<Line>): Builder("item", lines) {
             checkForErrors(line)
             updateContext(line)
             if(errors.isNotEmpty()) {
-                println("Build failed with ${errors.size} error(s):")
+                VConsole.out("Build failed with ${errors.size} error(s):")
                 errors.asSequence().forEach {
-                    println(it.getErrorLog())
+                    VConsole.out(it.getErrorLog())
                 }
                 break
             }
