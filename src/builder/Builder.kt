@@ -5,8 +5,20 @@ import language.*
 abstract class Builder(type: String, val lines: Array<Line>) {
 
     val validEvents = Events.getValidEventNames(type)
+    val validEventNameMap: Map<String, Event>
     var context = "default"
+    val eventContent: HashMap<String, MutableList<String>> = hashMapOf()
     val errors: MutableList<BuildError> = mutableListOf()
+
+    init {
+        val map = hashMapOf<String, Event>()
+        Events.getValidEvents(type).asSequence().forEach { map[it.name] = it }
+        validEventNameMap = map
+
+        validEvents.asSequence().forEach {
+            eventContent[it] = mutableListOf()
+        }
+    }
 
     abstract fun build()
 

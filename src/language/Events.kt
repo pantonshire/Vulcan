@@ -7,8 +7,9 @@ object Events {
 
     val itemEvents = arrayOf(
             Event("right_click", Player("player")),
-            Event("update", Player("player")),
-            Event("held", Player("player"))
+//            Event("update", Player("player")),
+            Event("held", Player("player")),
+            Event("hit_entity", LivingEntity("attacker"), LivingEntity("target"))
     )
 
     val foodEvents = arrayOf(

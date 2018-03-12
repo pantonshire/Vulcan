@@ -85,9 +85,11 @@ object ModBuilder {
         var content: String = "package com.$modID;¶»¶" +
                         "import net.minecraft.world.World;¶" +
                         "import net.minecraft.util.EnumHand;¶" +
-                        "import net.minecraft.entity.player.EntityPlayer;¶" +
                         "import net.minecraft.util.ActionResult;¶" +
                         "import net.minecraft.item.ItemStack;¶" +
+                        "import net.minecraft.entity.Entity;¶" +
+                        "import net.minecraft.entity.EntityLivingBase;¶" +
+                        "import net.minecraft.entity.player.EntityPlayer;¶" +
                         "»¶public final class ModItems {¶»public static void makeItems() {"
 
         items.asSequence().forEach {

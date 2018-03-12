@@ -14,7 +14,7 @@ class Player(name: String): VulcanObject(name) {
             Pair("mount", 1) //Ride an entity
     )
 
-    override fun convertMessage(message: String, parameters: Array<String>, others: Array<VulcanObject>): String {
+    override fun convertMessage(message: String, parameters: Array<String>, others: Map<String, VulcanObject>): String {
         when(message) {
             //Jump
             "jump" -> return "if(${name}.onGround){ ${name}.jump(); }"
@@ -79,13 +79,12 @@ class Player(name: String): VulcanObject(name) {
 
             //Set riding entity
             "mount" -> {
-                others.asSequence().forEach {
-                    if(it.name == parameters[0]) {
-                        if(it is LivingEntity || it is Player) {
-                            return "${name}.startRiding(${it.name}, true);"
-                        } else {
-                            throw IllegalArgumentException("${it.name} is not rideable")
-                        }
+                if(others.containsKey(parameters[0])) {
+                    val mountEntity = others[parameters[0]]!!
+                    if(mountEntity is LivingEntity || mountEntity is Player) {
+                        return "${name}.startRiding(${mountEntity.name}, true);"
+                    } else {
+                        throw IllegalArgumentException("${mountEntity.name} is not rideable")
                     }
                 }
 

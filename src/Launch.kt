@@ -31,6 +31,7 @@ private fun build(sourceDirectory: String) {
     }
 
     ModBuilder.build()
+    VConsole.out("Successfully built mod!")
 }
 
 private fun parseVulcanFile(vulcanFileDirectory: String) {
@@ -58,7 +59,7 @@ private fun parseVulcanFile(vulcanFileDirectory: String) {
     val lines = lineList.toTypedArray()
 
     when(type) {
-        "item" -> ItemBuilder(lines)
+        "item" -> ItemBuilder(lines).build()
         else -> VConsole.out("Unrecognised type: \"$type\". Skipping...")
     }
 }
