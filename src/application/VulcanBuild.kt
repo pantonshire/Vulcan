@@ -23,7 +23,9 @@ object VulcanBuild {
                 val settings = FileReader.readTextFile(Directories.getDirectory(source, vmod))
                 ModBuilder.setModSettings(settings)
             } else {
-                if(!UIHandler.confirm("No settings.vmod file was found. Generate the mod anyway?")) {
+                if(UIHandler.confirm("No settings.vmod file was found. Generate the mod anyway?")) {
+                    ModBuilder.setDefaultSettings()
+                } else {
                     return
                 }
             }
@@ -41,7 +43,7 @@ object VulcanBuild {
             }
 
             ModBuilder.build()
-            UIHandler.message("Successfully built mod ($files vlcn files found).")
+            UIHandler.message("Successfully built mod ($files vlcn file(s) found).")
 
         } catch(exception: IllegalArgumentException) {
             UIHandler.error(exception.message ?: "No error description was provided :(")
@@ -80,7 +82,7 @@ object VulcanBuild {
 
         when(type) {
             "item" -> ItemBuilder(fileName, lines).build()
-            else -> VConsole.out("Unrecognised type: \"$type\". Skipping...")
+            else -> UIHandler.error("Unrecognised type for $fileName: \"$type\". This file will be skipped.")
         }
     }
 }

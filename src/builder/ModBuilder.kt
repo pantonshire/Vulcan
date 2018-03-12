@@ -17,6 +17,13 @@ object ModBuilder {
     var src = "java${File.separator}com${File.separator}$modID"
     var assets = "resources${File.separator}assets${File.separator}$modID"
 
+    fun setDefaultSettings() {
+        modID = "my_vulcan_mod"
+        modName = "My Vulcan Mod"
+        version = "no version provided"
+        outputPath = ""
+    }
+
     fun setModSettings(lines: Array<String>) {
         lines.asSequence().forEach {
             val split = it.split(":")

@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/application/JavaFXApplication.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/application/UIHandler.kt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/application/VulcanBuild.kt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/template/TemplateGenerator.kt" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/LaunchKt.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/builder/Builder.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/builder/Builder.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/builder/ItemBuilder.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/language/Event.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/language/Event.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/language/Events.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/language/Events.class" />
       <change beforePath="$PROJECT_DIR$/out/production/Vulcan/language/Line.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/language/Line.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Vulcan/parser/VulcanParser.class" afterPath="$PROJECT_DIR$/out/production/Vulcan/parser/VulcanParser.class" />
-      <change beforePath="$PROJECT_DIR$/src/Launch.kt" afterPath="$PROJECT_DIR$/src/Launch.kt" />
-      <change beforePath="$PROJECT_DIR$/src/builder/Builder.kt" afterPath="$PROJECT_DIR$/src/builder/Builder.kt" />
-      <change beforePath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
+      <change beforePath="$PROJECT_DIR$/src/application/JavaFXApplication.java" afterPath="$PROJECT_DIR$/src/application/JavaFXApplication.java" />
+      <change beforePath="$PROJECT_DIR$/src/application/VulcanBuild.kt" afterPath="$PROJECT_DIR$/src/application/VulcanBuild.kt" />
       <change beforePath="$PROJECT_DIR$/src/builder/ModBuilder.kt" afterPath="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/Line.kt" afterPath="$PROJECT_DIR$/src/language/Line.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" afterPath="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/objects/Player.kt" afterPath="$PROJECT_DIR$/src/language/objects/Player.kt" />
-      <change beforePath="$PROJECT_DIR$/src/parser/VulcanParser.kt" afterPath="$PROJECT_DIR$/src/parser/VulcanParser.kt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,20 +22,18 @@
       <file leaf-file-name="VulcanBuild.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/VulcanBuild.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-              <folding>
-                <element signature="e#21#257#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="594">
+              <caret line="84" column="109" lean-forward="false" selection-start-line="84" selection-start-column="109" selection-end-line="84" selection-end-column="109" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Line.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/language/Line.kt">
+      <file leaf-file-name="ModBuilder.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="92" lean-forward="true" selection-start-line="7" selection-start-column="92" selection-end-line="7" selection-end-column="92" />
+            <state relative-caret-position="342">
+              <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -57,21 +42,9 @@
       <file leaf-file-name="Builder.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/builder/Builder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="340">
               <caret line="25" column="69" lean-forward="false" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Launch.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Launch.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#236#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -79,8 +52,8 @@
       <file leaf-file-name="ItemBuilder.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+            <state relative-caret-position="234">
+              <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -89,11 +62,11 @@
       <file leaf-file-name="JavaFXApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/JavaFXApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="36" column="64" lean-forward="false" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
+            <state relative-caret-position="319">
+              <caret line="66" column="61" lean-forward="true" selection-start-line="66" selection-start-column="61" selection-end-line="66" selection-end-column="61" />
               <folding>
-                <element signature="e#678#679#0" expanded="true" />
-                <element signature="e#706#707#0" expanded="true" />
+                <element signature="e#713#714#0" expanded="true" />
+                <element signature="e#741#742#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,6 +78,18 @@
             <state relative-caret-position="252">
               <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TemplateGenerator.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/template/TemplateGenerator.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="576">
+              <caret line="32" column="50" lean-forward="true" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+              <folding>
+                <element signature="e#18#60#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,7 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/assets/testdata/writetest.java" />
         <option value="$PROJECT_DIR$/assets/testdata/itemtemplate.vlcn" />
         <option value="$PROJECT_DIR$/src/language/Functions.kt" />
         <option value="$PROJECT_DIR$/src/builder/VulcanFile.kt" />
@@ -187,14 +171,15 @@
         <option value="$PROJECT_DIR$/src/VulcanBuild.kt" />
         <option value="$PROJECT_DIR$/src/ui/JavaFXApplication.java" />
         <option value="$PROJECT_DIR$/src/application/UIHandler.kt" />
-        <option value="$PROJECT_DIR$/src/application/JavaFXApplication.java" />
-        <option value="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
         <option value="$PROJECT_DIR$/src/builder/ItemBuilder.kt" />
-        <option value="$PROJECT_DIR$/src/application/VulcanBuild.kt" />
         <option value="$PROJECT_DIR$/src/builder/Builder.kt" />
         <option value="$PROJECT_DIR$/src/Launch.kt" />
         <option value="$PROJECT_DIR$/src/builder/BuildError.kt" />
         <option value="$PROJECT_DIR$/src/language/Line.kt" />
+        <option value="$PROJECT_DIR$/src/builder/ModBuilder.kt" />
+        <option value="$PROJECT_DIR$/src/application/VulcanBuild.kt" />
+        <option value="$PROJECT_DIR$/src/application/JavaFXApplication.java" />
+        <option value="$PROJECT_DIR$/src/template/TemplateGenerator.kt" />
       </list>
     </option>
   </component>
@@ -233,12 +218,6 @@
               <item name="Vulcan" type="b2602c69:ProjectViewProjectNode" />
               <item name="Vulcan" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Vulcan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Vulcan" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Vulcan" type="b2602c69:ProjectViewProjectNode" />
@@ -557,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520857990647</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added a GUI">
+      <created>1520874262654</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1520874262654</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -605,7 +591,8 @@
     <MESSAGE value="Updated addInformation method in VulcanItem for MC 1.12" />
     <MESSAGE value="It is now possible to iterate through a directory and build each vulcan file. Added a console class." />
     <MESSAGE value="Method overrides and method calls implemented properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Method overrides and method calls implemented properly" />
+    <MESSAGE value="Added a GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -614,22 +601,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-sources.jar!/kotlin/Any.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="34" column="29" lean-forward="false" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="531" column="22" lean-forward="false" selection-start-line="531" selection-start-column="22" selection-end-line="531" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/src.zip!/java/lang/Boolean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
@@ -760,14 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/console/VConsole.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-sources.jar!/kotlin/Collections.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
@@ -854,14 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="119" lean-forward="false" selection-start-line="8" selection-start-column="119" selection-end-line="8" selection-end-column="119" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/language/objects/Player.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="80" column="17" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -973,22 +928,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/JavaFXApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/builder/BuildError.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="36" column="64" lean-forward="false" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
+        <state relative-caret-position="72">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/language/Line.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="92" lean-forward="true" selection-start-line="7" selection-start-column="92" selection-end-line="7" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Launch.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
           <folding>
-            <element signature="e#678#679#0" expanded="true" />
-            <element signature="e#706#707#0" expanded="true" />
+            <element signature="e#0#236#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/java/com/test_mod/ModItems.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/Builder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="25" column="69" lean-forward="false" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/console/VConsole.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="43" column="74" lean-forward="true" selection-start-line="43" selection-start-column="74" selection-end-line="43" selection-end-column="74" />
+        <state relative-caret-position="342">
+          <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/VulcanBuild.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="84" column="109" lean-forward="false" selection-start-line="84" selection-start-column="109" selection-end-line="84" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/JavaFXApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="66" column="61" lean-forward="true" selection-start-line="66" selection-start-column="61" selection-end-line="66" selection-end-column="61" />
+          <folding>
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1000,55 +1021,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/BuildError.kt">
+    <entry file="file://$PROJECT_DIR$/src/language/objects/Player.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        <state relative-caret-position="562">
+          <caret line="80" column="23" lean-forward="true" selection-start-line="80" selection-start-column="23" selection-end-line="80" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Launch.kt">
+    <entry file="file://$PROJECT_DIR$/src/template/TemplateGenerator.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+        <state relative-caret-position="576">
+          <caret line="32" column="50" lean-forward="true" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
           <folding>
-            <element signature="e#0#236#0" expanded="true" />
+            <element signature="e#18#60#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/ItemBuilder.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/builder/Builder.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="25" column="69" lean-forward="false" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/VulcanBuild.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding>
-            <element signature="e#21#257#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/language/Line.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="92" lean-forward="true" selection-start-line="7" selection-start-column="92" selection-end-line="7" selection-end-column="92" />
-          <folding />
         </state>
       </provider>
     </entry>

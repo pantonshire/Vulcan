@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import template.TemplateGenerator;
 
 import java.io.File;
 
@@ -34,9 +35,9 @@ public class JavaFXApplication extends Application {
         vbox = new VBox();
         vbox.setAlignment(Pos.CENTER_LEFT);
 
-        Label label = addLabel("No directory chosen", 20, -130);
+        Label label = addLabel("No directory chosen", 20, -15);
 
-        addButton("Choose source directory", 20, -180, (event -> {
+        addButton("Choose source directory", 20, -60, (event -> {
             DirectoryChooser chooser = new DirectoryChooser();
             chooser.setTitle("Open Resource File");
             File file = chooser.showDialog(primaryStage);
@@ -46,7 +47,7 @@ public class JavaFXApplication extends Application {
             }
         }));
 
-        addButton("Build", 20, -80, (event -> {
+        addButton("Build", 20, -20, (event -> {
             if(!sourceDirectory.isEmpty()) {
                 VulcanBuild.INSTANCE.build(sourceDirectory);
             } else {
@@ -54,24 +55,26 @@ public class JavaFXApplication extends Application {
             }
         }));
 
-        addButton("Generate example mod", 20, -40, (event -> {
+        addButton("Generate settings file", 20, 0, (event -> {
             if(!sourceDirectory.isEmpty()) {
-
+                TemplateGenerator.INSTANCE.makeSettingsFile(sourceDirectory);
+                alert(Alert.AlertType.INFORMATION, "Generated settings file.", ButtonType.OK);
             } else {
                 alert(Alert.AlertType.ERROR, "Please choose a source directory first.", ButtonType.OK);
             }
         }));
 
-        addButton("Generate settings file", 20, -20, (event -> {
+        addButton("Generate example mod", 20, 20, (event -> {
             if(!sourceDirectory.isEmpty()) {
-
+                TemplateGenerator.INSTANCE.makeExampleProject(sourceDirectory);
+                alert(Alert.AlertType.INFORMATION, "Generated example project.", ButtonType.OK);
             } else {
                 alert(Alert.AlertType.ERROR, "Please choose a source directory first.", ButtonType.OK);
             }
         }));
 
         root.getChildren().add(vbox);
-        primaryStage.setScene(new Scene(root, 640, 480));
+        primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
