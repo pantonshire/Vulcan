@@ -1,11 +1,13 @@
 package parser
 
+import application.UIHandler
 import language.*
 
 object VulcanParser {
 
     fun parseLine(lineNo: Int, raw: String, validEvents: Array<Event>): Line {
-        val words = split(raw.trim())
+        val uncommented = raw.replace(Regex("(//)(.*)"), "")
+        val words = split(uncommented.trim())
 
         if(words.isEmpty()) {
             return BlankLine(lineNo)
