@@ -3,6 +3,7 @@
 * [The language](https://github.com/Pantonshire/Vulcan/blob/master/README.md#the-language)
 * [Planned features](https://github.com/Pantonshire/Vulcan/blob/master/README.md#planned-features)
 * [Downloads](https://github.com/Pantonshire/Vulcan/blob/master/README.md#downloads)
+   * [Recommended](https://github.com/Pantonshire/Vulcan/blob/master/README.md#recommended)
    * [Latest](https://github.com/Pantonshire/Vulcan/blob/master/README.md#latest)
    * [Older](https://github.com/Pantonshire/Vulcan/blob/master/README.md#older)
 
@@ -40,6 +41,9 @@ The programmer will have no way to create new methods, so the only methods that 
 * An IDE for Vulcan?  
 
 # Downloads
+## Recommended
+[Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")  
+
 ## Latest
 [Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")  
 
