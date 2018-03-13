@@ -1,7 +1,7 @@
 # Contents
 * [About](https://github.com/Pantonshire/Vulcan/blob/master/README.md#about)
 * [The language](https://github.com/Pantonshire/Vulcan/blob/master/README.md#the-language)
-* [Planned features](https://github.com/Pantonshire/Vulcan/blob/master/README.md#planned-features-todo)
+* [Planned features](https://github.com/Pantonshire/Vulcan/blob/master/README.md#planned-features)
 * [Downloads](https://github.com/Pantonshire/Vulcan/blob/master/README.md#downloads)
    * [Latest](https://github.com/Pantonshire/Vulcan/blob/master/README.md#latest)
    * [Older](https://github.com/Pantonshire/Vulcan/blob/master/README.md#older)
@@ -17,7 +17,7 @@ rather than the more traditional `player.jump()`. The syntax for passing argumen
 `tell player to burn for 5 seconds`.  
 The programmer will have no way to create new methods, so the only methods that they will be able to call are in-built ones.
 
-# Planned features (TODO)
+# Planned features
 * Code comments
 * If statements `if condition then ... end`
 * Else and else if `if condition then ... otherwise if condition ... otherwise ... end`
