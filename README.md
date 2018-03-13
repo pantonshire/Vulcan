@@ -1,10 +1,10 @@
 # Contents
-* [About](https://github.com/Pantonshire/Vulcan/blob/master/README.md#vulcan)
+* [About](https://github.com/Pantonshire/Vulcan/blob/master/README.md#about)
 * [The language](https://github.com/Pantonshire/Vulcan/blob/master/README.md#the-language)
 * [Planned features](https://github.com/Pantonshire/Vulcan/blob/master/README.md#planned-features-todo)
 * [Downloads](https://github.com/Pantonshire/Vulcan/blob/master/README.md#downloads)
-..* [Latest](https://github.com/Pantonshire/Vulcan/blob/master/README.md#latest)
-..* [Older](https://github.com/Pantonshire/Vulcan/blob/master/README.md#older)
+   * [Latest](https://github.com/Pantonshire/Vulcan/blob/master/README.md#latest)
+   * [Older](https://github.com/Pantonshire/Vulcan/blob/master/README.md#older)
 
 # About
 Vulcan is an experimental tool for Minecraft modding, intended for teaching basic programming concepts to beginners.  
