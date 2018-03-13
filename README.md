@@ -1,5 +1,13 @@
-# Vulcan
-An experimental tool for Minecraft modding, intended for teaching basic programming concepts to beginners.  
+# Contents
+* [About](https://github.com/Pantonshire/Vulcan/blob/master/README.md#vulcan)
+* [The language](https://github.com/Pantonshire/Vulcan/blob/master/README.md#the-language)
+* [Planned features](https://github.com/Pantonshire/Vulcan/blob/master/README.md#planned-features-todo)
+* [Downloads](https://github.com/Pantonshire/Vulcan/blob/master/README.md#downloads)
+..* [Latest](https://github.com/Pantonshire/Vulcan/blob/master/README.md#latest)
+..* [Older](https://github.com/Pantonshire/Vulcan/blob/master/README.md#older)
+
+# About
+Vulcan is an experimental tool for Minecraft modding, intended for teaching basic programming concepts to beginners.  
 The general idea is that the user codes their mod in the Vulcan language, which I have attempted to make as easy to understand for new programmers as possible, then that code is converted into Java so that it can be compiled into a working Minecraft mod. For now, the compilation of the Java code is manual, but at some point in the future it may be done automatically.
 
 # The language
