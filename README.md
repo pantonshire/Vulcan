@@ -18,7 +18,6 @@ rather than the more traditional `player.jump()`. The syntax for passing argumen
 The programmer will have no way to create new methods, so the only methods that they will be able to call are in-built ones.
 
 # Planned features
-* Code comments
 * If statements `if condition then ... end`
 * Else and else if `if condition then ... otherwise if condition ... otherwise ... end`
 * While loops `while condition do ... end`
@@ -42,6 +41,7 @@ The programmer will have no way to create new methods, so the only methods that 
 
 # Downloads
 ## Latest
-[Alpha version 0.0.1](https://www.dropbox.com/s/6kws97t78ps6fmn/vulcan-alpha-0.0.1.jar?dl=0 "Alpha 0.0.1")
+[Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")  
+
 ## Older
-None yet :(
+[Vulcan Alpha 0.0.1](https://www.dropbox.com/s/6kws97t78ps6fmn/vulcan-alpha-0.0.1.jar?dl=0 "Alpha 0.0.1")
