@@ -9,8 +9,31 @@ rather than the more traditional `player.jump()`. The syntax for passing argumen
 `tell player to burn for 5 seconds`.  
 The programmer will have no way to create new methods, so the only methods that they will be able to call are in-built ones.
 
-# Planned features
-
+# Planned features (TODO)
+* Code comments
+* If statements `if condition then ... end`
+* Else and else if `if condition then ... otherwise if condition ... otherwise ... end`
+* While loops `while condition do ... end`
+* For loops `repeat x times ... end`
+* "player" type for changing player attributes and recieving player-based events
+* "world" type for doing worldgen stuff
+* "block" type for adding custom blocks into the game
+* An event handler to recieve Forge events
+* A way to add crafting recipes
+* Ability to reference items and blocks by name, item and block object types
+* Method to add potion effects to entities
+* Types for item subclasses: "food" and "tool"
+* A "throwable" type to make throwable items that spawn projectiles when used
+* "biome" type for adding new biomes into the overworld
+* "dimension" type for adding new dimensions (don't expect this any time soon!)
+* "fluid" type for adding liquids, automatically create bucket
+* Possible integration with existing mods?
+* Ability for objects to reference themselves with "this" or "self", or similar
+* A better GUI for building the mod
+* An IDE for Vulcan?  
 
 # Downloads
+## Latest
 [Alpha version 0.0.1](https://www.dropbox.com/s/6kws97t78ps6fmn/vulcan-alpha-0.0.1.jar?dl=0 "Alpha 0.0.1")
+## Older
+None yet :(
