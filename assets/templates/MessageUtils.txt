@@ -1,8 +1,12 @@
 package com.~MODID~;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 
 public final class MessageUtils {
 
@@ -16,5 +20,34 @@ public final class MessageUtils {
 
     public static void kill(EntityPlayer player) {
         player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 10000);
+    }
+
+    public static void makeJump(EntityLivingBase entity) {
+        if(entity.onGround) {
+            try {
+                Method[] methods = EntityLivingBase.class.getDeclaredMethods();
+                for(Method method : methods) {
+                    if(method.getName().equals("jump")) {
+                        method.setAccessible(true);
+                        method.invoke(entity);
+                    }
+                }
+            } catch(IllegalAccessException | InvocationTargetException | SecurityException exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
+    public static void explode(EntityLivingBase entity, double strength) {
+        if(!entity.getEntityWorld().isRemote) {
+            float strengthf = (float)strength;
+            if(strengthf > 100) {
+                strengthf = 100f;
+            } else if(strengthf < 0) {
+                strengthf = 0f;
+            }
+
+            entity.getEntityWorld().createExplosion(entity, entity.posX, entity.posY, entity.posZ, strengthf, true);
+        }
     }
 }

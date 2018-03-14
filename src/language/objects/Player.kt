@@ -11,7 +11,8 @@ class Player(name: String): VulcanObject(name) {
             Pair("swing", 2), //Swing arm
             Pair("heal", 2), //Recover health
             Pair("die", 0), //Take unblockable fatal damage
-            Pair("ride", 1) //Ride an entity
+            Pair("ride", 1), //Ride an entity
+            Pair("explode", 3) //Explode the player
     )
 
     override fun convertMessage(message: String, parameters: Array<String>, others: Map<String, VulcanObject>): String {
@@ -90,8 +91,23 @@ class Player(name: String): VulcanObject(name) {
 
                 throw IllegalArgumentException("\"${parameters[0]}\" is not a valid target")
             }
+
+            //Explode the player (oh no!)
+            "explode" -> {
+                if(parameters[0] == "with" && parameters[1] == "strength") {
+                    try {
+                        val strength = parameters[2].toDouble()
+                        return "MessageUtils.explode($name, $strength);"
+                    } catch(exception: NumberFormatException) {
+                        throw IllegalArgumentException("${parameters[2]} is not a valid number")
+                    }
+                }
+
+                throw IllegalArgumentException("invalid syntax")
+            }
         }
 
+        //Should only be called if the message is registered as valid, but has no case in the when statement
         throw IllegalArgumentException("unsupported message $message")
     }
 }
