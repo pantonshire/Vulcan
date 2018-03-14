@@ -6,12 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="Added a recommended section to downloads">
+    <list default="true" id="10559787-6b28-4a43-8071-479815654824" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Changelog.md" afterPath="$PROJECT_DIR$/Changelog.md" />
-      <change beforePath="$PROJECT_DIR$/assets/templates/MessageUtils.txt" afterPath="$PROJECT_DIR$/assets/templates/MessageUtils.txt" />
-      <change beforePath="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" afterPath="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" />
-      <change beforePath="$PROJECT_DIR$/src/language/objects/Player.kt" afterPath="$PROJECT_DIR$/src/language/objects/Player.kt" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,6 +40,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="494">
+                <caret line="45" column="105" lean-forward="true" selection-start-line="45" selection-start-column="105" selection-end-line="45" selection-end-column="105" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ModBuilder.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/builder/ModBuilder.kt">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,16 +72,6 @@
                 <element signature="e#713#714#0" expanded="true" />
                 <element signature="e#741#742#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageUtils.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/templates/MessageUtils.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="51" lean-forward="false" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -96,7 +96,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Changelog.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Changelog.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Changelog.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -190,11 +190,11 @@
         <option value="$PROJECT_DIR$/src/Launch.kt" />
         <option value="$PROJECT_DIR$/src/parser/VulcanParser.kt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/language/objects/LivingEntity.kt" />
         <option value="$PROJECT_DIR$/src/language/objects/Player.kt" />
         <option value="$PROJECT_DIR$/assets/templates/MessageUtils.txt" />
         <option value="$PROJECT_DIR$/Changelog.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -624,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520971324462</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="New event called explode, ported some events from Player to LivingEntity (jump and swing)">
+      <created>1521051383830</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1521051383830</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -682,7 +689,8 @@
     <MESSAGE value="Added a changelog" />
     <MESSAGE value="Added new version to readme. Updated planned features" />
     <MESSAGE value="Added a recommended section to downloads" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a recommended section to downloads" />
+    <MESSAGE value="New event called explode, ported some events from Player to LivingEntity (jump and swing)" />
+    <option name="LAST_COMMIT_MESSAGE" value="New event called explode, ported some events from Player to LivingEntity (jump and swing)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1011,23 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="90">
-            <caret line="5" column="91" lean-forward="true" selection-start-line="5" selection-start-column="91" selection-end-line="5" selection-end-column="91" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1087,6 +1078,23 @@
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="494">
+            <caret line="45" column="105" lean-forward="true" selection-start-line="45" selection-start-column="105" selection-end-line="45" selection-end-column="105" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

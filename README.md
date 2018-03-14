@@ -42,10 +42,14 @@ The programmer will have no way to create new methods, so the only methods that 
 
 # Downloads
 ## Recommended
-[Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")  
+_The recommended version of Vulcan that's most likely to work properly._  
+[Vulcan Alpha 0.0.3](https://www.dropbox.com/s/wyozvpzyv8je4nw/vulcan-alpha-0.0.3.jar?dl=0 "Alpha 0.0.3")
 
 ## Latest
-[Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")  
+_The latest version of Vulcan which may include lots of bugs._  
+[Vulcan Alpha 0.0.3](https://www.dropbox.com/s/wyozvpzyv8je4nw/vulcan-alpha-0.0.3.jar?dl=0 "Alpha 0.0.3")
 
 ## Older
+_Older versions of Vulcan._  
+[Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")   
 [Vulcan Alpha 0.0.1](https://www.dropbox.com/s/6kws97t78ps6fmn/vulcan-alpha-0.0.1.jar?dl=0 "Alpha 0.0.1")
