@@ -2,6 +2,7 @@
 * [About](https://github.com/Pantonshire/Vulcan/blob/master/README.md#about)
 * [The language](https://github.com/Pantonshire/Vulcan/blob/master/README.md#the-language)
 * [Planned features](https://github.com/Pantonshire/Vulcan/blob/master/README.md#planned-features)
+* [Changelog](https://github.com/Pantonshire/Vulcan/blob/master/README.md#changelog)
 * [Downloads](https://github.com/Pantonshire/Vulcan/blob/master/README.md#downloads)
    * [Recommended](https://github.com/Pantonshire/Vulcan/blob/master/README.md#recommended)
    * [Latest](https://github.com/Pantonshire/Vulcan/blob/master/README.md#latest)
@@ -40,16 +41,21 @@ The programmer will have no way to create new methods, so the only methods that 
 * A better GUI for building the mod
 * An IDE for Vulcan?  
 
+# Changelog
+Changelog is available [here](https://github.com/Pantonshire/Vulcan/blob/master/Changelog.md#changelog "Changelog").  
+I try to update the changelog whenever I release a new version.
+
 # Downloads
 ## Recommended
 _The recommended version of Vulcan that's most likely to work properly._  
-[Vulcan Alpha 0.0.3](https://www.dropbox.com/s/wyozvpzyv8je4nw/vulcan-alpha-0.0.3.jar?dl=0 "Alpha 0.0.3")
+[Vulcan Alpha 0.0.4](https://www.dropbox.com/s/1yqm8c2v0yxzgaz/vulcan-alpha-0.0.4.jar?dl=0 "Alpha 0.0.4")  
 
 ## Latest
 _The latest version of Vulcan which may include lots of bugs._  
-[Vulcan Alpha 0.0.3](https://www.dropbox.com/s/wyozvpzyv8je4nw/vulcan-alpha-0.0.3.jar?dl=0 "Alpha 0.0.3")
+[Vulcan Alpha 0.0.4](https://www.dropbox.com/s/1yqm8c2v0yxzgaz/vulcan-alpha-0.0.4.jar?dl=0 "Alpha 0.0.4")  
 
 ## Older
 _Older versions of Vulcan._  
+[Vulcan Alpha 0.0.3](https://www.dropbox.com/s/wyozvpzyv8je4nw/vulcan-alpha-0.0.3.jar?dl=0 "Alpha 0.0.3")  
 [Vulcan Alpha 0.0.2](https://www.dropbox.com/s/o6tn2rlp44eo6pu/vulcan-alpha-0.0.2.jar?dl=0 "Alpha 0.0.2")   
 [Vulcan Alpha 0.0.1](https://www.dropbox.com/s/6kws97t78ps6fmn/vulcan-alpha-0.0.1.jar?dl=0 "Alpha 0.0.1")

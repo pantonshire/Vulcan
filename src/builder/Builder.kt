@@ -21,6 +21,8 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
     abstract fun build()
 
+    protected abstract fun processLine(line: Line)
+
     internal fun checkForErrors(line: Line) {
         if(line is BlankLine) {
             line.throwError(fileName,"internal error (this is bad!)")

@@ -1,4 +1,11 @@
 # Changelog
+## Alpha 0.0.4
+Released on 14th March 2018
+* Fixed issue #2: using an apostrophe within a string no longer causes an error
+* If ".png" is written at the end of the texture attribute in an item, it will be ignored
+* Setting attributes to invalid values will now show errors.
+* Introduced rules for whether or not a string is considered valid
+
 ## Alpha 0.0.3
 Released on 14th March 2018
 * Added "swing" method for LivingEntity objects to allow them to swing their arms too, like Player objects

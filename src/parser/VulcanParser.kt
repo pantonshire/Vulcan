@@ -50,10 +50,11 @@ object VulcanParser {
         val list: MutableList<String> = mutableListOf()
         var currentString = ""
         var quote = false
+
         raw.asSequence().forEach {
             if(quote || it != ' ') {
                 currentString += it
-                if(it == '\"' || it == '\'') {
+                if(it == '\"') {
                     quote = !quote
                 }
             } else if(currentString.isNotEmpty()) {

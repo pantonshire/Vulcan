@@ -1,7 +1,7 @@
 package builder
 
-import console.VConsole
 import language.*
+import utils.VulcanUtils
 
 class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
 
@@ -25,15 +25,50 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
         ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, makeOverrideMap()))
     }
 
-    private fun processLine(line: Line) {
+    override fun processLine(line: Line) {
         if(context == "constructor") {
             if(line is SetLine) {
                 when(line.field) {
-                    "name" -> name = line.value.replace("\"", "")
-                    "texture" -> texture = line.value.replace("\"", "").removePrefix(".png")
-                    "description" -> description = line.value.replace("\"", "")
-                    "stack" -> stackSize = line.value.toInt()
-                    "shiny" -> shiny = line.value.toBoolean()
+                    "name" -> {
+                        if(VulcanUtils.isValidInputString(line.value)) {
+                            name = VulcanUtils.sanitiseInputString(line.value)
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid string")
+                        }
+                    }
+
+                    "texture" -> {
+                        if(VulcanUtils.isValidInputString(line.value)) {
+                            texture = VulcanUtils.sanitiseInputString(line.value).removeSuffix(".png")
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid string")
+                        }
+                    }
+
+                    "description" -> {
+                        if(VulcanUtils.isValidInputString(line.value)) {
+                            description = VulcanUtils.sanitiseInputString(line.value)
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid string")
+                        }
+                    }
+
+                    "stack" -> {
+                        try {
+                            val size = line.value.toInt()
+                            stackSize = size
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid integer")
+                        }
+                    }
+
+                    "shiny" -> {
+                        if(line.value == "true" || line.value == "false") {
+                            shiny = line.value == "true"
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid boolean")
+                        }
+                    }
                 }
             }
         }
@@ -66,6 +101,8 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
         }
     }
 
+    /** Returns a map for method overrides for the java item object.
+     * The key is the method declaration line and the value is the method content. */
     private fun makeOverrideMap(): Map<String, String> {
         val overrides: HashMap<String, String> = hashMapOf()
         eventContent.asSequence().forEach {
