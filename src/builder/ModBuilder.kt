@@ -90,7 +90,7 @@ object ModBuilder {
     }
 
     private fun modItemsFile() {
-        var content: String = "package com.$modID;¶»¶" +
+        var content: String = "package com.$modID;¶¶" +
                         "import net.minecraft.world.World;¶" +
                         "import net.minecraft.util.EnumHand;¶" +
                         "import net.minecraft.util.ActionResult;¶" +
@@ -98,12 +98,12 @@ object ModBuilder {
                         "import net.minecraft.entity.Entity;¶" +
                         "import net.minecraft.entity.EntityLivingBase;¶" +
                         "import net.minecraft.entity.player.EntityPlayer;¶" +
-                        "»¶public final class ModItems {¶»public static void makeItems() {"
+                        "¶public final class ModItems {¶public static void makeItems() {"
 
         items.asSequence().forEach {
             content += "¶" + it.toJava()
         }
-        content += "¶»}¶}"
+        content += "¶}¶}"
         FileWriter.writeFile(Directories.getDirectory(src, "ModItems.java"), content)
     }
 

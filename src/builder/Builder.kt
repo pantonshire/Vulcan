@@ -36,13 +36,15 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
             updateContext(line)
             processLine(line)
         }
+
+        passToNext()
     }
 
     abstract fun passToNext()
 
     protected abstract fun processLine(line: Line)
 
-    protected fun checkForErrors(line: Line) {
+    private fun checkForErrors(line: Line) {
         if(line is BlankLine) {
             line.throwError(fileName,"internal error (this is bad!)")
         }
