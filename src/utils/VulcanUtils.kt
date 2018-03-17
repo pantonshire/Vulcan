@@ -1,6 +1,6 @@
 package utils
 
-infix fun Boolean.xor(other: Boolean) = (this && !other) || (!this && other)
+//infix fun Boolean.xor(other: Boolean) = (this && !other) || (!this && other)
 
 object VulcanUtils {
 

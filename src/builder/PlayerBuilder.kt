@@ -1,67 +1,57 @@
 package builder
 
 import language.*
+import language.objects.Player
 import language.objects.VulcanObject
 import utils.VulcanUtils
 
-class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
+class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines,
+        Player("self")
+        //TODO: world goes here
+    ) {
 
+    //TODO: Replace these with player events
     private val rightClick = "public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)"
     private val update = "public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)"
     private val hitEntity = "public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)"
 
-    private var name: String = "???"
-    private var description: String = ""
-    private var stackSize: Int = 64
-    private var shiny: Boolean = false
-    private var texture: String = ""
+    private var maxHealth = 20
+    private var attackDamage = 1
+    private var jumpMultiplier = 1.0
 
     override fun passToNext() {
-        ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, makeOverrideMap()))
+        //TODO: Pass data to mod builder
+//        ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, makeOverrideMap()))
     }
 
     override fun processLine(line: Line) {
         if(context == "constructor") {
             if(line is SetLine) {
                 when(line.field) {
-                    "name" -> {
-                        if(VulcanUtils.isValidInputString(line.value)) {
-                            name = VulcanUtils.sanitiseInputString(line.value)
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid string")
-                        }
-                    }
-
-                    "texture" -> {
-                        if(VulcanUtils.isValidInputString(line.value)) {
-                            texture = VulcanUtils.sanitiseInputString(line.value).removeSuffix(".png")
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid string")
-                        }
-                    }
-
-                    "description" -> {
-                        if(VulcanUtils.isValidInputString(line.value)) {
-                            description = VulcanUtils.sanitiseInputString(line.value)
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid string")
-                        }
-                    }
-
-                    "stack" -> {
+                    "hearts" -> {
                         try {
-                            val size = line.value.toInt()
-                            stackSize = size
+                            val hearts = line.value.toInt()
+                            maxHealth = hearts * 2
                         } catch(exception: NumberFormatException) {
                             line.throwError(fileName, "${line.value} is not a valid integer")
                         }
                     }
 
-                    "shiny" -> {
-                        if(line.value == "true" || line.value == "false") {
-                            shiny = line.value == "true"
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid boolean")
+                    "strength" -> {
+                        try {
+                            val damage = line.value.toInt()
+                            attackDamage = damage
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid integer")
+                        }
+                    }
+
+                    "jump_height" -> {
+                        try {
+                            val height = line.value.toDouble()
+                            jumpMultiplier = height
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
                         }
                     }
                 }
