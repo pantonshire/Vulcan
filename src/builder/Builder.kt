@@ -8,8 +8,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
     /** All of the Vulcan Objects that can be referenced from anywhere. May include "self". */
     val globalObjects: Map<String, VulcanObject>
 
-    val validBehaviours = Behaviours.getValidBehaviourNames(type)
-    val validBehaviourNameMap: Map<String, Behaviour>
+    val validBehaviours: Map<String, Behaviour>
     var context = "default"
     val behaviourContent: HashMap<String, MutableList<String>> = hashMapOf()
 
@@ -17,10 +16,10 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
         //Make map of valid contexts with their name as a key
         val map = hashMapOf<String, Behaviour>()
         Behaviours.getValidBehaviours(type).asSequence().forEach { map[it.name] = it }
-        validBehaviourNameMap = map
+        validBehaviours = map
 
         //Initialise behaviour content map
-        validBehaviours.asSequence().forEach {
+        validBehaviours.keys.asSequence().forEach {
             behaviourContent[it] = mutableListOf()
         }
 
@@ -70,15 +69,15 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
         }
     }
 
-    protected fun updateContext(line: Line) {
+    private fun updateContext(line: Line) {
         if(line is ConstructorLine) {
             context = "constructor"
         } else if(line is BehaviourLine) {
-            val event = line.behaviour.name
-            if(event in validBehaviours) {
-                context = event
+            val behaviour = line.behaviour.name
+            if(behaviour in validBehaviours) {
+                context = behaviour
             } else {
-                line.throwError(fileName,"unrecognised behaviour \"$event\"")
+                line.throwError(fileName,"unrecognised behaviour \"$behaviour\"")
             }
         }
     }

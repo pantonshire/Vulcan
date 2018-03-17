@@ -58,7 +58,7 @@ class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"ite
         }
 
         else if(context in validBehaviours) {
-            val event = validBehaviourNameMap[context]
+            val event = validBehaviours[context]
             if(event != null) {
                 val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(event)
 

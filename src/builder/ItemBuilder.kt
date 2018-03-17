@@ -69,7 +69,7 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
         }
 
         else if(context in validBehaviours) {
-            val behaviour = validBehaviourNameMap[context]
+            val behaviour = validBehaviours[context]
             if(behaviour != null) {
                 val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(behaviour)
 
