@@ -1,11 +1,10 @@
 package parser
 
-import application.UIHandler
 import language.*
 
 object VulcanParser {
 
-    fun parseLine(lineNo: Int, raw: String, validEvents: Array<Event>): Line {
+    fun parseLine(lineNo: Int, raw: String, validEvents: Array<Behaviour>): Line {
         val uncommented = raw.replace(Regex("(//)(.*)"), "")
         val words = split(uncommented.trim())
 
@@ -13,7 +12,7 @@ object VulcanParser {
             return BlankLine(lineNo)
         }
 
-        val eventNameMap = Events.toNameMap(validEvents)
+        val eventNameMap = Behaviours.toNameMap(validEvents)
 
         return when(getWord(words, 0)) {
             "set" -> {
@@ -30,7 +29,7 @@ object VulcanParser {
                     for(word in 4 until words.size) {
                         args += words[word]
                     }
-                    MessageLine(lineNo, words[1], words[3], args.toTypedArray())
+                    ActionLine(lineNo, words[1], words[3], args.toTypedArray())
                 } else {
                     BlankLine(lineNo)
                 }
@@ -38,7 +37,7 @@ object VulcanParser {
 
             "attributes:" -> ConstructorLine(lineNo)
 
-            in eventNameMap -> EventLine(lineNo, eventNameMap[words[0]]!!)
+            in eventNameMap -> BehaviourLine(lineNo, eventNameMap[words[0]]!!)
 
             else -> BlankLine(lineNo)
         }

@@ -4,7 +4,7 @@ import console.VConsole
 import io.Directories
 import io.FileReader
 import language.BlankLine
-import language.Events
+import language.Behaviours
 import language.Line
 import parser.VulcanParser
 import java.io.File
@@ -43,7 +43,7 @@ private fun parseVulcanFile(vulcanFileDirectory: String) {
     }
 
     var lineNo = 0
-    var validEvents = Events.none
+    var validEvents = Behaviours.none
     var type = ""
     val lineList: MutableList<Line> = mutableListOf()
 
@@ -52,7 +52,7 @@ private fun parseVulcanFile(vulcanFileDirectory: String) {
             val words = it.split(Regex("\\s+"))
             if(words.size == 2 && words[0] == "type:") {
                 type = words[1].toLowerCase().trim()
-                validEvents = Events.getValidEvents(type)
+                validEvents = Behaviours.getValidBehaviours(type)
             }
         } else {
             val line = VulcanParser.parseLine(lineNo, it, validEvents)

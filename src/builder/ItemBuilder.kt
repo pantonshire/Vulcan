@@ -68,24 +68,24 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
             }
         }
 
-        else if(context in validEvents) {
-            val event = validEventNameMap[context]
-            if(event != null) {
-                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(event)
+        else if(context in validBehaviours) {
+            val behaviour = validBehaviourNameMap[context]
+            if(behaviour != null) {
+                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(behaviour)
 
-                if(line is MessageLine) {
+                if(line is ActionLine) {
                     if(visibleObjects.containsKey(line.target)) {
                         val target = visibleObjects[line.target]!!
                         if(target.isValidMessage(line.method)) {
                             var javaFunctionCall = ""
                             try {
-                                javaFunctionCall = target.messageToJava(line.method, line.arguments, event.parameters)
+                                javaFunctionCall = target.messageToJava(line.method, line.arguments, behaviour.parameters)
                             } catch(exception: IllegalArgumentException) {
                                 line.throwError(fileName,exception.message ?: "no error message was provided")
                             }
 
                             if(javaFunctionCall.isNotEmpty()) {
-                               eventContent[context]?.add(javaFunctionCall)
+                               behaviourContent[context]?.add(javaFunctionCall)
                             }
                         } else {
                             line.throwError(fileName,"invalid message \"${line.method}\"")
@@ -102,7 +102,7 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
      * The key is the method declaration line and the value is the method content. */
     private fun makeOverrideMap(): Map<String, String> {
         val overrides: HashMap<String, String> = hashMapOf()
-        eventContent.asSequence().forEach {
+        behaviourContent.asSequence().forEach {
             var content = ""
             it.value.asSequence().forEach {
                 if(content.isNotEmpty()) {

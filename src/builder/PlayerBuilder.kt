@@ -3,7 +3,6 @@ package builder
 import language.*
 import language.objects.Player
 import language.objects.VulcanObject
-import utils.VulcanUtils
 
 class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines,
         Player("self")
@@ -58,12 +57,12 @@ class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"ite
             }
         }
 
-        else if(context in validEvents) {
-            val event = validEventNameMap[context]
+        else if(context in validBehaviours) {
+            val event = validBehaviourNameMap[context]
             if(event != null) {
                 val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(event)
 
-                if(line is MessageLine) {
+                if(line is ActionLine) {
                     if(visibleObjects.containsKey(line.target)) {
                         val target = visibleObjects[line.target]!!
                         if(target.isValidMessage(line.method)) {
@@ -75,7 +74,7 @@ class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"ite
                             }
 
                             if(javaFunctionCall.isNotEmpty()) {
-                               eventContent[context]?.add(javaFunctionCall)
+                               behaviourContent[context]?.add(javaFunctionCall)
                             }
                         } else {
                             line.throwError(fileName,"invalid message \"${line.method}\"")
@@ -92,7 +91,7 @@ class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"ite
      * The key is the method declaration line and the value is the method content. */
     private fun makeOverrideMap(): Map<String, String> {
         val overrides: HashMap<String, String> = hashMapOf()
-        eventContent.asSequence().forEach {
+        behaviourContent.asSequence().forEach {
             var content = ""
             it.value.asSequence().forEach {
                 if(content.isNotEmpty()) {

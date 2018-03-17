@@ -1,4 +1,8 @@
 # Changelog
+## Alpha 0.0.5
+In development
+* Removed indentation from ModItems file to be reimplemented at a later date
+
 ## Alpha 0.0.4
 Released on 14th March 2018
 * Fixed issue #2: using an apostrophe within a string no longer causes an error

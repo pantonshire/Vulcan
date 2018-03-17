@@ -2,15 +2,13 @@ package language
 
 import language.objects.VulcanObject
 
-class Event(val name: String, vararg eventParameters: VulcanObject) {
+class Behaviour(val name: String, vararg parameterList: VulcanObject) {
 
     val parameters: Map<String, VulcanObject>
 
     init {
         val mutableParameterMap: HashMap<String, VulcanObject> = hashMapOf()
-        eventParameters.asSequence().forEach { mutableParameterMap[it.name] = it }
+        parameterList.asSequence().forEach { mutableParameterMap[it.name] = it }
         parameters = mutableParameterMap.toMap()
     }
-
-    fun functionName() = name + ":"
 }
