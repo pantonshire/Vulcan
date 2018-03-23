@@ -52,7 +52,7 @@ _The recommended version of Vulcan that's most likely to work properly._
 
 ## Latest
 _The latest version of Vulcan which may include lots of bugs._  
-[Vulcan Alpha 0.0.4](https://www.dropbox.com/s/1yqm8c2v0yxzgaz/vulcan-alpha-0.0.4.jar?dl=0 "Alpha 0.0.4")  
+[Vulcan Alpha 0.0.5](https://www.dropbox.com/s/rxtucd8ltzkf70i/vulcan-alpha-0.0.5.jar?dl=0 "Alpha 0.0.5")  
 
 ## Older
 _Older versions of Vulcan._  
