@@ -1,6 +1,6 @@
 # Changelog
 ## Alpha 0.0.5
-In development
+Released on 23rd March 2018
 * Removed indentation from ModItems file to be reimplemented at a later date
 * A creative menu tab is now included to contain all modded items
 
