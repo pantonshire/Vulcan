@@ -38,8 +38,8 @@ The programmer will have no way to create new methods, so the only methods that 
 * "fluid" type for adding liquids, automatically create bucket
 * Possible integration with existing mods?
 * Ability for objects to reference themselves with "this" or "self", or similar
-* A better GUI for building the mod
-* An IDE for Vulcan?  
+* An IDE for Vulcan?
+* Alternative flavours of Vulcan: more traditional programming syntax, French, German (maybe more!)
 
 # Changelog
 Changelog is available [here](https://github.com/Pantonshire/Vulcan/blob/master/Changelog.md#changelog "Changelog").  
