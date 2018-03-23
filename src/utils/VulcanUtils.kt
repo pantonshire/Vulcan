@@ -20,4 +20,8 @@ object VulcanUtils {
 
         return true
     }
+
+    fun isValidInt() {
+
+    }
 }

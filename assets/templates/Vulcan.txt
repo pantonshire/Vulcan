@@ -1,7 +1,10 @@
 package com.~MODID~;
 
+import java.util.Random;
+
 public final class Vulcan {
 
+    public static Random rand = new Random();
     public static ItemManager items = new ItemManager();
     public static RegistryManager registry = new RegistryManager();
 }

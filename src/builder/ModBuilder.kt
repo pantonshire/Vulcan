@@ -131,6 +131,7 @@ object ModBuilder {
         items.asSequence().forEach {
             content += "item.${it.registryName()}.name=${it.name}¶"
         }
+        content += "itemGroup.$modID=$modName items"
         FileWriter.writeFile(Directories.getDirectory(assets, "lang", "en_us.lang"), content)
     }
 }

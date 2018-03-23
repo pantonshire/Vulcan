@@ -12,11 +12,23 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Random;
 
 public final class ItemManager {
 
     private HashMap<String, Item> items;
+
+    public static CreativeTabs tab = new CreativeTabs("~MODID~") {
+        @SideOnly(Side.CLIENT)
+        public ItemStack getTabIconItem() {
+            return Vulcan.items.getRandomItem(Vulcan.rand);
+        }
+    };
 
     public ItemManager() {
         items = new HashMap<String, Item>();
@@ -29,6 +41,18 @@ public final class ItemManager {
             System.err.println("Could not find an item called \'" + name + "\'.");
             return Items.APPLE;
         }
+    }
+
+    public Item getRandomItem(Random random) {
+        Collection<Item> values = items.values();
+        int index = random.nextInt(values.size());
+        int i = 0;
+        for(Item item : values) {
+            if(i == index) { return item; }
+            ++i;
+        }
+
+        return Items.APPLE;
     }
 
     public Item addItem(String name, Item item) {

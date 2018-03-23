@@ -18,6 +18,7 @@ public class VulcanItem extends Item {
         this.description = description;
         this.enchantedEffect = enchantedEffect;
         setMaxStackSize(stackSize);
+        setCreativeTab(ItemManager.tab);
     }
 
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flag) {
