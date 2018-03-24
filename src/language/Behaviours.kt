@@ -26,7 +26,7 @@ object Behaviours {
             Behaviour("walked_on", LivingEntity("entity")),
             Behaviour("destroyed"),
             Behaviour("right_clicked", Player("player")),
-            Behaviour("placed")
+            Behaviour("placed", LivingEntity("placer"))
     )
 
     private val playerBehaviours = arrayOf(

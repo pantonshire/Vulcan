@@ -1,0 +1,86 @@
+package com.~MODID~;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.Random;
+
+public class VulcanBlock extends Block {
+
+    private boolean explosionDestroysBlock;
+    private boolean climbable;
+    private Item itemDrop;
+    private int minExpDrop, maxExpDrop;
+
+    public VulcanBlock(float hardness, float resistance, boolean unbreakable, float slipperiness, float light, String tool, int harvestLevel, boolean destroyedByExplosion, boolean climbable, Item item, int minExpDrop, int maxExpDrop) {
+        super(Material.ROCK);
+        setHardness(hardness);
+        setResistance(resistance);
+        this.explosionDestroysBlock = destroyedByExplosion;
+        this.climbable = climbable;
+
+        if(slipperiness != 0) {
+            setDefaultSlipperiness(MathHelper.clamp(slipperiness, 0f, 1f));
+        }
+
+        if(light != 0) {
+            setLightLevel(MathHelper.clamp(light, 0f, 1f));
+        }
+
+        if(unbreakable) {
+            setBlockUnbreakable();
+        }
+
+        if(!tool.isEmpty()) {
+            setHarvestLevel(tool, harvestLevel);
+        }
+
+        if(item != null) {
+            this.itemDrop = item;
+            this.minExpDrop = minExpDrop;
+            this.maxExpDrop = maxExpDrop;
+        }
+    }
+
+    @Override
+    public boolean canDropFromExplosion(Explosion explosion) {
+        return !explosionDestroysBlock;
+    }
+
+    @Override
+    public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
+        return climbable;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return itemDrop == null ? super.getItemDropped(state, random, fortune) : itemDrop;
+    }
+
+    @Override
+    public int quantityDroppedWithBonus(int fortune, Random random) {
+        if(itemDrop != null && fortune > 0) {
+            return quantityDropped(random) * Math.max(random.nextInt(fortune + 2) - 1, 0) + 1;
+        }
+
+        return quantityDropped(random);
+    }
+
+    @Override
+    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
+        if(itemDrop != null) {
+            Random random = world instanceof World ? ((World)world).rand : new Random();
+            return MathHelper.getInt(random, minExpDrop, maxExpDrop);
+        }
+
+        return 0;
+    }
+}

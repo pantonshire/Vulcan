@@ -7,20 +7,22 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = "~MODID~", version = "~VERSION~", name = "~NAME~")
-public final class VulcanMod {
+public final class Mod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(Vulcan.registry);
         ModItems.makeItems();
+        ModBlocks.makeBlocks();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        //MinecraftForge.EVENT_BUS.register(new EventManager());
+        //MinecraftForge.EVENT_BUS.register(new ModEvents());
 
         if(event.getSide() == Side.CLIENT) {
             Vulcan.items.registerModels();
+            Vulcan.blocks.registerModels();
         }
     }
 }

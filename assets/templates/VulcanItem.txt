@@ -21,12 +21,14 @@ public class VulcanItem extends Item {
         setCreativeTab(ItemManager.tab);
     }
 
+    @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flag) {
         if(description != null && !description.equals("")) {
             tooltip.add(description);
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return enchantedEffect || super.hasEffect(stack);
