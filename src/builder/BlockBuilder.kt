@@ -16,16 +16,19 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
     private var resistance = 1.0
     private var unbreakable = false
     private var destroyedByExplosion = false
-    private var climbable = false
+    private var flammable = false
+    private var burnForever = false
+    private var redstoneSignal = 0
     private var slipperiness = 0.0
     private var light = 0.0
     private var tool = ""
     private var harvestLevel = 0
+    private var gravity = false;
     private var texture = ""
 
     override fun passToNext() {
         ModBuilder.registerBlock(Block(name, texture, hardness, resistance, unbreakable, destroyedByExplosion,
-                climbable, slipperiness, light, tool, harvestLevel, makeOverrideMap()))
+                flammable, burnForever, redstoneSignal, slipperiness, light, tool, harvestLevel, gravity, makeOverrideMap()))
     }
 
     override fun processLine(line: Line) {
@@ -82,11 +85,28 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
                         }
                     }
 
-                    "climbable" -> {
+                    "flammable" -> {
                         if(line.value == "true" || line.value == "false") {
-                            climbable = line.value == "true"
+                            flammable = line.value == "true"
                         } else {
                             line.throwError(fileName, "${line.value} is not a valid boolean")
+                        }
+                    }
+
+                    "burn_forever" -> {
+                        if(line.value == "true" || line.value == "false") {
+                            burnForever = line.value == "true"
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid boolean")
+                        }
+                    }
+
+                    "redstone_signal" -> {
+                        try {
+                            val value = line.value.toInt()
+                            redstoneSignal = value
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid integer")
                         }
                     }
 
@@ -122,6 +142,14 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
                             harvestLevel = value
                         } catch(exception: NumberFormatException) {
                             line.throwError(fileName, "${line.value} is not a valid integer")
+                        }
+                    }
+
+                    "gravity" -> {
+                        if(line.value == "true" || line.value == "false") {
+                            gravity = line.value == "true"
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid boolean")
                         }
                     }
                 }

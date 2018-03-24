@@ -1,4 +1,11 @@
 # Changelog
+## Alpha 0.1.1
+In development
+* Fixed a crash in compiled mods caused when no items or no blocks were registered
+* Removed the "climbable" attribute from block
+* Added new attributes to block: flammable, burn_forever, redstone_signal and gravity
+* Added a new generated Java class: VulcanBlockFalling.java, which is used for blocks with gravity
+
 ## Alpha 0.1.0
 Released on 24th March 2018
 * Added a new type of Vulcan file: block!

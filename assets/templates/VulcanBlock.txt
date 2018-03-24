@@ -16,17 +16,20 @@ import java.util.Random;
 public class VulcanBlock extends Block {
 
     private boolean explosionDestroysBlock;
-    private boolean climbable;
+    private boolean flammable;
+    private boolean burnForever;
+    private int redstoneSignal;
     private Item itemDrop;
     private int minExpDrop, maxExpDrop;
 
-    public VulcanBlock(double hardness, double resistance, boolean unbreakable, double slipperiness, double light, String tool, int harvestLevel, boolean destroyedByExplosion, boolean climbable, Item item, int minExpDrop, int maxExpDrop) {
+    public VulcanBlock(double hardness, double resistance, boolean unbreakable, double slipperiness, double light, String tool, int harvestLevel, boolean destroyedByExplosion, boolean flammable, boolean burnForever, int redstoneSignal, Item item, int minExpDrop, int maxExpDrop) {
         super(Material.ROCK);
         setCreativeTab(BlockManager.tab);
         setHardness((float)hardness);
         setResistance((float)resistance);
         this.explosionDestroysBlock = destroyedByExplosion;
-        this.climbable = climbable;
+        this.flammable = flammable;
+        this.redstoneSignal = MathHelper.clamp(redstoneSignal, 0, 15);
 
         if(slipperiness != 0) {
             setDefaultSlipperiness(MathHelper.clamp((float)slipperiness, 0f, 1f));
@@ -57,11 +60,6 @@ public class VulcanBlock extends Block {
     }
 
     @Override
-    public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
-        return climbable;
-    }
-
-    @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune) {
         return itemDrop == null ? super.getItemDropped(state, random, fortune) : itemDrop;
     }
@@ -83,5 +81,30 @@ public class VulcanBlock extends Block {
         }
 
         return 0;
+    }
+
+    @Override
+    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return flammable ? 20 : super.getFlammability(world, pos, face);
+    }
+
+    @Override
+    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return flammable ? 5 : super.getFireSpreadSpeed(world, pos, face);
+    }
+
+    @Override
+    public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
+        return (burnForever && side == EnumFacing.UP) || super.isFireSource(world, pos, side);
+    }
+
+    @Override
+    public boolean canProvidePower(IBlockState state) {
+        return redstoneSignal > 0;
+    }
+
+    @Override
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return redstoneSignal;
     }
 }

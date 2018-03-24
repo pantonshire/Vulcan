@@ -70,6 +70,7 @@ object ModBuilder {
         javaFileFromTemplate("BlockManager")
         javaFileFromTemplate("VulcanItem")
         javaFileFromTemplate("VulcanBlock")
+        javaFileFromTemplate("VulcanBlockFalling")
         javaFileFromTemplate("MessageUtils")
         itemModelFiles()
         blockModelFiles()

@@ -1,0 +1,68 @@
+package com.~MODID~;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFalling;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.Random;
+
+public class VulcanBlockFalling extends VulcanBlock {
+
+    public VulcanBlockFalling(double hardness, double resistance, boolean unbreakable, double slipperiness, double light, String tool, int harvestLevel, boolean destroyedByExplosion, boolean flammable, boolean burnsForever, int redstoneSignal, Item item, int minExpDrop, int maxExpDrop) {
+        super(hardness, resistance, unbreakable, slipperiness, light, tool, harvestLevel, destroyedByExplosion, flammable, burnsForever, redstoneSignal, item, minExpDrop, maxExpDrop);
+    }
+
+    @Override
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
+        world.scheduleUpdate(pos, this, tickRate(world));
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        world.scheduleUpdate(pos, this, tickRate(world));
+    }
+
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        if(!world.isRemote) {
+            checkFallable(world, pos);
+        }
+    }
+
+    private void checkFallable(World world, BlockPos pos) {
+        if((world.isAirBlock(pos.down()) || BlockFalling.canFallThrough(world.getBlockState(pos.down()))) && pos.getY() >= 0) {
+            int i = 32;
+
+            if(world.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
+                if(!world.isRemote) {
+                    EntityFallingBlock entityfallingblock = new EntityFallingBlock(world, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, world.getBlockState(pos));
+                    world.spawnEntity(entityfallingblock);
+                }
+            }
+
+            else {
+                IBlockState state = world.getBlockState(pos);
+                world.setBlockToAir(pos);
+                BlockPos blockpos;
+
+                for(blockpos = pos.down(); (world.isAirBlock(blockpos) || BlockFalling.canFallThrough(world.getBlockState(blockpos))) && blockpos.getY() > 0; blockpos = blockpos.down()) {
+
+                }
+
+                if(blockpos.getY() > 0) {
+                    world.setBlockState(blockpos.up(), state); //Forge: Fix loss of state information during world gen.
+                }
+            }
+        }
+    }
+
+    @Override
+    public int tickRate(World world) {
+        return 2;
+    }
+}
