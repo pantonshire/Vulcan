@@ -1,9 +1,10 @@
 # Changelog
 ## Alpha 0.1.0
-In development
+Released on 24th March 2018
 * Added a new type of Vulcan file: block!
 * Blocks have four behaviours: walked_on, placed, right_clicked and destroyed
 * Blocks have 11 different attributes: name, texture, hardness, resistance, unbreakable, fragile, climbable, slipperiness, light, tool and tool_level
+* Added a separate creative menu tab for blocks
 
 ## Alpha 0.0.5
 Released on 23rd March 2018
@@ -14,7 +15,7 @@ Released on 23rd March 2018
 Released on 14th March 2018
 * Fixed issue #2: using an apostrophe within a string no longer causes an error
 * If ".png" is written at the end of the texture attribute in an item, it will be ignored
-* Setting attributes to invalid values will now show errors.
+* Setting attributes to invalid values will now show errors
 * Introduced rules for whether or not a string is considered valid
 
 ## Alpha 0.0.3
