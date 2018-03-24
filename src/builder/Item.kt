@@ -5,7 +5,7 @@ class Item(val name: String, val texture: String, val description: String, val s
     fun registryName(): String = name.replace(" ", "_").toLowerCase()
 
     fun toJava(): String {
-        var java = "Vulcan.items.addItem(\"${registryName()}\", new VulcanItem(\"$description\", $stackSize, $shiny)"
+        var java = "VulcanMod.items.addItem(\"${registryName()}\", new VulcanItem(\"$description\", $stackSize, $shiny)"
         if(overrides.isNotEmpty()) {
             java += " {¶"
             overrides.keys.asSequence().forEach {

@@ -29,12 +29,12 @@ public final class BlockManager {
     public static CreativeTabs tab = new CreativeTabs("~MODID~_blocks") {
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {
-            return new ItemStack(Vulcan.items.getRandomItem(Vulcan.rand));
+            return new ItemStack(VulcanMod.blocks.getRandomBlock(VulcanMod.rand));
         }
     };
 
-    public ItemManager() {
-        items = new HashMap<String, Item>();
+    public BlockManager() {
+        blocks = new HashMap<String, Block>();
     }
 
     public Block getBlock(String name) {
@@ -59,15 +59,15 @@ public final class BlockManager {
     }
 
     public Block addBlock(String name, Block block) {
-        blocks.put(name, item);
-        Vulcan.registry.scheduleRegisterBlock(block, name);
+        blocks.put(name, block);
+        VulcanMod.registry.scheduleRegisterBlock(block, name);
         return block;
     }
 
     public void registerModels() {
         net.minecraft.client.renderer.RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
         for(String blockName : blocks.keySet()) {
-            renderItem.getItemModelMesher().register(Item.getItemFromBlock(getBlock(blockName)), 0, new ModelResourceLocation("~MODID~:" + itemName, "inventory"));
+            renderItem.getItemModelMesher().register(Item.getItemFromBlock(getBlock(blockName)), 0, new ModelResourceLocation("~MODID~:" + blockName, "inventory"));
         }
     }
 }

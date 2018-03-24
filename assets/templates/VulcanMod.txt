@@ -6,12 +6,19 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.Random;
+
 @Mod(modid = "~MODID~", version = "~VERSION~", name = "~NAME~")
-public final class Mod {
+public final class VulcanMod {
+
+    public static Random rand = new Random();
+    public static ItemManager items = new ItemManager();
+    public static BlockManager blocks = new BlockManager();
+    public static RegistryManager registry = new RegistryManager();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(Vulcan.registry);
+        MinecraftForge.EVENT_BUS.register(VulcanMod.registry);
         ModItems.makeItems();
         ModBlocks.makeBlocks();
     }
@@ -21,8 +28,8 @@ public final class Mod {
         //MinecraftForge.EVENT_BUS.register(new ModEvents());
 
         if(event.getSide() == Side.CLIENT) {
-            Vulcan.items.registerModels();
-            Vulcan.blocks.registerModels();
+            VulcanMod.items.registerModels();
+            VulcanMod.blocks.registerModels();
         }
     }
 }

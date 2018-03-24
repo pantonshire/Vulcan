@@ -4,7 +4,7 @@ import language.*
 import language.objects.VulcanObject
 import utils.VulcanUtils
 
-class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
+class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"block", lines) {
 
     private val walkedOn = "public void onEntityWalk(World world, BlockPos position, Entity entityUnsanitised)"
     private val destroyed = "public void breakBlock(World world, BlockPos position, IBlockState state)"

@@ -64,12 +64,12 @@ object ModBuilder {
         projectSkeleton()
         modItemsFile()
         modBlocksFile()
-        javaFileFromTemplate("Mod")
-        javaFileFromTemplate("Vulcan")
+        javaFileFromTemplate("VulcanMod")
         javaFileFromTemplate("RegistryManager")
         javaFileFromTemplate("ItemManager")
         javaFileFromTemplate("BlockManager")
         javaFileFromTemplate("VulcanItem")
+        javaFileFromTemplate("VulcanBlock")
         javaFileFromTemplate("MessageUtils")
         itemModelFiles()
         blockModelFiles()
@@ -131,7 +131,7 @@ object ModBuilder {
                 "import net.minecraft.entity.player.EntityPlayer;¶" +
                 "import net.minecraft.block.state.IBlockState¶;" +
                 "import net.minecraft.util.math.BlockPos;¶" +
-                "¶public final class ModItems {¶public static void makeBlocks() {"
+                "¶public final class ModBlocks {¶public static void makeBlocks() {"
 
         blocks.asSequence().forEach {
             content += "¶" + it.toJava()

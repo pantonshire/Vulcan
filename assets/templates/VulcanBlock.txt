@@ -20,19 +20,20 @@ public class VulcanBlock extends Block {
     private Item itemDrop;
     private int minExpDrop, maxExpDrop;
 
-    public VulcanBlock(float hardness, float resistance, boolean unbreakable, float slipperiness, float light, String tool, int harvestLevel, boolean destroyedByExplosion, boolean climbable, Item item, int minExpDrop, int maxExpDrop) {
+    public VulcanBlock(double hardness, double resistance, boolean unbreakable, double slipperiness, double light, String tool, int harvestLevel, boolean destroyedByExplosion, boolean climbable, Item item, int minExpDrop, int maxExpDrop) {
         super(Material.ROCK);
-        setHardness(hardness);
-        setResistance(resistance);
+        setCreativeTab(BlockManager.tab);
+        setHardness((float)hardness);
+        setResistance((float)resistance);
         this.explosionDestroysBlock = destroyedByExplosion;
         this.climbable = climbable;
 
         if(slipperiness != 0) {
-            setDefaultSlipperiness(MathHelper.clamp(slipperiness, 0f, 1f));
+            setDefaultSlipperiness(MathHelper.clamp((float)slipperiness, 0f, 1f));
         }
 
         if(light != 0) {
-            setLightLevel(MathHelper.clamp(light, 0f, 1f));
+            setLightLevel(MathHelper.clamp((float)light, 0f, 1f));
         }
 
         if(unbreakable) {

@@ -26,7 +26,7 @@ public final class ItemManager {
     public static CreativeTabs tab = new CreativeTabs("~MODID~_items") {
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {
-            return new ItemStack(Vulcan.items.getRandomItem(Vulcan.rand));
+            return new ItemStack(VulcanMod.items.getRandomItem(VulcanMod.rand));
         }
     };
 
@@ -57,7 +57,7 @@ public final class ItemManager {
 
     public Item addItem(String name, Item item) {
         items.put(name, item);
-        Vulcan.registry.scheduleRegisterItem(item, name);
+        VulcanMod.registry.scheduleRegisterItem(item, name);
         return item;
     }
 
