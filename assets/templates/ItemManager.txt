@@ -44,7 +44,7 @@ public final class ItemManager {
     }
 
     public Item getRandomItem(Random random) {
-        if(!items.isEmpty) {
+        if(!items.isEmpty()) {
             Collection<Item> values = items.values();
             int index = random.nextInt(values.size());
             int i = 0;
