@@ -23,7 +23,7 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
     private var light = 0.0
     private var tool = ""
     private var harvestLevel = 0
-    private var gravity = false;
+    private var gravity = false
     private var texture = ""
 
     override fun passToNext() {
