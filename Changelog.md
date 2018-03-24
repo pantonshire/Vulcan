@@ -3,7 +3,7 @@
 In development
 * Added a new type of Vulcan file: block!
 * Blocks have four behaviours: walked_on, placed, right_clicked and destroyed
-* Blocks have 11 different attributes: name, hardness, resistance, unbreakable, fragile, climbable, slipperiness, light, tool and tool_level
+* Blocks have 11 different attributes: name, texture, hardness, resistance, unbreakable, fragile, climbable, slipperiness, light, tool and tool_level
 
 ## Alpha 0.0.5
 Released on 23rd March 2018
