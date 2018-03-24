@@ -47,12 +47,14 @@ public final class BlockManager {
     }
 
     public Block getRandomBlock(Random random) {
-        Collection<Block> values = blocks.values();
-        int index = random.nextInt(values.size());
-        int i = 0;
-        for(Block block : values) {
-            if(i == index) { return block; }
-            ++i;
+        if(!blocks.isEmpty()) {
+            Collection<Block> values = blocks.values();
+            int index = random.nextInt(values.size());
+            int i = 0;
+            for(Block block : values) {
+                if(i == index) { return block; }
+                ++i;
+            }
         }
 
         return Blocks.DIRT;

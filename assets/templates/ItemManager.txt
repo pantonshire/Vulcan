@@ -44,12 +44,14 @@ public final class ItemManager {
     }
 
     public Item getRandomItem(Random random) {
-        Collection<Item> values = items.values();
-        int index = random.nextInt(values.size());
-        int i = 0;
-        for(Item item : values) {
-            if(i == index) { return item; }
-            ++i;
+        if(!items.isEmpty) {
+            Collection<Item> values = items.values();
+            int index = random.nextInt(values.size());
+            int i = 0;
+            for(Item item : values) {
+                if(i == index) { return item; }
+                ++i;
+            }
         }
 
         return Items.APPLE;
