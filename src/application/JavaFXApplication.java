@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -31,6 +32,7 @@ public class JavaFXApplication extends Application {
         UIHandler.INSTANCE.setApplication(this);
 
         primaryStage.setTitle("Vulcan");
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/logo.png")));
         root = new StackPane();
         vbox = new VBox();
         vbox.setAlignment(Pos.CENTER_LEFT);

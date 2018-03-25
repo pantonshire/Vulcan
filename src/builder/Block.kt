@@ -8,7 +8,7 @@ class Block(val name: String, val texture: String, val hardness: Double, val res
     fun registryName(): String = name.replace(" ", "_").toLowerCase()
 
     fun toJava(): String {
-        var blockClass = if(gravity) "VulcanBlockFalling" else "VulcanBlock"
+        val blockClass = if(gravity) "VulcanBlockFalling" else "VulcanBlock"
         var java = "VulcanMod.blocks.addBlock(\"${registryName()}\", new $blockClass($hardness, $resistance, $unbreakable, $slipperiness, $light, \"$tool\", $harvestLevel, $destroyedByExplosion, $flammable, $burnForever, $redstoneSignal, null, 0, 0)"
         if(overrides.isNotEmpty()) {
             java += " {¶"
