@@ -1,6 +1,7 @@
 package application
 
 import builder.BlockBuilder
+import builder.FoodBuilder
 import builder.ItemBuilder
 import builder.ModBuilder
 import io.Directories
@@ -83,6 +84,7 @@ object VulcanBuild {
 
         when(type) {
             "item" -> ItemBuilder(fileName, lines).build()
+            "food" -> FoodBuilder(fileName, lines).build()
             "block" -> BlockBuilder(fileName, lines).build()
             else -> UIHandler.error("Unrecognised type for $fileName: \"$type\". This file will be skipped.")
         }
