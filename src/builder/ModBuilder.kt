@@ -69,6 +69,7 @@ object ModBuilder {
         javaFileFromTemplate("ItemManager")
         javaFileFromTemplate("BlockManager")
         javaFileFromTemplate("VulcanItem")
+        javaFileFromTemplate("VulcanFood")
         javaFileFromTemplate("VulcanBlock")
         javaFileFromTemplate("VulcanBlockFalling")
         javaFileFromTemplate("MessageUtils")
