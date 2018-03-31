@@ -1,26 +1,34 @@
 package com.~MODID~;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
-public class VulcanItem extends Item {
+public class VulcanFood extends ItemFood {
 
+    private int eatTime;
     private int burnTime;
     private boolean enchantedEffect;
     private String description;
 
-    public VulcanItem(String description, int stackSize, boolean enchantedEffect, int burnTime) {
-        super();
+    public VulcanFood(String description, int foodValue, double saturation, boolean meat, int eatTime, int stackSize, boolean enchantedEffect, int burnTime) {
+        super(foodValue, (float)Math.max(saturation, 0), meat);
         this.description = description;
         this.enchantedEffect = enchantedEffect;
         this.burnTime = Math.max(burnTime, 0);
+        this.eatTime = Math.max(eatTime, 0);
         setMaxStackSize(stackSize);
         setCreativeTab(ItemManager.tab);
+    }
+
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return eatTime;
     }
 
     @Override
@@ -29,7 +37,7 @@ public class VulcanItem extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flag) {
         if(description != null && !description.equals("")) {
             tooltip.add(description);
         }

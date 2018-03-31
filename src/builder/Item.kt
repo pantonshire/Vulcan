@@ -1,11 +1,11 @@
 package builder
 
-class Item(val name: String, val texture: String, val description: String, val stackSize: Int, val shiny: Boolean, val overrides: Map<String, String>) {
+open class Item(val name: String, val texture: String, val description: String, val stackSize: Int, val shiny: Boolean, val burnTime: Int, val overrides: Map<String, String>) {
 
     fun registryName(): String = name.replace(" ", "_").toLowerCase()
 
-    fun toJava(): String {
-        var java = "VulcanMod.items.addItem(\"${registryName()}\", new VulcanItem(\"$description\", $stackSize, $shiny)"
+    open fun toJava(): String {
+        var java = "VulcanMod.items.addItem(\"${registryName()}\", new VulcanItem(\"$description\", $stackSize, $shiny, $burnTime)"
         if(overrides.isNotEmpty()) {
             java += " {¶"
             overrides.keys.asSequence().forEach {

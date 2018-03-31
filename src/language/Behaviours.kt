@@ -12,7 +12,9 @@ object Behaviours {
     )
 
     private val foodBehaviours = arrayOf(
-            Behaviour("eaten", Player("player"))
+            Behaviour("eaten", Player("player")),
+            Behaviour("held", Player("player")),
+            Behaviour("hit_entity", LivingEntity("attacker"), LivingEntity("target"))
     )
 
     private val toolBehaviours = arrayOf(

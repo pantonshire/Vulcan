@@ -4,21 +4,25 @@ import language.*
 import language.objects.VulcanObject
 import utils.VulcanUtils
 
-class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
+class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food", lines) {
 
-    private val rightClick = "public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)"
+    private val eaten = "protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player)"
     private val update = "public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)"
     private val hitEntity = "public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)"
 
     private var name: String = "???"
     private var description: String = ""
     private var stackSize: Int = 64
+    private var foodValue: Int = 1
+    private var saturation: Double = 0.3
+    private var meat: Boolean = false
+    private var eatTime: Int = 32
     private var shiny: Boolean = false
     private var burnTime: Int = 0
     private var texture: String = ""
 
     override fun passToNext() {
-        ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, burnTime, makeOverrideMap()))
+        ModBuilder.registerItem(Food(name, texture, description, stackSize, shiny, burnTime, foodValue, saturation, meat, eatTime, makeOverrideMap()))
     }
 
     override fun processLine(line: Line) {
@@ -74,6 +78,41 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
                             line.throwError(fileName, "${line.value} is not a valid integer")
                         }
                     }
+
+                    "heal_amount" -> {
+                        try {
+                            val value = line.value.toInt()
+                            foodValue = value
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid integer")
+                        }
+                    }
+
+                    "saturation" -> {
+                        try {
+                            val value = line.value.toDouble()
+                            saturation = value
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
+                        }
+                    }
+
+                    "meat" -> {
+                        if(line.value == "true" || line.value == "false") {
+                            meat = line.value == "true"
+                        } else {
+                            line.throwError(fileName, "${line.value} is not a valid boolean")
+                        }
+                    }
+
+                    "eat_time" -> {
+                        try {
+                            val time = line.value.toInt()
+                            eatTime = time
+                        } catch(exception: NumberFormatException) {
+                            line.throwError(fileName, "${line.value} is not a valid integer")
+                        }
+                    }
                 }
             }
         }
@@ -122,8 +161,8 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
             }
 
             if(content.isNotEmpty()) {
-                when (it.key) {
-                    "right_click" -> overrides[rightClick] = "$content¶return super.onItemRightClick(world, player, hand);"
+                when(it.key) {
+                    "eaten" -> overrides[eaten] = content
                     "held" -> overrides[update] = "if(selected && entity instanceof EntityPlayer) {¶EntityPlayer player = (EntityPlayer)entity;¶$content¶}"
                     "hit_entity" -> overrides[hitEntity] = "$content¶return true;"
                 }

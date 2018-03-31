@@ -1,4 +1,10 @@
 # Changelog
+## Alpha 0.2.0
+In development
+* Added food
+* Food has three behaviours: eaten, held and hit_entity
+* Food has all of the same attributes as item, plus a few extras: heal_amount, saturation, meat and eat_time
+
 ## Alpha 0.1.1
 Released on 24th March 2018
 * Fixed a crash in compiled mods caused when no items or no blocks were registered
