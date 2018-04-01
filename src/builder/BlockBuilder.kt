@@ -11,179 +11,45 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
     private val rightClicked = "public boolean onBlockActivated(World world, BlockPos position, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)"
     private val placed = "public void onBlockPlacedBy(World world, BlockPos position, IBlockState state, EntityLivingBase placer, ItemStack stack)"
 
-    private var name = "???"
-    private var hardness = 1.0
-    private var resistance = 1.0
-    private var unbreakable = false
-    private var destroyedByExplosion = false
-    private var flammable = false
-    private var burnForever = false
-    private var redstoneSignal = 0
-    private var slipperiness = 0.0
-    private var light = 0.0
-    private var tool = ""
-    private var harvestLevel = 0
-    private var gravity = false
-    private var texture = ""
+    //Strings
+    private var name            = StringAttribute(this, "name", "???")
+    private var texture         = StringAttribute(this, "texture", "")
+    private var tool            = StringAttribute(this, "tool", "")
+    //Booleans
+    private var unbreakable     = BooleanAttribute(this, "unbreakable", false)
+    private var destroyedByExplosion = BooleanAttribute(this, "fragile", false)
+    private var flammable       = BooleanAttribute(this, "flammable", false)
+    private var burnForever     = BooleanAttribute(this, "burn_forever", false)
+    private var gravity         = BooleanAttribute(this, "gravity", false)
+    //Integers
+    private var redstoneSignal  = IntegerAttribute(this, "redstone_signal", 0)
+    private var harvestLevel    = IntegerAttribute(this, "tool_level", 0)
+    //Floats
+    private var hardness        = FloatAttribute(this, "hardness", 1.0)
+    private var resistance      = FloatAttribute(this, "resistance", 1.0)
+    private var slipperiness    = FloatAttribute(this, "slipperiness", 0.0)
+    private var light           = FloatAttribute(this, "light", 0.0)
 
     override fun passToNext() {
-        ModBuilder.registerBlock(Block(name, texture, hardness, resistance, unbreakable, destroyedByExplosion,
-                flammable, burnForever, redstoneSignal, slipperiness, light, tool, harvestLevel, gravity, makeOverrideMap()))
-    }
+        ModBuilder.registerBlock(Block(
 
-    override fun processLine(line: Line) {
-        if(context == "constructor") {
-            if(line is SetLine) {
-                when(line.field) {
-                    "name" -> {
-                        if(VulcanUtils.isValidInputString(line.value)) {
-                            name = VulcanUtils.sanitiseInputString(line.value)
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid string")
-                        }
-                    }
+                name                 .get(),
+                texture              .get(),
+                hardness             .get(),
+                resistance           .get(),
+                unbreakable          .get(),
+                destroyedByExplosion .get(),
+                flammable            .get(),
+                burnForever          .get(),
+                redstoneSignal       .get(),
+                slipperiness         .get(),
+                light                .get(),
+                tool                 .get(),
+                harvestLevel         .get(),
+                gravity              .get(),
 
-                    "texture" -> {
-                        if(VulcanUtils.isValidInputString(line.value)) {
-                            texture = VulcanUtils.sanitiseInputString(line.value).removeSuffix(".png")
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid string")
-                        }
-                    }
-
-                    "hardness" -> {
-                        try {
-                            val value = line.value.toDouble()
-                            hardness = value
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
-                        }
-                    }
-
-                    "resistance" -> {
-                        try {
-                            val value = line.value.toDouble()
-                            resistance = value
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
-                        }
-                    }
-
-                    "unbreakable" -> {
-                        if(line.value == "true" || line.value == "false") {
-                            unbreakable = line.value == "true"
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid boolean")
-                        }
-                    }
-
-                    "fragile" -> {
-                        if(line.value == "true" || line.value == "false") {
-                            destroyedByExplosion = line.value == "true"
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid boolean")
-                        }
-                    }
-
-                    "flammable" -> {
-                        if(line.value == "true" || line.value == "false") {
-                            flammable = line.value == "true"
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid boolean")
-                        }
-                    }
-
-                    "burn_forever" -> {
-                        if(line.value == "true" || line.value == "false") {
-                            burnForever = line.value == "true"
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid boolean")
-                        }
-                    }
-
-                    "redstone_signal" -> {
-                        try {
-                            val value = line.value.toInt()
-                            redstoneSignal = value
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid integer")
-                        }
-                    }
-
-                    "slipperiness" -> {
-                        try {
-                            val value = line.value.toDouble()
-                            slipperiness = value
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
-                        }
-                    }
-
-                    "light" -> {
-                        try {
-                            val value = line.value.toDouble()
-                            light = value
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
-                        }
-                    }
-
-                    "tool" -> {
-                        if(VulcanUtils.isValidInputString(line.value)) {
-                            tool = VulcanUtils.sanitiseInputString(line.value)
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid string")
-                        }
-                    }
-
-                    "tool_level" -> {
-                        try {
-                            val value = line.value.toInt()
-                            harvestLevel = value
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid integer")
-                        }
-                    }
-
-                    "gravity" -> {
-                        if(line.value == "true" || line.value == "false") {
-                            gravity = line.value == "true"
-                        } else {
-                            line.throwError(fileName, "${line.value} is not a valid boolean")
-                        }
-                    }
-                }
-            }
-        }
-
-        else if(context in validBehaviours) {
-            val behaviour = validBehaviours[context]
-            if(behaviour != null) {
-                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(behaviour)
-
-                if(line is ActionLine) {
-                    if(visibleObjects.containsKey(line.target)) {
-                        val target = visibleObjects[line.target]!!
-                        if(target.isValidMessage(line.method)) {
-                            var javaFunctionCall = ""
-                            try {
-                                javaFunctionCall = target.messageToJava(line.method, line.arguments, behaviour.parameters)
-                            } catch(exception: IllegalArgumentException) {
-                                line.throwError(fileName,exception.message ?: "no error message was provided")
-                            }
-
-                            if(javaFunctionCall.isNotEmpty()) {
-                               behaviourContent[context]?.add(javaFunctionCall)
-                            }
-                        } else {
-                            line.throwError(fileName,"invalid message \"${line.method}\"")
-                        }
-                    } else {
-                        line.throwError(fileName,"invalid target for message \"${line.target}\"")
-                    }
-                }
-            }
-        }
+                makeOverrideMap()
+        ))
     }
 
     /** Returns a map for method overrides for the java item object.

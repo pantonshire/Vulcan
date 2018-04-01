@@ -5,6 +5,8 @@ import language.objects.VulcanObject
 
 abstract class Builder(val fileName: String, type: String, val lines: Array<Line>, vararg globalObjectsVararg: VulcanObject) {
 
+    val attributes: HashMap<String, Attribute<Any>> = hashMapOf()
+
     /** All of the Vulcan Objects that can be referenced from anywhere. May include "self". */
     val globalObjects: Map<String, VulcanObject>
 
@@ -41,7 +43,46 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
     abstract fun passToNext()
 
-    protected abstract fun processLine(line: Line)
+    private fun processLine(line: Line) {
+        if(context == "constructor" && line is SetLine) {
+            if (line.field in attributes) {
+                try {
+                    attributes[line.field]!!.set(line.value)
+                } catch (exception: IllegalArgumentException) {
+                    line.throwError(fileName, exception.message ?: "no error message provided")
+                }
+            }
+        }
+
+        else if(context in validBehaviours) {
+            val behaviour = validBehaviours[context]
+            if(behaviour != null) {
+                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(behaviour)
+
+                if(line is ActionLine) {
+                    if(visibleObjects.containsKey(line.target)) {
+                        val target = visibleObjects[line.target]!!
+                        if(target.isValidMessage(line.method)) {
+                            var javaFunctionCall = ""
+                            try {
+                                javaFunctionCall = target.messageToJava(line.method, line.arguments, behaviour.parameters)
+                            } catch(exception: IllegalArgumentException) {
+                                line.throwError(fileName,exception.message ?: "no error message was provided")
+                            }
+
+                            if(javaFunctionCall.isNotEmpty()) {
+                                behaviourContent[context]?.add(javaFunctionCall)
+                            }
+                        } else {
+                            line.throwError(fileName,"invalid message \"${line.method}\"")
+                        }
+                    } else {
+                        line.throwError(fileName,"invalid target for message \"${line.target}\"")
+                    }
+                }
+            }
+        }
+    }
 
     private fun checkForErrors(line: Line) {
         if(line is BlankLine) {
