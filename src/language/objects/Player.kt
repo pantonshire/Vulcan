@@ -38,6 +38,16 @@ class Player(name: String, mutable: Boolean = true): VulcanObject(DataType.PLAYE
                 }
             }
 
+            //Set the player's position
+            "teleport" -> {
+                if(parameters[0] == "to") {
+                    val position = DataType.VECTOR3.toJava(parameters[1], variables)
+                    return "$name.setPosition($position.getX(), $position.getY(), $position.getZ())"
+                } else {
+                    throw IllegalArgumentException("invalid syntax")
+                }
+            }
+
             //Restore air
             "breathe" -> return "$name.setAir(300);"
 

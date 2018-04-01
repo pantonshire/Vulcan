@@ -9,7 +9,6 @@ class LivingEntity(name: String, mutable: Boolean = true): VulcanObject(DataType
             Pair("take", 2),        //Damage entity
             Pair("burn", 3),        //Set entity on fire
             Pair("teleport", 2),    //Set entity's position
-            //TODO: Add functionality to teleport
             Pair("breathe", 0),     //Restore entity's air
             Pair("swing", 2),       //Swing arm
             Pair("heal", 2),        //Recover health
@@ -38,6 +37,16 @@ class LivingEntity(name: String, mutable: Boolean = true): VulcanObject(DataType
                 if(parameters[0] == "for" && (parameters[2] == "seconds" || parameters[2] == "second")) {
                     val time = DataType.INTEGER.toJava(parameters[1], variables)
                     return "$name.setFire($time);"
+                } else {
+                    throw IllegalArgumentException("invalid syntax")
+                }
+            }
+
+            //Set the player's position
+            "teleport" -> {
+                if(parameters[0] == "to") {
+                    val position = DataType.VECTOR3.toJava(parameters[1], variables)
+                    return "$name.setPosition($position.getX(), $position.getY(), $position.getZ())"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }

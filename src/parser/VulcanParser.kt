@@ -57,12 +57,17 @@ object VulcanParser {
         val list: MutableList<String> = mutableListOf()
         var currentString = ""
         var quote = false
+        var squareBrackets = 0
 
         raw.asSequence().forEach {
-            if(quote || it != ' ') {
+            if(it != ' ' || quote || squareBrackets > 0) {
                 currentString += it
                 if(it == '\"') {
                     quote = !quote
+                } else if(it == '[') {
+                    squareBrackets += 1
+                } else if(it == ']') {
+                    squareBrackets -= 1
                 }
             } else if(currentString.isNotEmpty()) {
                 list += currentString
