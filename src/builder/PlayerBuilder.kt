@@ -23,69 +23,69 @@ class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"ite
 //        ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, makeOverrideMap()))
     }
 
-    override fun processLine(line: Line) {
-        if(context == "constructor") {
-            if(line is SetLine) {
-                when(line.field) {
-                    "hearts" -> {
-                        try {
-                            val hearts = line.value.toInt()
-                            maxHealth = hearts * 2
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid integer")
-                        }
-                    }
-
-                    "strength" -> {
-                        try {
-                            val damage = line.value.toInt()
-                            attackDamage = damage
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid integer")
-                        }
-                    }
-
-                    "jump_height" -> {
-                        try {
-                            val height = line.value.toDouble()
-                            jumpMultiplier = height
-                        } catch(exception: NumberFormatException) {
-                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
-                        }
-                    }
-                }
-            }
-        }
-
-        else if(context in validBehaviours) {
-            val event = validBehaviours[context]
-            if(event != null) {
-                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(event)
-
-                if(line is ActionLine) {
-                    if(visibleObjects.containsKey(line.target)) {
-                        val target = visibleObjects[line.target]!!
-                        if(target.isValidMessage(line.method)) {
-                            var javaFunctionCall = ""
-                            try {
-                                javaFunctionCall = target.messageToJava(line.method, line.arguments, event.parameters)
-                            } catch(exception: IllegalArgumentException) {
-                                line.throwError(fileName,exception.message ?: "no error message was provided")
-                            }
-
-                            if(javaFunctionCall.isNotEmpty()) {
-                               behaviourContent[context]?.add(javaFunctionCall)
-                            }
-                        } else {
-                            line.throwError(fileName,"invalid message \"${line.method}\"")
-                        }
-                    } else {
-                        line.throwError(fileName,"invalid target for message \"${line.target}\"")
-                    }
-                }
-            }
-        }
-    }
+//    override fun processLine(line: Line) {
+//        if(context == "constructor") {
+//            if(line is SetLine) {
+//                when(line.field) {
+//                    "hearts" -> {
+//                        try {
+//                            val hearts = line.value.toInt()
+//                            maxHealth = hearts * 2
+//                        } catch(exception: NumberFormatException) {
+//                            line.throwError(fileName, "${line.value} is not a valid integer")
+//                        }
+//                    }
+//
+//                    "strength" -> {
+//                        try {
+//                            val damage = line.value.toInt()
+//                            attackDamage = damage
+//                        } catch(exception: NumberFormatException) {
+//                            line.throwError(fileName, "${line.value} is not a valid integer")
+//                        }
+//                    }
+//
+//                    "jump_height" -> {
+//                        try {
+//                            val height = line.value.toDouble()
+//                            jumpMultiplier = height
+//                        } catch(exception: NumberFormatException) {
+//                            line.throwError(fileName, "${line.value} is not a valid floating-point number")
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        else if(context in validBehaviours) {
+//            val event = validBehaviours[context]
+//            if(event != null) {
+//                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(event)
+//
+//                if(line is ActionLine) {
+//                    if(visibleObjects.containsKey(line.target)) {
+//                        val target = visibleObjects[line.target]!!
+//                        if(target.isValidMessage(line.method)) {
+//                            var javaFunctionCall = ""
+//                            try {
+//                                javaFunctionCall = target.messageToJava(line.method, line.arguments, event.parameters)
+//                            } catch(exception: IllegalArgumentException) {
+//                                line.throwError(fileName,exception.message ?: "no error message was provided")
+//                            }
+//
+//                            if(javaFunctionCall.isNotEmpty()) {
+//                               behaviourContent[context]?.add(javaFunctionCall)
+//                            }
+//                        } else {
+//                            line.throwError(fileName,"invalid message \"${line.method}\"")
+//                        }
+//                    } else {
+//                        line.throwError(fileName,"invalid target for message \"${line.target}\"")
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     /** Returns a map for method overrides for the java item object.
      * The key is the method declaration line and the value is the method content. */

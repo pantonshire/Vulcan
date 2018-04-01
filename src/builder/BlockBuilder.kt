@@ -12,23 +12,23 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
     private val placed = "public void onBlockPlacedBy(World world, BlockPos position, IBlockState state, EntityLivingBase placer, ItemStack stack)"
 
     //Strings
-    private var name            = StringAttribute(this, "name", "???")
-    private var texture         = StringAttribute(this, "texture", "")
-    private var tool            = StringAttribute(this, "tool", "")
+    private var name                    = StringAttribute(this, "name", "???")
+    private var texture                 = StringAttribute(this, "texture", "")
+    private var tool                    = StringAttribute(this, "tool", "")
     //Booleans
-    private var unbreakable     = BooleanAttribute(this, "unbreakable", false)
-    private var destroyedByExplosion = BooleanAttribute(this, "fragile", false)
-    private var flammable       = BooleanAttribute(this, "flammable", false)
-    private var burnForever     = BooleanAttribute(this, "burn_forever", false)
-    private var gravity         = BooleanAttribute(this, "gravity", false)
+    private var unbreakable             = BooleanAttribute(this, "unbreakable", false)
+    private var destroyedByExplosion    = BooleanAttribute(this, "fragile", false)
+    private var flammable               = BooleanAttribute(this, "flammable", false)
+    private var burnForever             = BooleanAttribute(this, "burn_forever", false)
+    private var gravity                 = BooleanAttribute(this, "gravity", false)
     //Integers
-    private var redstoneSignal  = IntegerAttribute(this, "redstone_signal", 0)
-    private var harvestLevel    = IntegerAttribute(this, "tool_level", 0)
+    private var redstoneSignal          = IntegerAttribute(this, "redstone_signal", 0)
+    private var harvestLevel            = IntegerAttribute(this, "tool_level", 0)
     //Floats
-    private var hardness        = FloatAttribute(this, "hardness", 1.0)
-    private var resistance      = FloatAttribute(this, "resistance", 1.0)
-    private var slipperiness    = FloatAttribute(this, "slipperiness", 0.0)
-    private var light           = FloatAttribute(this, "light", 0.0)
+    private var hardness                = FloatAttribute(this, "hardness", 1.0)
+    private var resistance              = FloatAttribute(this, "resistance", 1.0)
+    private var slipperiness            = FloatAttribute(this, "slipperiness", 0.0)
+    private var light                   = FloatAttribute(this, "light", 0.0)
 
     override fun passToNext() {
         ModBuilder.registerBlock(Block(
