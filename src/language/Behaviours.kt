@@ -6,36 +6,36 @@ import language.objects.Player
 object Behaviours {
 
     private val itemBehaviours = arrayOf(
-            Behaviour("right_click", Player("player")),
-            Behaviour("held", Player("player")),
-            Behaviour("hit_entity", LivingEntity("attacker"), LivingEntity("target"))
+            Behaviour("right_click", Player("player", false)),
+            Behaviour("held", Player("player", false)),
+            Behaviour("hit_entity", LivingEntity("attacker", false), LivingEntity("target", false))
     )
 
     private val foodBehaviours = arrayOf(
-            Behaviour("eaten", Player("player")),
-            Behaviour("held", Player("player")),
-            Behaviour("hit_entity", LivingEntity("attacker"), LivingEntity("target"))
+            Behaviour("eaten", Player("player", false)),
+            Behaviour("held", Player("player", false)),
+            Behaviour("hit_entity", LivingEntity("attacker", false), LivingEntity("target", false))
     )
 
     private val toolBehaviours = arrayOf(
-            Behaviour("block_broken", Player("player")),
-            Behaviour("right_click", Player("player")),
-            Behaviour("held", Player("player")),
-            Behaviour("hit_entity", LivingEntity("attacker"), LivingEntity("target"))
+            Behaviour("block_broken", Player("player", false)),
+            Behaviour("right_click", Player("player", false)),
+            Behaviour("held", Player("player", false)),
+            Behaviour("hit_entity", LivingEntity("attacker", false), LivingEntity("target", false))
     )
 
     private val blockBehaviours = arrayOf(
-            Behaviour("walked_on", LivingEntity("entity")),
+            Behaviour("walked_on", LivingEntity("entity", false)),
             Behaviour("destroyed"),
-            Behaviour("right_clicked", Player("player")),
-            Behaviour("placed", LivingEntity("placer"))
+            Behaviour("right_clicked", Player("player", false)),
+            Behaviour("placed", LivingEntity("placer", false))
     )
 
     private val playerBehaviours = arrayOf(
             Behaviour("update"),
             Behaviour("jump"),
             Behaviour("sleep"),
-            Behaviour("hurt", LivingEntity("attacker")),
+            Behaviour("hurt", LivingEntity("attacker", false)),
             Behaviour("spawn")
     )
 

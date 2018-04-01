@@ -38,16 +38,15 @@ public final class MessageUtils {
         }
     }
 
-    public static void explode(EntityLivingBase entity, double strength) {
+    public static void explode(EntityLivingBase entity, float strength) {
         if(!entity.getEntityWorld().isRemote) {
-            float strengthf = (float)strength;
-            if(strengthf > 100) {
-                strengthf = 100f;
-            } else if(strengthf < 0) {
-                strengthf = 0f;
+            if(strength > 100f) {
+                strength = 100f;
+            } else if(strength < 0f) {
+                strength = 0f;
             }
 
-            entity.getEntityWorld().createExplosion(entity, entity.posX, entity.posY, entity.posZ, strengthf, true);
+            entity.getEntityWorld().createExplosion(entity, entity.posX, entity.posY, entity.posZ, strength, true);
         }
     }
 }

@@ -3,15 +3,18 @@ package builder
 import language.*
 import language.objects.VulcanObject
 
-abstract class Builder(val fileName: String, type: String, val lines: Array<Line>, vararg globalObjectsVararg: VulcanObject) {
+abstract class Builder(val fileName: String, type: String, val lines: Array<Line>, vararg defaultGlobalVariables: VulcanObject) {
 
     val attributes: HashMap<String, Attribute<Any>> = hashMapOf()
 
     /** All of the Vulcan Objects that can be referenced from anywhere. May include "self". */
-    val globalObjects: Map<String, VulcanObject>
+    private val globalVariables: Map<String, VulcanObject>
 
-    val validBehaviours: Map<String, Behaviour>
-    var context = "default"
+    /** All of the local variables that can currently be referenced. */
+    private val localVariables: Map<String, VulcanObject> = mapOf()
+
+    private val validBehaviours: Map<String, Behaviour>
+    private var context = "default"
     val behaviourContent: HashMap<String, MutableList<String>> = hashMapOf()
 
     init {
@@ -25,10 +28,10 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
             behaviourContent[it] = mutableListOf()
         }
 
-        //Make global objects map
-        val mutableObjectsMap: HashMap<String, VulcanObject> = hashMapOf()
-        globalObjectsVararg.asSequence().forEach { mutableObjectsMap[it.name] = it }
-        globalObjects = mutableObjectsMap.toMap()
+        //Make global variables map
+        val mutableMap: HashMap<String, VulcanObject> = hashMapOf()
+        defaultGlobalVariables.asSequence().forEach { mutableMap[it.name] = it }
+        globalVariables = mutableMap.toMap()
     }
 
     fun build() {
@@ -57,11 +60,12 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
         else if(context in validBehaviours) {
             val behaviour = validBehaviours[context]
             if(behaviour != null) {
-                val visibleObjects: Map<String, VulcanObject> = getAllVisibleObjects(behaviour)
+                val visibleVariables: Map<String, VulcanObject> = getVisibleVariables(behaviour)
 
+                //Method calls
                 if(line is ActionLine) {
-                    if(visibleObjects.containsKey(line.target)) {
-                        val target = visibleObjects[line.target]!!
+                    if(line.target in visibleVariables) {
+                        val target = visibleVariables[line.target]!!
                         if(target.isValidMessage(line.method)) {
                             var javaFunctionCall = ""
                             try {
@@ -78,6 +82,25 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                         }
                     } else {
                         line.throwError(fileName,"invalid target for message \"${line.target}\"")
+                    }
+                }
+
+                //Assignment
+                else if(line is AssignmentLine) {
+                    if(line.variable in visibleVariables) {
+                        val variable = visibleVariables[line.variable]!!
+                        if(variable.mutable) {
+                            try {
+                                val value = variable.type.toJava(line.value, visibleVariables)
+                                behaviourContent[context]?.add("${variable.name} = $value;")
+                            } catch (exception: IllegalArgumentException) {
+                                line.throwError(fileName, exception.message ?: "no error message provided")
+                            }
+                        } else {
+                            line.throwError(fileName,"\"${line.variable}\" is read-only; it cannot be reassigned")
+                        }
+                    } else {
+                        line.throwError(fileName,"the variable \"${line.variable}\" does not exist")
                     }
                 }
             }
@@ -124,5 +147,5 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
     }
 
     //* Returns all of the Vulcan Objects that can be referenced in the current behaviour. */
-    protected fun getAllVisibleObjects(currentEvent: Behaviour): Map<String, VulcanObject> = globalObjects + currentEvent.parameters
+    protected fun getVisibleVariables(currentBehaviour: Behaviour): Map<String, VulcanObject> = globalVariables + localVariables + currentBehaviour.parameters
 }

@@ -20,7 +20,6 @@ import java.io.File;
 
 public class JavaFXApplication extends Application {
 
-    private StackPane root;
     private VBox vbox;
     private String sourceDirectory = "";
 
@@ -33,7 +32,7 @@ public class JavaFXApplication extends Application {
 
         primaryStage.setTitle("Vulcan");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/logo.png")));
-        root = new StackPane();
+        StackPane root = new StackPane();
         vbox = new VBox();
         vbox.setAlignment(Pos.CENTER_LEFT);
 

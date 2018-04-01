@@ -1,22 +1,24 @@
 package language.objects
 
-class LivingEntity(name: String): VulcanObject(name) {
+import language.DataType
+
+class LivingEntity(name: String, mutable: Boolean = true): VulcanObject(DataType.ENTITY, name, mutable) {
 
     override val validMessages: Map<String, Int> = mapOf(
-            Pair("jump", 0), //Make entity jump
-            Pair("take", 2), //Damage entity
-            Pair("burn", 3), //Set entity on fire
-            Pair("teleport", 2), //Set entity's position
+            Pair("jump", 0),        //Make entity jump
+            Pair("take", 2),        //Damage entity
+            Pair("burn", 3),        //Set entity on fire
+            Pair("teleport", 2),    //Set entity's position
             //TODO: Add functionality to teleport
-            Pair("breathe", 0), //Restore entity's air
-            Pair("swing", 2), //Swing arm
-            Pair("heal", 2), //Recover health
-            Pair("die", 0), //Take unblockable fatal damage
-            Pair("ride", 1), //Ride an entity
-            Pair("explode", 3) //Explode the entity
+            Pair("breathe", 0),     //Restore entity's air
+            Pair("swing", 2),       //Swing arm
+            Pair("heal", 2),        //Recover health
+            Pair("die", 0),         //Take unblockable fatal damage
+            Pair("ride", 1),        //Ride an entity
+            Pair("explode", 3)      //Explode the entity
     )
 
-    override fun convertMessage(message: String, parameters: Array<String>, others: Map<String, VulcanObject>): String {
+    override fun convertMessage(message: String, parameters: Array<String>, variables: Map<String, VulcanObject>): String {
         when(message) {
             //Jump
             "jump" -> return "MessageUtils.makeJump($name);"
@@ -24,12 +26,8 @@ class LivingEntity(name: String): VulcanObject(name) {
             //Damage
             "take" -> {
                 if(parameters[1] == "damage") {
-                    try {
-                        val damage = parameters[0].toInt()
-                        return "MessageUtils.attack($name, $damage);"
-                    } catch(exception: NumberFormatException) {
-                        throw IllegalArgumentException("${parameters[0]} is not a valid number")
-                    }
+                    val damage = DataType.INTEGER.toJava(parameters[0], variables)
+                    return "MessageUtils.attack($name, $damage);"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }
@@ -38,19 +36,15 @@ class LivingEntity(name: String): VulcanObject(name) {
             //Set fire
             "burn" -> {
                 if(parameters[0] == "for" && (parameters[2] == "seconds" || parameters[2] == "second")) {
-                    try {
-                        val time = parameters[1].toInt()
-                        return "${name}.setFire($time);"
-                    } catch(exception: NumberFormatException) {
-                        throw IllegalArgumentException("${parameters[1]} is not a valid number")
-                    }
+                    val time = DataType.INTEGER.toJava(parameters[1], variables)
+                    return "$name.setFire($time);"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }
             }
 
             //Restore air
-            "breathe" -> return "${name}.setAir(300);"
+            "breathe" -> return "$name.setAir(300);"
 
             //Swing arm
             "swing" -> {
@@ -65,12 +59,8 @@ class LivingEntity(name: String): VulcanObject(name) {
             //Restore health
             "heal" -> {
                 if(parameters[1] == "health") {
-                    try {
-                        val amount = parameters[0].toInt()
-                        return "${name}.heal($amount);"
-                    } catch(exception: NumberFormatException) {
-                        throw IllegalArgumentException("${parameters[0]} is not a valid number")
-                    }
+                    val amount = DataType.INTEGER.toJava(parameters[0], variables)
+                    return "$name.heal($amount);"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }
@@ -81,27 +71,15 @@ class LivingEntity(name: String): VulcanObject(name) {
 
             //Set riding entity
             "ride" -> {
-                if(others.containsKey(parameters[0])) {
-                    val mountEntity = others[parameters[0]]!!
-                    if(mountEntity is LivingEntity || mountEntity is Player) {
-                        return "${name}.startRiding(${mountEntity.name}, true);"
-                    } else {
-                        throw IllegalArgumentException("${mountEntity.name} is not rideable")
-                    }
-                }
-
-                throw IllegalArgumentException("\"${parameters[0]}\" is not a valid target")
+                val target = DataType.ENTITY.toJava(parameters[0], variables)
+                return "$name.startRiding($target, true);"
             }
 
             //Explode the entity (KABOOM!)
             "explode" -> {
                 if(parameters[0] == "with" && parameters[1] == "strength") {
-                    try {
-                        val strength = parameters[2].toDouble()
-                        return "MessageUtils.explode($name, $strength);"
-                    } catch(exception: NumberFormatException) {
-                        throw IllegalArgumentException("${parameters[2]} is not a valid number")
-                    }
+                    val strength = DataType.FLOAT.toJava(parameters[2], variables)
+                    return "MessageUtils.explode($name, $strength);"
                 }
 
                 throw IllegalArgumentException("invalid syntax")

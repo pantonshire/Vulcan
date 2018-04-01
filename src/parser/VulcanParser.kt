@@ -23,6 +23,14 @@ object VulcanParser {
                 }
             }
 
+            "assign" -> {
+                if(words.size == 4 && words[2] == "to") { //TODO: More than 4 words e.g. assign variable to player's name
+                    AssignmentLine(lineNo, words[1], words[3])
+                } else {
+                    BlankLine(lineNo)
+                }
+            }
+
             "tell" -> {
                 if(words.size >= 4 && words[2] == "to") {
                     val args: MutableList<String> = mutableListOf()
