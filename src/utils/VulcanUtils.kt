@@ -28,12 +28,24 @@ object VulcanUtils {
             return false
         }
 
+        var numbersAllowed = false
+        var containsLetter = false
+
         name.asSequence().forEach {
-            if(!it.isLetter()) {
+            if(!(it.isLetter() || it == '_' || (numbersAllowed && it.isDigit()))) {
                 return false
+            }
+
+            if(!containsLetter && it.isLetter()) {
+                containsLetter = true
+            }
+
+            //Numbers are only not allowed on the first pass
+            if(!numbersAllowed) {
+                numbersAllowed = true
             }
         }
 
-        return true
+        return containsLetter
     }
 }

@@ -89,15 +89,19 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
                 //Declaring variables
                 else if(line is DeclarationLine) {
-                    try {
+                    if(line.variable.name in visibleVariables) {
+                        line.throwError(fileName, "another variable called ${line.variable.name} already exists")
+                    } else {
+                        try {
 
-                        localVariables[line.variable.name] = line.variable
-                        val type = line.variable.type
-                        val initialValueJava = type.toJava(line.initialValue, visibleVariables)
-                        behaviourContent[context]?.add("${type.javaTypeName} ${line.variable.name} = $initialValueJava;")
+                            localVariables[line.variable.name] = line.variable
+                            val type = line.variable.type
+                            val initialValueJava = type.toJava(line.initialValue, visibleVariables)
+                            behaviourContent[context]?.add("${type.javaTypeName} ${line.variable.name} = $initialValueJava;")
 
-                    } catch(exception: IllegalArgumentException) {
-                        line.throwError(fileName, exception.message ?: "no error message provided")
+                        } catch (exception: IllegalArgumentException) {
+                            line.throwError(fileName, exception.message ?: "no error message provided")
+                        }
                     }
                 }
 

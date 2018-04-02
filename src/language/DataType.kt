@@ -15,7 +15,8 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
     WORLD       ("world", "World"),
     //TODO: Add support for the following
     POTION      ("effect", "PotionEffect"),
-    HAND        ("hand", "EnumHand")
+    ITEM        ("item", "Item"),
+    BLOCK       ("block", "Block")
     ;
 
     private val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")

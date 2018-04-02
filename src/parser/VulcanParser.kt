@@ -72,10 +72,10 @@ object VulcanParser {
                         DataType.STRING   ->   VulcanString(words[3], mutable)
                         DataType.INTEGER  ->   VulcanInteger(words[3], mutable)
                         DataType.FLOAT    ->   VulcanDecimal(words[3], mutable)
-                        DataType.VECTOR3  ->   null
+                        DataType.VECTOR3  ->   VulcanVector3(words[3], mutable)
                         DataType.ENTITY   ->   LivingEntity(words[3], mutable)
                         DataType.PLAYER   ->   Player(words[3], mutable)
-                        DataType.WORLD    ->   null
+                        DataType.WORLD    ->   World(words[3], mutable)
                         else              ->   null
                     }
 
