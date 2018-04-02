@@ -1,6 +1,15 @@
 # Changelog
-## Alpha 0.2.0
+## Alpha 0.3.0
 In development
+* Added the ability to declare and assign variables
+* Declaring variables has the syntax `new [type] variable [name] = [value]` (constant can be written instead of variable to make it immutable)
+* Assigning variables has the same syntax as setting attributes: `set [name] to [value]`
+* Added several new data types: boolean, integer, decimal, string, vector and world (note that most of these do not yet have all of the desired features, such as an easy way to perform arithmetic)
+* All block behaviours now have access to the world
+* Added an attribute class to store the value and data type of the different attributes for items, blocks, etc
+
+## Alpha 0.2.0
+Not yet publicly released due to lack of internet connection
 * Added food
 * Food has three behaviours: eaten, held and hit_entity
 * Food has all of the same attributes as item, plus a few extras: heal_amount, saturation, meat and eat_time
