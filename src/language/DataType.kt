@@ -15,6 +15,8 @@ enum class DataType(val typeName: String) {
     WORLD       ("world")
     ;
 
+    val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")
+
     fun toJava(value: String, variables: Map<String, VulcanObject>): String {
         if(value in variables) {
             val variable = variables[value]!!
@@ -64,18 +66,29 @@ enum class DataType(val typeName: String) {
 
             VECTOR3 -> {
                 if(value.startsWith("[") && value.endsWith("]")) {
-                    val coordinates = value.substring(1, value.length - 1).split(",")
-                    if(coordinates.size == 3) {
-                        val castCoordinates: Array<Float> = arrayOf(0f, 0f, 0f)
-                        try {
-                            for(i in 0..2) {
-                                castCoordinates[i] = coordinates[i].trim().toFloat()
+                    val coordinatesIn = value
+                            .substring(1, value.length - 1)
+                            .replace(" ", "")
+                            .split(",")
+
+                    if(coordinatesIn.size == 3) {
+                        val coordinates: Array<Float> = arrayOf(0f, 0f, 0f)
+
+                        for(i in 0..2) {
+                            var coordinate = coordinatesIn[i].trim()
+                            val prefix = vectorPrefixes[i]
+                            if(coordinate.startsWith(prefix, true)) {
+                                coordinate = coordinate.substring(prefix.length)
                             }
-                        } catch(exception: NumberFormatException) {
-                            throw IllegalArgumentException(typeError(value))
+
+                            try {
+                                coordinates[i] = coordinate.toFloat()
+                            } catch(exception: NumberFormatException) {
+                                throw IllegalArgumentException(typeError(value))
+                            }
                         }
 
-                        return "(new BlockPos(${castCoordinates[0]}f, ${castCoordinates[1]}f, ${castCoordinates[2]}f))"
+                        return "(new BlockPos(${coordinates[0]}f, ${coordinates[1]}f, ${coordinates[2]}f))"
                     }
                 }
             }
