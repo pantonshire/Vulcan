@@ -97,7 +97,8 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                             localVariables[line.variable.name] = line.variable
                             val type = line.variable.type
                             val initialValueJava = type.toJava(line.initialValue, visibleVariables)
-                            behaviourContent[context]?.add("${type.javaTypeName} ${line.variable.name} = $initialValueJava;")
+                            val prefix = if(line.variable.mutable) "final " else ""
+                            behaviourContent[context]?.add("$prefix${type.javaTypeName} ${line.variable.name} = $initialValueJava;")
 
                         } catch (exception: IllegalArgumentException) {
                             line.throwError(fileName, exception.message ?: "no error message provided")
