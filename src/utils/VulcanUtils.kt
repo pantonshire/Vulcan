@@ -1,5 +1,7 @@
 package utils
 
+import language.KEYWORDS
+
 //infix fun Boolean.xor(other: Boolean) = (this && !other) || (!this && other)
 
 object VulcanUtils {
@@ -21,7 +23,17 @@ object VulcanUtils {
         return true
     }
 
-    fun isValidInt() {
+    fun isValidVariableName(name: String): Boolean {
+        if(name in KEYWORDS) {
+            return false
+        }
 
+        name.asSequence().forEach {
+            if(!it.isLetter()) {
+                return false
+            }
+        }
+
+        return true
     }
 }

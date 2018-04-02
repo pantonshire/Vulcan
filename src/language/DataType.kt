@@ -3,19 +3,22 @@ package language
 import language.objects.VulcanObject
 import utils.VulcanUtils
 
-enum class DataType(val typeName: String) {
+enum class DataType(val typeName: String, val javaTypeName: String) {
 
-    BOOLEAN     ("boolean"),
-    STRING      ("string"),
-    INTEGER     ("integer"),
-    FLOAT       ("decimal"),
-    VECTOR3     ("vector"),
-    ENTITY      ("entity"),
-    PLAYER      ("player"),
-    WORLD       ("world")
+    BOOLEAN     ("boolean", "boolean"),
+    STRING      ("string", "String"),
+    INTEGER     ("integer", "int"),
+    FLOAT       ("decimal", "float"),
+    VECTOR3     ("vector", "BlockPos"),
+    ENTITY      ("entity", "EntityLivingBase"),
+    PLAYER      ("player", "EntityPlayer"),
+    WORLD       ("world", "World"),
+    //TODO: Add support for the following
+    POTION      ("effect", "PotionEffect"),
+    HAND        ("hand", "EnumHand")
     ;
 
-    val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")
+    private val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")
 
     fun toJava(value: String, variables: Map<String, VulcanObject>): String {
         if(value in variables) {
@@ -64,6 +67,10 @@ enum class DataType(val typeName: String) {
                 }
             }
 
+            /** Syntax: [x:32, y:12.5, z:-34.6]
+             * The "x:", "y:" and "z:" are optional and not case-sensitive.
+             * They must be in the correct order.
+             * All whitespace is ignored. */
             VECTOR3 -> {
                 if(value.startsWith("[") && value.endsWith("]")) {
                     val coordinatesIn = value

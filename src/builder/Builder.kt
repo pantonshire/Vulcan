@@ -11,10 +11,11 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
     private val globalVariables: Map<String, VulcanObject>
 
     /** All of the local variables that can currently be referenced. */
-    private val localVariables: Map<String, VulcanObject> = mapOf()
+    private val localVariables: HashMap<String, VulcanObject> = hashMapOf()
 
     private val validBehaviours: Map<String, Behaviour>
     private var context = "default"
+    private var depth = 0 //Increase with if, for, while etc, decrease with end if, end for, end while, etc
     val behaviourContent: HashMap<String, MutableList<String>> = hashMapOf()
 
     init {
@@ -69,7 +70,8 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                         if(target.isValidMessage(line.method)) {
                             var javaFunctionCall = ""
                             try {
-                                javaFunctionCall = target.messageToJava(line.method, line.arguments, behaviour.parameters)
+                                //Convert line to java code
+                                javaFunctionCall = target.messageToJava(line.method, line.arguments, visibleVariables)
                             } catch(exception: IllegalArgumentException) {
                                 line.throwError(fileName,exception.message ?: "no error message was provided")
                             }
@@ -85,10 +87,24 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     }
                 }
 
+                //Declaring variables
+                else if(line is DeclarationLine) {
+                    try {
+
+                        localVariables[line.variable.name] = line.variable
+                        val type = line.variable.type
+                        val initialValueJava = type.toJava(line.initialValue, visibleVariables)
+                        behaviourContent[context]?.add("${type.javaTypeName} ${line.variable.name} = $initialValueJava;")
+
+                    } catch(exception: IllegalArgumentException) {
+                        line.throwError(fileName, exception.message ?: "no error message provided")
+                    }
+                }
+
                 //Assignment
-                else if(line is AssignmentLine) {
-                    if(line.variable in visibleVariables) {
-                        val variable = visibleVariables[line.variable]!!
+                else if(line is SetLine) {
+                    if(line.field in visibleVariables) {
+                        val variable = visibleVariables[line.field]!!
                         if(variable.mutable) {
                             try {
                                 val value = variable.type.toJava(line.value, visibleVariables)
@@ -97,10 +113,10 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                                 line.throwError(fileName, exception.message ?: "no error message provided")
                             }
                         } else {
-                            line.throwError(fileName,"\"${line.variable}\" is read-only; it cannot be reassigned")
+                            line.throwError(fileName,"\"${line.field}\" is read-only; it cannot be reassigned")
                         }
                     } else {
-                        line.throwError(fileName,"the variable \"${line.variable}\" does not exist")
+                        line.throwError(fileName,"the variable \"${line.field}\" does not exist")
                     }
                 }
             }
@@ -126,9 +142,9 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
             }
 
             in validBehaviours -> {
-                if(line is SetLine) {
-                    line.throwError(fileName,"cannot set attributes in the current behaviour")
-                }
+//                if(line is SetLine) {
+//                    line.throwError(fileName,"cannot set attributes in the current behaviour")
+//                }
             }
         }
     }
@@ -139,7 +155,10 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
         } else if(line is BehaviourLine) {
             val behaviour = line.behaviour.name
             if(behaviour in validBehaviours) {
+                //Update context
                 context = behaviour
+                //Remove local variables from previous context
+                localVariables.clear()
             } else {
                 line.throwError(fileName,"unrecognised behaviour \"$behaviour\"")
             }
@@ -147,5 +166,5 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
     }
 
     //* Returns all of the Vulcan Objects that can be referenced in the current behaviour. */
-    protected fun getVisibleVariables(currentBehaviour: Behaviour): Map<String, VulcanObject> = globalVariables + localVariables + currentBehaviour.parameters
+    private fun getVisibleVariables(currentBehaviour: Behaviour): Map<String, VulcanObject> = globalVariables + localVariables + currentBehaviour.parameters
 }

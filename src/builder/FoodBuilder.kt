@@ -1,8 +1,6 @@
 package builder
 
 import language.*
-import language.objects.VulcanObject
-import utils.VulcanUtils
 
 class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food", lines) {
 
@@ -26,7 +24,7 @@ class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food"
     private var saturation      = FloatAttribute(this, "saturation", 0.3)
 
     override fun passToNext() {
-        ModBuilder.registerItem(Food(
+        ModCompiler.instance.registerItem(Food(
 
                 name            .get(),
                 texture         .get(),

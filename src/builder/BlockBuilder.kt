@@ -1,8 +1,6 @@
 package builder
 
 import language.*
-import language.objects.VulcanObject
-import utils.VulcanUtils
 
 class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"block", lines) {
 
@@ -31,7 +29,7 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
     private var light                   = FloatAttribute(this, "light", 0.0)
 
     override fun passToNext() {
-        ModBuilder.registerBlock(Block(
+        ModCompiler.instance.registerBlock(Block(
 
                 name                 .get(),
                 texture              .get(),

@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class LivingEntity(name: String, mutable: Boolean = true): VulcanObject(DataType.ENTITY, name, mutable) {
+class LivingEntity(name: String, mutable: Boolean = false): VulcanObject(DataType.ENTITY, name, mutable) {
 
     override val validMessages: Map<String, Int> = mapOf(
             Pair("jump", 0),        //Make entity jump

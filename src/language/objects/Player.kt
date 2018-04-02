@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class Player(name: String, mutable: Boolean = true): VulcanObject(DataType.PLAYER, name, mutable) {
+class Player(name: String, mutable: Boolean = false): VulcanObject(DataType.PLAYER, name, mutable) {
 
     override val validMessages: Map<String, Int> = mapOf(
             Pair("jump", 0),        //Make player jump
@@ -24,8 +24,12 @@ class Player(name: String, mutable: Boolean = true): VulcanObject(DataType.PLAYE
 
             //Damage
             "take" -> {
-                val damage = DataType.INTEGER.toJava(parameters[0], variables)
-                return "MessageUtils.attack($name, $damage);"
+                if(parameters[1] == "damage") {
+                    val damage = DataType.INTEGER.toJava(parameters[0], variables)
+                    return "MessageUtils.attack($name, $damage);"
+                } else {
+                    throw IllegalArgumentException("invalid syntax")
+                }
             }
 
             //Set fire

@@ -3,7 +3,7 @@ package application
 import builder.BlockBuilder
 import builder.FoodBuilder
 import builder.ItemBuilder
-import builder.ModBuilder
+import builder.ModCompiler
 import io.Directories
 import io.FileReader
 import language.BlankLine
@@ -16,18 +16,23 @@ object VulcanBuild {
 
     fun build(sourceDirectory: String) {
         try {
+            //Create new compiler instance
+            ModCompiler.newInstance()
+            //Parse input source directory
             val source = Directories.parseExternalDirectory(sourceDirectory)
-            ModBuilder.inputPath = source
+            //Set compiler input path
+            ModCompiler.instance.inputPath = source
+            //Get all source files
             val sourceFiles = FileReader.getFilesInFolder(source)
+            //Mod settings file name
             val vmod = "settings.vmod"
 
+            //Search for vmod file and update compiler settings
             if(sourceFiles.contains(vmod)) {
                 val settings = FileReader.readTextFile(Directories.getDirectory(source, vmod))
-                ModBuilder.setModSettings(settings)
+                ModCompiler.instance.setModSettings(settings)
             } else {
-                if(UIHandler.confirm("No settings.vmod file was found. Generate the mod anyway?")) {
-                    ModBuilder.setDefaultSettings()
-                } else {
+                if(!UIHandler.confirm("No settings.vmod file was found. Generate the mod anyway?")) {
                     return
                 }
             }
@@ -44,7 +49,7 @@ object VulcanBuild {
                 return
             }
 
-            ModBuilder.build()
+            ModCompiler.instance.compileMod()
             UIHandler.message("Successfully built mod ($files vlcn file(s) found).")
 
         } catch(exception: IllegalArgumentException) {
@@ -72,7 +77,7 @@ object VulcanBuild {
                     validEvents = Behaviours.getValidBehaviours(type)
                 }
             } else {
-                val line = VulcanParser.parseLine(lineNo, it, validEvents)
+                val line = VulcanParser.parseLine(fileName, lineNo, it, validEvents)
                 if(line !is BlankLine) {
                     lineList += line
                 }

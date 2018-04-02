@@ -1,8 +1,6 @@
 package builder
 
 import language.*
-import language.objects.VulcanObject
-import utils.VulcanUtils
 
 class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
 
@@ -21,7 +19,7 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
     private var burnTime        = IntegerAttribute(this, "burn_time", 0)
 
     override fun passToNext() {
-        ModBuilder.registerItem(Item(
+        ModCompiler.instance.registerItem(Item(
 
                 name            .get(),
                 texture         .get(),

@@ -1,5 +1,5 @@
 import builder.ItemBuilder
-import builder.ModBuilder
+import builder.ModCompiler
 import console.VConsole
 import io.Directories
 import io.FileReader
@@ -12,6 +12,10 @@ import java.io.File
 fun main(args: Array<String>) {
 
     build("Desktop/TestInput")
+//    val split = VulcanParser.split("\thello   world\thow      are\t\t\tyou today?")
+//    split.asSequence().forEach {
+//        println("->$it")
+//    }
 
 }
 
@@ -22,7 +26,7 @@ private fun build(sourceDirectory: String) {
 
     if(sourceFiles.contains(vmod)) {
         val settings = FileReader.readTextFile(Directories.getDirectory(source, vmod))
-        ModBuilder.setModSettings(settings)
+        ModCompiler.instance.setModSettings(settings)
     } else {
         VConsole.out("Warning: no settings.vmod file was found. This file is necessary for setting your mod\'s name and id. Default values will be used.")
     }
@@ -31,7 +35,7 @@ private fun build(sourceDirectory: String) {
         parseVulcanFile(Directories.getDirectory(source, it))
     }
 
-    ModBuilder.build()
+    ModCompiler.instance.compileMod()
     VConsole.out("Successfully built mod!")
 }
 
@@ -55,7 +59,7 @@ private fun parseVulcanFile(vulcanFileDirectory: String) {
                 validEvents = Behaviours.getValidBehaviours(type)
             }
         } else {
-            val line = VulcanParser.parseLine(lineNo, it, validEvents)
+            val line = VulcanParser.parseLine(fileName, lineNo, it, validEvents)
             if(line !is BlankLine) {
                 lineList += line
             }
