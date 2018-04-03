@@ -10,7 +10,13 @@ class VulcanBoolean(name: String, java: String = name, mutable: Boolean = false)
 
     override fun convertMessage(message: String, parameters: Array<String>, variables: Map<String, VulcanObject>): String {
         when(message) {
-            "flip" -> return "$java = !$java;"
+            "flip" -> {
+                if(mutable) {
+                    return "$java = !$java;"
+                } else {
+                    throw IllegalArgumentException("cannot tell $name to flip since it is immutable")
+                }
+            }
         }
 
         throw IllegalArgumentException("unsupported message $message")

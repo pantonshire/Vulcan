@@ -11,8 +11,9 @@ class World(name: String, java: String = name, mutable: Boolean = false): Vulcan
         VulcanBoolean   ("thundering",      "$java.isThundering()"                  ),
         VulcanBoolean   ("daytime",         "$java.isDaytime()"                     ),
         VulcanInteger   ("build_limit",     "$java.getHeight()"                     ),
+        VulcanInteger   ("sea_level",       "$java.getSeaLevel()"                   ),
         VulcanString    ("name",            "$java.getWorldInfo().getWorldName()"   ),
-        VulcanVector3   ("spawn",           "$java.getSpawnPoint()")
+        VulcanVector3   ("spawn",           "$java.getSpawnPoint()"                 )
 
 ) {
 
