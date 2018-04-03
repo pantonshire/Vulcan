@@ -1,6 +1,5 @@
 package parser
 
-import application.UIHandler
 import language.*
 import language.objects.*
 import utils.VulcanUtils
@@ -9,9 +8,9 @@ object VulcanParser {
 
     private fun initialParse(unparsed: String): String {
         return unparsed
-                .replace("\'s ", ".")             // Simplify field references
-                .replace(Regex("(//)(.*)"), "")  // Remove comments
-                .trim()                                             // Remove unnecessary whitespace
+                .replace(Regex("(\'s)(\\s+)"), ".")     // Simplify field references
+                .replace(Regex("(//)(.*)"), "")         // Remove comments
+                .trim()                                                   // Remove unnecessary whitespace
 
     }
 
@@ -29,6 +28,7 @@ object VulcanParser {
         val eventNameMap = Behaviours.toNameMap(validEvents)
 
         return when(getWord(words, 0)) {
+            //Setting attributes and assigning variables
             "set" -> {
                 if(words.size == 4 && words[2] == "to") {
                     SetLine(lineNo, words[1], words[3])
@@ -38,6 +38,7 @@ object VulcanParser {
                 }
             }
 
+            //Declaring variables
             "new" -> {
                 if(words.size == 6 && words[4] == "=") {
                     //Data type
@@ -68,14 +69,14 @@ object VulcanParser {
 
                     //New variable object
                     val newVariable: VulcanObject? = when(type) {
-                        DataType.BOOLEAN  ->   VulcanBoolean(words[3], mutable)
-                        DataType.STRING   ->   VulcanString(words[3], mutable)
-                        DataType.INTEGER  ->   VulcanInteger(words[3], mutable)
-                        DataType.FLOAT    ->   VulcanDecimal(words[3], mutable)
-                        DataType.VECTOR3  ->   VulcanVector3(words[3], mutable)
-                        DataType.ENTITY   ->   LivingEntity(words[3], mutable)
-                        DataType.PLAYER   ->   Player(words[3], mutable)
-                        DataType.WORLD    ->   World(words[3], mutable)
+                        DataType.BOOLEAN  ->   VulcanBoolean    (words[3], mutable=mutable)
+                        DataType.STRING   ->   VulcanString     (words[3], mutable=mutable)
+                        DataType.INTEGER  ->   VulcanInteger    (words[3], mutable=mutable)
+                        DataType.FLOAT    ->   VulcanDecimal    (words[3], mutable=mutable)
+                        DataType.VECTOR3  ->   VulcanVector3    (words[3], mutable=mutable)
+                        DataType.ENTITY   ->   LivingEntity     (words[3], mutable=mutable)
+                        DataType.PLAYER   ->   Player           (words[3], mutable=mutable)
+                        DataType.WORLD    ->   World            (words[3], mutable=mutable)
                         else              ->   null
                     }
 
@@ -101,6 +102,7 @@ object VulcanParser {
 //                }
 //            }
 
+            //Function calls
             "tell" -> {
                 if(words.size >= 4 && words[2] == "to") {
                     val args: MutableList<String> = mutableListOf()
@@ -114,11 +116,17 @@ object VulcanParser {
                 }
             }
 
+            //Constructor
             "attributes:" -> ConstructorLine(lineNo)
 
+            //Behaviours
             in eventNameMap -> BehaviourLine(lineNo, eventNameMap[words[0]]!!)
 
-            else -> BlankLine(lineNo)
+            //Invalid line
+            else -> {
+                throwError(fileName, lineNo, "invalid syntax")
+                BlankLine(lineNo)
+            }
         }
     }
 

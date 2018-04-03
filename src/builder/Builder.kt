@@ -2,6 +2,7 @@ package builder
 
 import language.*
 import language.objects.VulcanObject
+import utils.VulcanUtils
 
 abstract class Builder(val fileName: String, type: String, val lines: Array<Line>, vararg defaultGlobalVariables: VulcanObject) {
 
@@ -65,8 +66,8 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
                 //Method calls
                 if(line is ActionLine) {
-                    if(line.target in visibleVariables) {
-                        val target = visibleVariables[line.target]!!
+                    val target = VulcanUtils.getVariable(line.target, visibleVariables)
+                    if(target != null) {
                         if(target.isValidMessage(line.method)) {
                             var javaFunctionCall = ""
                             try {
@@ -98,7 +99,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                             val type = line.variable.type
                             val initialValueJava = type.toJava(line.initialValue, visibleVariables)
                             val prefix = if(line.variable.mutable) "final " else ""
-                            behaviourContent[context]?.add("$prefix${type.javaTypeName} ${line.variable.name} = $initialValueJava;")
+                            behaviourContent[context]?.add("$prefix${type.javaTypeName} ${line.variable.java} = $initialValueJava;")
 
                         } catch (exception: IllegalArgumentException) {
                             line.throwError(fileName, exception.message ?: "no error message provided")
@@ -108,12 +109,12 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
                 //Assignment
                 else if(line is SetLine) {
-                    if(line.field in visibleVariables) {
-                        val variable = visibleVariables[line.field]!!
+                    val variable = VulcanUtils.getVariable(line.field, visibleVariables)
+                    if(variable != null) {
                         if(variable.mutable) {
                             try {
                                 val value = variable.type.toJava(line.value, visibleVariables)
-                                behaviourContent[context]?.add("${variable.name} = $value;")
+                                behaviourContent[context]?.add("${variable.java} = $value;")
                             } catch (exception: IllegalArgumentException) {
                                 line.throwError(fileName, exception.message ?: "no error message provided")
                             }

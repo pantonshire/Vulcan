@@ -2,9 +2,9 @@ package language.objects
 
 import language.DataType
 
-class VulcanDecimal(name: String, mutable: Boolean = false): VulcanObject(DataType.FLOAT, name, mutable) {
+class VulcanDecimal(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.FLOAT, name, java, mutable) {
 
-    override val validMessages: Map<String, Int> = mapOf(
+    override val actions: Map<String, Int> = mapOf(
             Pair("increase", 2),
             Pair("decrease", 2),
             Pair("negate", 0),
@@ -16,7 +16,7 @@ class VulcanDecimal(name: String, mutable: Boolean = false): VulcanObject(DataTy
             "increase" -> {
                 if(parameters[0] == "by") {
                     val amount = type.toJava(parameters[1], variables)
-                    return "$name += $amount;"
+                    return "$java += $amount;"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }
@@ -25,15 +25,15 @@ class VulcanDecimal(name: String, mutable: Boolean = false): VulcanObject(DataTy
             "decrease" -> {
                 if(parameters[0] == "by") {
                     val amount = type.toJava(parameters[1], variables)
-                    return "$name -= $amount;"
+                    return "$java -= $amount;"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }
             }
 
-            "negate" -> return "$name = -$name;"
+            "negate" -> return "$java = -$java;"
 
-            "round" -> return "$name = Math.round($name);"
+            "round" -> return "$java = Math.round($java);"
         }
 
         //Should only be called if the message is registered as valid, but has no case in the when statement

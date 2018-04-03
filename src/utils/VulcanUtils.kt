@@ -1,6 +1,7 @@
 package utils
 
 import language.KEYWORDS
+import language.objects.VulcanObject
 
 //infix fun Boolean.xor(other: Boolean) = (this && !other) || (!this && other)
 
@@ -21,6 +22,36 @@ object VulcanUtils {
         }
 
         return true
+    }
+
+    fun getVariable(name: String, visibleVariables: Map<String, VulcanObject>): VulcanObject? {
+        val parts: Array<String> = name.split(".").toTypedArray()
+        return when {
+            parts.isEmpty() -> null
+            parts.size == 1 -> visibleVariables[name]
+            else -> {
+                val root = visibleVariables[parts[0]]
+                if(root == null) {
+                    null
+                } else {
+                    getField(root, parts.copyOfRange(1, parts.size))
+                }
+            }
+        }
+    }
+
+    private fun getField(container: VulcanObject, parts: Array<String>): VulcanObject? {
+        if(parts.isEmpty()) {
+            return null
+        }
+
+        val root = container.fields[parts[0]]
+
+        return when {
+            parts.size == 1 -> root
+            root == null -> null
+            else -> getField(root, parts.copyOfRange(1, parts.size))
+        }
     }
 
     fun isValidVariableName(name: String): Boolean {

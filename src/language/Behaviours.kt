@@ -36,7 +36,7 @@ object Behaviours {
             Behaviour("update"),
             Behaviour("jump"),
             Behaviour("sleep"),
-            Behaviour("hurt", LivingEntity("attacker", false)),
+            Behaviour("hurt", LivingEntity("attacker")),
             Behaviour("spawn")
     )
 

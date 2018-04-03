@@ -22,16 +22,16 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
     private val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")
 
     fun toJava(value: String, variables: Map<String, VulcanObject>): String {
-        if(value in variables) {
-            val variable = variables[value]!!
+        val variable = VulcanUtils.getVariable(value, variables)
+        if(variable != null) {
             return if(variable.type == this) {
-                value
+                variable.java
             } else if(variable.type == INTEGER && this == FLOAT) {
-                "((float)$value)"
+                "((float)${variable.java})"
             } else if(variable.type == FLOAT && this == INTEGER) {
-                "((int)$value)"
+                "((int)${variable.java})"
             } else if(variable.type == PLAYER && this == ENTITY) {
-                "((EntityLivingBase)$value)"
+                "((EntityLivingBase)${variable.java})"
             } else {
                 throw IllegalArgumentException("cannot convert ${variable.type.name} to $name")
             }

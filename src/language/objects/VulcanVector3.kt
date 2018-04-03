@@ -2,9 +2,9 @@ package language.objects
 
 import language.DataType
 
-class VulcanVector3(name: String, mutable: Boolean = false): VulcanObject(DataType.VECTOR3, name, mutable) {
+class VulcanVector3(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.VECTOR3, name, java, mutable) {
 
-    override val validMessages: Map<String, Int> = mapOf(
+    override val actions: Map<String, Int> = mapOf(
             Pair("offset", 2)
     )
 
@@ -13,7 +13,7 @@ class VulcanVector3(name: String, mutable: Boolean = false): VulcanObject(DataTy
             "offset" -> {
                 if(parameters[0] == "by") {
                     val offset = type.toJava(parameters[1], variables)
-                    return "$name = $name.add($offset);"
+                    return "$java = $java.add($offset);"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }

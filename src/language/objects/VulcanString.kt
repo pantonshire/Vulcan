@@ -2,9 +2,9 @@ package language.objects
 
 import language.DataType
 
-class VulcanString(name: String, mutable: Boolean = false): VulcanObject(DataType.STRING, name, mutable) {
+class VulcanString(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.STRING, name, java, mutable) {
 
-    override val validMessages: Map<String, Int> = mapOf(
+    override val actions: Map<String, Int> = mapOf(
             Pair("trim", 0),
             Pair("remove", 1),
             Pair("replace", 3)
@@ -13,18 +13,18 @@ class VulcanString(name: String, mutable: Boolean = false): VulcanObject(DataTyp
     override fun convertMessage(message: String, parameters: Array<String>, variables: Map<String, VulcanObject>): String {
         when(message) {
 
-            "trim" -> return "$name = $name.trim();"
+            "trim" -> return "$java = $java.trim();"
 
             "remove" -> {
                 val removeString = type.toJava(parameters[1], variables)
-                return "$name = $name.replace($removeString, \"\");"
+                return "$java = $java.replace($removeString, \"\");"
             }
 
             "replace" -> {
                 if(parameters[1] == "with") {
                     val oldString = type.toJava(parameters[0], variables)
                     val newString = type.toJava(parameters[2], variables)
-                    return "$name = $name.replace($oldString, $newString);"
+                    return "$java = $java.replace($oldString, $newString);"
                 } else {
                     throw IllegalArgumentException("invalid syntax")
                 }

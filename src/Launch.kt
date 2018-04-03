@@ -1,13 +1,4 @@
-import builder.ItemBuilder
-import builder.ModCompiler
-import console.VConsole
-import io.Directories
-import io.FileReader
-import language.BlankLine
-import language.Behaviours
-import language.Line
-import parser.VulcanParser
-import java.io.File
+import application.VulcanBuild
 
 const val VERSION = "alpha 0.3.0"
 
@@ -15,6 +6,13 @@ fun main(args: Array<String>) {
     if(args.isNotEmpty()) {
         if(args[0] == "--version") {
             System.out.println(VERSION)
+        }
+
+        else if(args[0] == "compile") {
+            //TODO: Get input and output directories
+            val inputDir = ""
+            val outputDir = ""
+            VulcanBuild.build(inputDir)
         }
     }
 }
