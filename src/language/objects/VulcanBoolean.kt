@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class VulcanBoolean(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.BOOLEAN, name, java, mutable) {
+class VulcanBoolean(name: String, java: String = name, cas: String? = null, mutable: Boolean = false): VulcanObject(DataType.BOOLEAN, name, java, cas, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("flip", 0)     //Flip boolean state

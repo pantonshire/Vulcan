@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class VulcanString(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.STRING, name, java, mutable) {
+class VulcanString(name: String, java: String = name, cas: String? = null, mutable: Boolean = false): VulcanObject(DataType.STRING, name, java, cas, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("trim", 0),

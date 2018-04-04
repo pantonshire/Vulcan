@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class World(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.WORLD, name, java, mutable) {
+class World(name: String, java: String = name, cas: String? = null, mutable: Boolean = false): VulcanObject(DataType.WORLD, name, java, cas, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("sunshine", 3),

@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class VulcanVector3(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.VECTOR3, name, java, mutable) {
+class VulcanVector3(name: String, java: String = name, cas: String? = null, mutable: Boolean = false): VulcanObject(DataType.VECTOR3, name, java, cas, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("offset", 2)

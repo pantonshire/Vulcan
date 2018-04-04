@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class Player(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.PLAYER, name, java, mutable) {
+class Player(name: String, java: String = name, cas: String? = null, mutable: Boolean = false): VulcanObject(DataType.PLAYER, name, java, cas, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("jump", 0),        //Make player jump

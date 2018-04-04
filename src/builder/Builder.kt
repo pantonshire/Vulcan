@@ -116,7 +116,16 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                         if(variable.mutable) {
                             try {
                                 val value = variable.type.toJava(line.value, visibleVariables)
-                                behaviourContent[context]?.add("${variable.java} = $value;")
+                                var assignment = "${variable.java} = $value;"
+
+                                //Custom assignment syntax, e.g. setter methods
+                                val cas = variable.customAssignmentSyntax
+                                if(cas != null) {
+                                    assignment = cas.replace("VALUE", value)
+                                }
+
+                                behaviourContent[context]?.add(assignment)
+
                             } catch (exception: IllegalArgumentException) {
                                 line.throwError(fileName, exception.message ?: "no error message provided")
                             }

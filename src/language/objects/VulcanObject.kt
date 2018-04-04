@@ -2,9 +2,12 @@ package language.objects
 
 import language.DataType
 
-abstract class VulcanObject(val type: DataType, val name: String, val java: String = name, val mutable: Boolean = false, var depth: Int = 0) {
+abstract class VulcanObject(val type: DataType, val name: String, val java: String = name, val customAssignmentSyntax: String? = null, val mutable: Boolean = false) {
 
     abstract val actions: Map<String, Int>
+
+    //Which block of code this variable is contained to
+    var depth: Int = 0
 
     fun getFields(): Map<String, VulcanObject> {
         val fields: HashMap<String, VulcanObject> = hashMapOf()

@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-class VulcanInteger(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.INTEGER, name, java, mutable) {
+class VulcanInteger(name: String, java: String = name, cas: String? = null, mutable: Boolean = false): VulcanObject(DataType.INTEGER, name, java, cas, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("increase", 2),
