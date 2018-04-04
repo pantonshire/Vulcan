@@ -1,6 +1,7 @@
 package builder
 
 import language.*
+import language.objects.VulcanInteger
 import language.objects.VulcanObject
 import utils.VulcanUtils
 
@@ -139,6 +140,22 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     val condition = DataType.BOOLEAN.toJava(line.condition, visibleVariables)
                     behaviourContent[context]?.add("while($condition) {")
                     nest += "while"
+                }
+
+                //For loops
+                else if(line is ForLine) {
+                    val loops = DataType.INTEGER.toJava(line.loops, visibleVariables)
+                    val counter: String = line.counter ?: "_FOR_COUNTER_${nest.size}"
+                    if(line.counter in visibleVariables) {
+                        line.throwError(fileName, "another variable called ${line.counter} already exists")
+                    } else {
+                        if(line.counter != null) {
+                            localVariables[counter] = VulcanInteger(counter)
+                        }
+
+                        behaviourContent[context]?.add("for(int $counter = 0; $counter < $loops; ++$counter) {")
+                        nest += "repeat"
+                    }
                 }
 
                 //Terminators

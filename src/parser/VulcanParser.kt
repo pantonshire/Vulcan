@@ -143,11 +143,17 @@ object VulcanParser {
             }
 
             //For loop
-            "from" -> {
+            "repeat" -> {
+                //Implicit counter variable
                 if(words.size == 3 && words[2] == "times") {
-                    ForLine(lineNo, words[1])
+                    ForLine(lineNo, words[1], null)
+                }
+                //Explicit counter variable
+                else if(words.size == 8 && words[2] == "times" && words[3] == "using"
+                        && words[4] == "counter" && words[5] == "variable" && words[6] == "called") {
+                    ForLine(lineNo, words[1], words[7])
                 } else {
-                    throwError(fileName, lineNo, "invalid syntax for a from loop")
+                    throwError(fileName, lineNo, "invalid syntax for a repeat loop")
                     BlankLine(lineNo)
                 }
             }
