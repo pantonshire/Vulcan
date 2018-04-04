@@ -22,6 +22,99 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
     private val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")
 
     fun toJava(value: String, variables: Map<String, VulcanObject>): String {
+        //Arithmetic
+        if(this == INTEGER || this == FLOAT) {
+
+        }
+
+        //Boolean expressions (world's messiest code)
+        if(this == BOOLEAN) {
+            //and
+            val splitAnd = value.split("&&")
+            if(splitAnd.size > 1) {
+                var statementJava = "("
+                splitAnd.asSequence().forEach {
+                    if(statementJava.length > 1) {
+                        statementJava += " && "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                statementJava += ")"
+                return statementJava
+            } else {
+                //or
+                val splitOr = value.split("||")
+                if(splitOr.size > 1) {
+                    var statementJava = "("
+                    splitOr.asSequence().forEach {
+                        if(statementJava.length > 1) {
+                            statementJava += " || "
+                        }
+                        statementJava += toJava(it.trim(), variables)
+                    }
+                    statementJava += ")"
+                    return statementJava
+                } else {
+                    //isn't
+                    val splitIsNot = value.split("!=")
+                    if(splitIsNot.size == 2) {
+                        val typeA = VulcanUtils.inferType(splitIsNot[0], variables)
+                        val typeB = VulcanUtils.inferType(splitIsNot[1], variables)
+                        if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
+                            return "(${splitIsNot[0]} != ${splitIsNot[1]})"
+                        } else {
+                            throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
+                        }
+                    } else if(splitIsNot.size > 2) {
+                        throw IllegalArgumentException("invalid syntax")
+                    } else {
+                        //is
+                        val splitIs = value.split("==")
+                        if(splitIs.size == 2) {
+                            val typeA = VulcanUtils.inferType(splitIs[0], variables)
+                            val typeB = VulcanUtils.inferType(splitIs[1], variables)
+                            if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
+                                return "(${splitIs[0]} == ${splitIs[1]})"
+                            } else {
+                                throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
+                            }
+                        } else if(splitIs.size > 2) {
+                            throw IllegalArgumentException("invalid syntax")
+                        } else {
+                            //less than
+                            val splitLess = value.split("<")
+                            if(splitLess.size == 2) {
+                                val typeA = VulcanUtils.inferType(splitLess[0], variables)
+                                val typeB = VulcanUtils.inferType(splitLess[1], variables)
+                                if(typeA.isNumerical() && typeB.isNumerical()) {
+                                    return "(${splitLess[0]} < ${splitLess[1]})"
+                                } else {
+                                    throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
+                                }
+                            } else if(splitLess.size > 2) {
+                                throw IllegalArgumentException("invalid syntax")
+                            } else {
+                                //greater than
+                                val splitGreater = value.split(">")
+                                if(splitLess.size == 2) {
+                                    val typeA = VulcanUtils.inferType(splitGreater[0], variables)
+                                    val typeB = VulcanUtils.inferType(splitGreater[1], variables)
+                                    if(typeA.isNumerical() && typeB.isNumerical()) {
+                                        return "(${splitGreater[0]} > ${splitGreater[1]})"
+                                    } else {
+                                        throw IllegalArgumentException("left and right hand side of > must both be numerical (integers or decimals)")
+                                    }
+                                } else if(splitGreater.size > 2) {
+                                    throw IllegalArgumentException("invalid syntax")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Search for variable names and check data type
         val variable = VulcanUtils.getVariable(value, variables)
         if(variable != null) {
             return if(variable.type == this) {
@@ -76,7 +169,7 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                 if(value.startsWith("[") && value.endsWith("]")) {
                     val coordinatesIn = value
                             .substring(1, value.length - 1)
-                            .replace(" ", "")
+                            .replace(Regex("\\s+"), "")
                             .split(",")
 
                     if(coordinatesIn.size == 3) {
@@ -108,6 +201,18 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
 
         throw IllegalArgumentException(typeError(value))
     }
+
+    fun comparableWith(other: DataType): Boolean {
+        return this == other || when(this) {
+            INTEGER     -> other == FLOAT
+            FLOAT       -> other == INTEGER
+            ENTITY      -> other == PLAYER
+            PLAYER      -> other == ENTITY
+            else        -> false
+        }
+    }
+
+    fun isNumerical(): Boolean = this == INTEGER || this == FLOAT
 
     private fun typeError(value: String): String = "$value is not a valid $typeName"
 }

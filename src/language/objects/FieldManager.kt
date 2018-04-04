@@ -88,7 +88,6 @@ object FieldManager {
 
             WORLD   -> arrayOf(
                     VulcanBoolean   ("remote",          "$javaName.isRemote"                        ),
-                    //Should water vaporise when placed?
                     VulcanBoolean   ("boiling",         "$javaName.provider.doesWaterVaporize()"    ),
                     VulcanBoolean   ("raining",         "$javaName.isRaining()"                     ),
                     VulcanBoolean   ("thundering",      "$javaName.isThundering()"                  ),

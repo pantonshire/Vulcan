@@ -9,6 +9,12 @@ object VulcanParser {
     private fun initialParse(unparsed: String): String {
         return unparsed
                 .replace(Regex("(\'s)(\\s+)"), ".")     // Simplify field references
+                .replace(Regex("(\\s*)(<|is less than)(\\s*)"), "<")
+                .replace(Regex("(\\s*)(>|is more than|is greater than)(\\s*)"), ">")
+                .replace(Regex("(\\s+)(isn\'t equal to)(\\s+)"), "!=")
+                .replace(Regex("(\\s+)(is equal to)(\\s+)"), "==")
+                .replace(Regex("(\\s+)(and)(\\s+)"), "&&")
+                .replace(Regex("(\\s+)(or)(\\s+)"), "||")
                 .replace(Regex("(//)(.*)"), "")         // Remove comments
                 .trim()                                                   // Remove unnecessary whitespace
 

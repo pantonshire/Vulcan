@@ -1,5 +1,6 @@
 package utils
 
+import language.DataType
 import language.KEYWORDS
 import language.objects.VulcanObject
 
@@ -52,6 +53,22 @@ object VulcanUtils {
             root == null -> null
             else -> getField(root, parts.copyOfRange(1, parts.size))
         }
+    }
+
+    fun inferType(value: String, variables: Map<String, VulcanObject>): DataType {
+        DataType.values().asSequence().forEach {
+            try {
+                it.toJava(value, variables)
+                if(it == DataType.INTEGER) {
+                    return DataType.FLOAT
+                }
+                return it
+            } catch(exception: IllegalArgumentException) {
+                //Not the correct data type
+            }
+        }
+
+        throw IllegalArgumentException("failed to infer type of \"$value\"")
     }
 
     fun isValidVariableName(name: String): Boolean {

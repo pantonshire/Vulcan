@@ -3,18 +3,23 @@ import application.VulcanBuild
 const val VERSION = "alpha 0.3.0"
 
 fun main(args: Array<String>) {
-    if(args.isNotEmpty()) {
-        if(args[0] == "--version") {
-            System.out.println(VERSION)
-        }
+//    if(args.isNotEmpty()) {
+//        if(args[0] == "--version") {
+//            System.out.println(VERSION)
+//        }
+//
+//        else if(args[0] == "compile") {
+//            //TODO: Get input and output directories
+//            val inputDir = ""
+//            val outputDir = ""
+//            VulcanBuild.build(inputDir)
+//        }
+//    }
 
-        else if(args[0] == "compile") {
-            //TODO: Get input and output directories
-            val inputDir = ""
-            val outputDir = ""
-            VulcanBuild.build(inputDir)
-        }
-    }
+    //Whitespace optional e.g. < or >
+    "player's health is 10 and player's y_position is 64".split(Regex("(\\s*)(and)(\\s*)")).asSequence().forEach { println(it) }
+    //Whitespace mandatory e.g. and
+    "player's health is 10 and player's y_position is 64".split(Regex("(\\s+)(and)(\\s+)")).asSequence().forEach { println(it) }
 }
 
 //private fun build(sourceDirectory: String) {
