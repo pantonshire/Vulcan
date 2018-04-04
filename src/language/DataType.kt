@@ -64,8 +64,8 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                         val typeA = VulcanUtils.inferType(splitIsNot[0], variables)
                         val typeB = VulcanUtils.inferType(splitIsNot[1], variables)
                         if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
-                            val left = toJava(splitIsNot[0].trim(), variables)
-                            val right = toJava(splitIsNot[1].trim(), variables)
+                            val left = typeA.toJava(splitIsNot[0].trim(), variables)
+                            val right = typeB.toJava(splitIsNot[1].trim(), variables)
                             return "($left != $right)"
                         } else {
                             throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
@@ -79,8 +79,8 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                             val typeA = VulcanUtils.inferType(splitIs[0], variables)
                             val typeB = VulcanUtils.inferType(splitIs[1], variables)
                             if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
-                                val left = toJava(splitIs[0].trim(), variables)
-                                val right = toJava(splitIs[1].trim(), variables)
+                                val left = typeA.toJava(splitIs[0].trim(), variables)
+                                val right = typeB.toJava(splitIs[1].trim(), variables)
                                 return "($left == $right)"
                             } else {
                                 throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
@@ -94,8 +94,8 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                                 val typeA = VulcanUtils.inferType(splitLess[0], variables)
                                 val typeB = VulcanUtils.inferType(splitLess[1], variables)
                                 if(typeA.isNumerical() && typeB.isNumerical()) {
-                                    val left = toJava(splitLess[0].trim(), variables)
-                                    val right = toJava(splitLess[1].trim(), variables)
+                                    val left = typeA.toJava(splitLess[0].trim(), variables)
+                                    val right = typeB.toJava(splitLess[1].trim(), variables)
                                     return "($left < $right)"
                                 } else {
                                     throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
@@ -109,8 +109,8 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                                     val typeA = VulcanUtils.inferType(splitGreater[0], variables)
                                     val typeB = VulcanUtils.inferType(splitGreater[1], variables)
                                     if(typeA.isNumerical() && typeB.isNumerical()) {
-                                        val left = toJava(splitGreater[0].trim(), variables)
-                                        val right = toJava(splitGreater[1].trim(), variables)
+                                        val left = typeA.toJava(splitGreater[0].trim(), variables)
+                                        val right = typeB.toJava(splitGreater[1].trim(), variables)
                                         return "($left > $right)"
                                     } else {
                                         throw IllegalArgumentException("left and right hand side of > must both be numerical (integers or decimals)")
@@ -137,7 +137,7 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             } else if(variable.type == PLAYER && this == ENTITY) {
                 "((EntityLivingBase)${variable.java})"
             } else {
-                throw IllegalArgumentException("cannot convert ${variable.type.name} to $name")
+                throw IllegalArgumentException("cannot convert ${variable.type.typeName} to $typeName")
             }
         }
 
