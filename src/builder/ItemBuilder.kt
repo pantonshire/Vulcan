@@ -4,9 +4,9 @@ import language.*
 
 class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
 
-    private val rightClick = "public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)"
-    private val update = "public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)"
-    private val hitEntity = "public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)"
+    private val rightClick = "public ActionResult<ItemStack> onItemRightClick(World _world, EntityPlayer player, EnumHand _hand)"
+    private val update = "public void onUpdate(ItemStack _stack, World _world, Entity _entity, int _slot, boolean _selected)"
+    private val hitEntity = "public boolean hitEntity(ItemStack _stack, EntityLivingBase target, EntityLivingBase attacker)"
 
     //Strings
     private var name            = StringAttribute(this, "name", "???")
@@ -47,8 +47,8 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
 
             if(content.isNotEmpty()) {
                 when (it.key) {
-                    "right_click" -> overrides[rightClick] = "$content¶return super.onItemRightClick(world, player, hand);"
-                    "held" -> overrides[update] = "if(selected && entity instanceof EntityPlayer) {¶EntityPlayer player = (EntityPlayer)entity;¶$content¶}"
+                    "right_click" -> overrides[rightClick] = "$content¶return super.onItemRightClick(_world, player, _hand);"
+                    "held" -> overrides[update] = "if(_selected && _entity instanceof EntityPlayer) {¶EntityPlayer player = (EntityPlayer)_entity;¶$content¶}"
                     "hit_entity" -> overrides[hitEntity] = "$content¶return true;"
                 }
             }

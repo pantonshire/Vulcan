@@ -76,11 +76,12 @@ object VulcanUtils {
             return false
         }
 
-        var numbersAllowed = false
+        var firstCharacter = true
         var containsLetter = false
 
         name.asSequence().forEach {
-            if(!(it.isLetter() || it == '_' || (numbersAllowed && it.isDigit()))) {
+            val valid = it.isLetter() || (!firstCharacter && (it == '_' || it.isDigit()))
+            if(!valid) {
                 return false
             }
 
@@ -88,9 +89,9 @@ object VulcanUtils {
                 containsLetter = true
             }
 
-            //Numbers are only not allowed on the first pass
-            if(!numbersAllowed) {
-                numbersAllowed = true
+            //Numbers and underscores are only not allowed on the first pass
+            if(firstCharacter) {
+                firstCharacter = false
             }
         }
 

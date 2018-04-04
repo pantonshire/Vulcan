@@ -4,9 +4,9 @@ import language.*
 
 class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food", lines) {
 
-    private val eaten = "protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player)"
-    private val update = "public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)"
-    private val hitEntity = "public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)"
+    private val eaten = "protected void onFoodEaten(ItemStack _stack, World _world, EntityPlayer player)"
+    private val update = "public void onUpdate(ItemStack _stack, World _world, Entity _entity, int _slot, boolean _selected)"
+    private val hitEntity = "public boolean hitEntity(ItemStack _stack, EntityLivingBase target, EntityLivingBase attacker)"
 
     //Strings
     private var name            = StringAttribute(this, "name", "???")
@@ -57,7 +57,7 @@ class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food"
             if(content.isNotEmpty()) {
                 when(it.key) {
                     "eaten" -> overrides[eaten] = content
-                    "held" -> overrides[update] = "if(selected && entity instanceof EntityPlayer) {¶EntityPlayer player = (EntityPlayer)entity;¶$content¶}"
+                    "held" -> overrides[update] = "if(_selected && _entity instanceof EntityPlayer) {¶EntityPlayer player = (EntityPlayer)_entity;¶$content¶}"
                     "hit_entity" -> overrides[hitEntity] = "$content¶return true;"
                 }
             }

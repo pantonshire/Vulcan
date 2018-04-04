@@ -142,6 +142,16 @@ object VulcanParser {
                 }
             }
 
+            //For loop
+            "from" -> {
+                if(words.size == 3 && words[2] == "times") {
+                    ForLine(lineNo, words[1])
+                } else {
+                    throwError(fileName, lineNo, "invalid syntax for a from loop")
+                    BlankLine(lineNo)
+                }
+            }
+
             //Terminator
             "end" -> {
                 if(words.size == 2) {

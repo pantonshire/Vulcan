@@ -4,10 +4,10 @@ import language.*
 
 class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"block", lines) {
 
-    private val walkedOn = "public void onEntityWalk(World world, BlockPos position, Entity entityUnsanitised)"
-    private val destroyed = "public void breakBlock(World world, BlockPos position, IBlockState state)"
-    private val rightClicked = "public boolean onBlockActivated(World world, BlockPos position, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)"
-    private val placed = "public void onBlockPlacedBy(World world, BlockPos position, IBlockState state, EntityLivingBase placer, ItemStack stack)"
+    private val walkedOn = "public void onEntityWalk(World world, BlockPos _position, Entity _entityUnsanitised)"
+    private val destroyed = "public void breakBlock(World world, BlockPos _position, IBlockState _state)"
+    private val rightClicked = "public boolean onBlockActivated(World world, BlockPos _position, IBlockState _state, EntityPlayer player, EnumHand _hand, EnumFacing _facing, float _hitX, float _hitY, float _hitZ)"
+    private val placed = "public void onBlockPlacedBy(World world, BlockPos _position, IBlockState _state, EntityLivingBase placer, ItemStack _stack)"
 
     //Strings
     private var name                    = StringAttribute(this, "name", "???")
@@ -65,8 +65,8 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
 
             if(content.isNotEmpty()) {
                 when (it.key) {
-                    "walked_on" -> overrides[walkedOn] = "if(entityUnsanitised instanceof EntityLivingBase) {¶EntityLivingBase entity = (EntityLivingBase)entityUnsanitised;¶$content¶}"
-                    "destroyed" -> overrides[destroyed] = "$content¶super.breakBlock(world, position, state);"
+                    "walked_on" -> overrides[walkedOn] = "if(_entityUnsanitised instanceof EntityLivingBase) {¶EntityLivingBase entity = (EntityLivingBase)_entityUnsanitised;¶$content¶}"
+                    "destroyed" -> overrides[destroyed] = "$content¶super.breakBlock(world, _position, _state);"
                     "right_clicked" -> overrides[rightClicked] = "$content¶return true;"
                     "placed" -> overrides[placed] = content
                 }
