@@ -64,7 +64,9 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                         val typeA = VulcanUtils.inferType(splitIsNot[0], variables)
                         val typeB = VulcanUtils.inferType(splitIsNot[1], variables)
                         if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
-                            return "(${splitIsNot[0]} != ${splitIsNot[1]})"
+                            val left = toJava(splitIsNot[0].trim(), variables)
+                            val right = toJava(splitIsNot[1].trim(), variables)
+                            return "($left != $right)"
                         } else {
                             throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
                         }
@@ -77,7 +79,9 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                             val typeA = VulcanUtils.inferType(splitIs[0], variables)
                             val typeB = VulcanUtils.inferType(splitIs[1], variables)
                             if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
-                                return "(${splitIs[0]} == ${splitIs[1]})"
+                                val left = toJava(splitIs[0].trim(), variables)
+                                val right = toJava(splitIs[1].trim(), variables)
+                                return "($left == $right)"
                             } else {
                                 throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
                             }
@@ -90,7 +94,9 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                                 val typeA = VulcanUtils.inferType(splitLess[0], variables)
                                 val typeB = VulcanUtils.inferType(splitLess[1], variables)
                                 if(typeA.isNumerical() && typeB.isNumerical()) {
-                                    return "(${splitLess[0]} < ${splitLess[1]})"
+                                    val left = toJava(splitLess[0].trim(), variables)
+                                    val right = toJava(splitLess[1].trim(), variables)
+                                    return "($left < $right)"
                                 } else {
                                     throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
                                 }
@@ -103,7 +109,9 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                                     val typeA = VulcanUtils.inferType(splitGreater[0], variables)
                                     val typeB = VulcanUtils.inferType(splitGreater[1], variables)
                                     if(typeA.isNumerical() && typeB.isNumerical()) {
-                                        return "(${splitGreater[0]} > ${splitGreater[1]})"
+                                        val left = toJava(splitGreater[0].trim(), variables)
+                                        val right = toJava(splitGreater[1].trim(), variables)
+                                        return "($left > $right)"
                                     } else {
                                         throw IllegalArgumentException("left and right hand side of > must both be numerical (integers or decimals)")
                                     }
