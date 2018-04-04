@@ -28,6 +28,9 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
         }
 
         //Boolean expressions (world's messiest code)
+        //TODO: CLEAN THIS UP
+        //TODO: && and || are the wrong way around
+        //TODO: Brackets
         if(this == BOOLEAN) {
             //and
             val splitAnd = value.split("&&")

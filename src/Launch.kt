@@ -1,6 +1,6 @@
 import application.VulcanBuild
 
-const val VERSION = "alpha 0.3.0"
+const val VERSION = "alpha 0.2.0"
 
 fun main(args: Array<String>) {
 //    if(args.isNotEmpty()) {

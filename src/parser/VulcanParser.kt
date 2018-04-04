@@ -8,15 +8,24 @@ object VulcanParser {
 
     private fun initialParse(unparsed: String): String {
         return unparsed
-                .replace(Regex("(\'s)(\\s+)"), ".")     // Simplify field references
+                //Field references
+                .replace(Regex("(\'s)(\\s+)"), ".")
+                //Less than
                 .replace(Regex("(\\s*)(<|is less than)(\\s*)"), "<")
+                //Greater than
                 .replace(Regex("(\\s*)(>|is more than|is greater than)(\\s*)"), ">")
-                .replace(Regex("(\\s+)(isn\'t equal to)(\\s+)"), "!=")
-                .replace(Regex("(\\s+)(is equal to)(\\s+)"), "==")
+                //Not equal
+                .replace(Regex("(\\s+)(isn\'t equal to|does not equal)(\\s+)"), "!=")
+                //Equal
+                .replace(Regex("(\\s+)(is equal to|equals)(\\s+)"), "==")
+                //And
                 .replace(Regex("(\\s+)(and)(\\s+)"), "&&")
+                //Or
                 .replace(Regex("(\\s+)(or)(\\s+)"), "||")
-                .replace(Regex("(//)(.*)"), "")         // Remove comments
-                .trim()                                                   // Remove unnecessary whitespace
+                //Remove comments
+                .replace(Regex("(//)(.*)"), "")
+                //Remove unnecessary whitespace
+                .trim()
 
     }
 

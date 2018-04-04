@@ -1,16 +1,17 @@
 # Changelog
-## Alpha 0.3.0
+## Alpha 0.2.0
 In development
 * Added the ability to declare and assign variables
 * Declaring variables has the syntax `new [type] variable [name] = [value]` (constant can be written instead of variable to make it immutable)
 * Assigning variables has the same syntax as setting attributes: `set [name] to [value]`
 * Objects now contain fields which can be referenced and used (but not reassigned) within your code using the syntax `object's field`, for example: `player's position` is a vector equal to the player's current position in the world
 * Added several new data types: boolean, integer, decimal, string, vector and world (note that most of these do not yet have all of the desired features, such as an easy way to perform arithmetic)
+* Added boolean expressions, which are written with very English-y syntax, e.g. `a is equal to b` or `a is less than b and a is greater than c`
 * All block behaviours now have access to the world
 * Added an attribute class to store the value and data type of the different attributes for items, blocks, etc
 * Lines starting with invalid words will now throw an error
 
-## Alpha 0.2.0
+## Alpha 0.1.2
 Not yet publicly released due to lack of internet connection
 * Added food
 * Food has three behaviours: eaten, held and hit_entity
