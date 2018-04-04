@@ -150,7 +150,9 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                         line.throwError(fileName, "another variable called ${line.counter} already exists")
                     } else {
                         if(line.counter != null) {
-                            localVariables[counter] = VulcanInteger(counter)
+                            val counterObject = VulcanInteger(counter)
+                            counterObject.depth = nest.size + 1
+                            localVariables[counter] = counterObject
                         }
 
                         behaviourContent[context]?.add("for(int $counter = 0; $counter < $loops; ++$counter) {")
