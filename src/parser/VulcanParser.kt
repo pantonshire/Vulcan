@@ -40,7 +40,7 @@ object VulcanParser {
 
             //Declaring variables
             "new" -> {
-                if(words.size == 6 && words[4] == "=") {
+                if(words.size == 7 && words[3] == "called" && words[5] == "=") {
                     //Data type
                     var type: DataType? = null
                     for(possibleType in DataType.values()) {
@@ -63,20 +63,20 @@ object VulcanParser {
                     }
 
                     //Ensure variable name is not a keyword
-                    if(!VulcanUtils.isValidVariableName(words[3])) {
-                        throwError(fileName, lineNo, "${words[3]} cannot be used as a variable name")
+                    if(!VulcanUtils.isValidVariableName(words[4])) {
+                        throwError(fileName, lineNo, "${words[4]} cannot be used as a variable name")
                     }
 
                     //New variable object
                     val newVariable: VulcanObject? = when(type) {
-                        DataType.BOOLEAN  ->   VulcanBoolean    (words[3], mutable=mutable)
-                        DataType.STRING   ->   VulcanString     (words[3], mutable=mutable)
-                        DataType.INTEGER  ->   VulcanInteger    (words[3], mutable=mutable)
-                        DataType.FLOAT    ->   VulcanDecimal    (words[3], mutable=mutable)
-                        DataType.VECTOR3  ->   VulcanVector3    (words[3], mutable=mutable)
-                        DataType.ENTITY   ->   LivingEntity     (words[3], mutable=mutable)
-                        DataType.PLAYER   ->   Player           (words[3], mutable=mutable)
-                        DataType.WORLD    ->   World            (words[3], mutable=mutable)
+                        DataType.BOOLEAN  ->   VulcanBoolean    (words[4], mutable=mutable)
+                        DataType.STRING   ->   VulcanString     (words[4], mutable=mutable)
+                        DataType.INTEGER  ->   VulcanInteger    (words[4], mutable=mutable)
+                        DataType.FLOAT    ->   VulcanDecimal    (words[4], mutable=mutable)
+                        DataType.VECTOR3  ->   VulcanVector3    (words[4], mutable=mutable)
+                        DataType.ENTITY   ->   LivingEntity     (words[4], mutable=mutable)
+                        DataType.PLAYER   ->   Player           (words[4], mutable=mutable)
+                        DataType.WORLD    ->   World            (words[4], mutable=mutable)
                         else              ->   null
                     }
 
@@ -85,7 +85,7 @@ object VulcanParser {
                     }
 
                     //Return new line object
-                    DeclarationLine(lineNo, newVariable!!, words[5])
+                    DeclarationLine(lineNo, newVariable!!, words[6])
 
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for declaring a variable")
