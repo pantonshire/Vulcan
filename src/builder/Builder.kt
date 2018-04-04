@@ -98,7 +98,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                             localVariables[line.variable.name] = line.variable
                             val type = line.variable.type
                             val initialValueJava = type.toJava(line.initialValue, visibleVariables)
-                            val prefix = if(line.variable.mutable) "final " else ""
+                            val prefix = if(!line.variable.mutable) "final " else ""
                             behaviourContent[context]?.add("$prefix${type.javaTypeName} ${line.variable.java} = $initialValueJava;")
 
                         } catch (exception: IllegalArgumentException) {
