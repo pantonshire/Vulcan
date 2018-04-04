@@ -16,7 +16,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
     private val validBehaviours: Map<String, Behaviour>
     private var context = "default"
-    private var depth = 0 //Increase with if, for, while etc, decrease with end if, end for, end while, etc
+    private val nest: MutableList<String> = mutableListOf() //All of the current nested statements. Nest.size will give the current depth
     val behaviourContent: HashMap<String, MutableList<String>> = hashMapOf()
 
     init {
@@ -50,7 +50,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
     private fun processLine(line: Line) {
         if(context == "constructor" && line is SetLine) {
-            if (line.field in attributes) {
+            if(line.field in attributes) {
                 try {
                     attributes[line.field]!!.set(line.value)
                 } catch (exception: IllegalArgumentException) {
@@ -95,6 +95,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     } else {
                         try {
 
+                            line.variable.depth = nest.size
                             localVariables[line.variable.name] = line.variable
                             val type = line.variable.type
                             val initialValueJava = type.toJava(line.initialValue, visibleVariables)
@@ -123,6 +124,24 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                         }
                     } else {
                         line.throwError(fileName,"the variable \"${line.field}\" does not exist")
+                    }
+                }
+
+                //If statements
+                else if(line is IfLine) {
+                    val condition = DataType.BOOLEAN.toJava(line.condition, visibleVariables)
+                    behaviourContent[context]?.add("if($condition) {")
+                    nest += "if"
+                }
+
+                //Terminators
+                else if(line is TerminatorLine) {
+                    if(nest.isNotEmpty() && line.type == nest.last()) {
+                        behaviourContent[context]?.add("}")
+                        nest.removeAt(nest.size - 1)
+                        updateLocalVariables()
+                    } else {
+                        line.throwError(fileName, "invalid use of \"end\"")
                     }
                 }
             }
@@ -172,5 +191,19 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
     }
 
     //* Returns all of the Vulcan Objects that can be referenced in the current behaviour. */
-    private fun getVisibleVariables(currentBehaviour: Behaviour): Map<String, VulcanObject> = globalVariables + localVariables + currentBehaviour.parameters
+    private fun getVisibleVariables(currentBehaviour: Behaviour): Map<String, VulcanObject> =
+            globalVariables + localVariables + currentBehaviour.parameters
+
+    private fun updateLocalVariables() {
+        val depth = nest.size
+        val toRemove: MutableList<String> = mutableListOf()
+        localVariables.values.asSequence().forEach {
+            if(it.depth > depth) {
+                toRemove += it.name
+            }
+        }
+        toRemove.asSequence().forEach {
+            localVariables.remove(it)
+        }
+    }
 }

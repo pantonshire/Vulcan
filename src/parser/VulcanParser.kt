@@ -108,15 +108,6 @@ object VulcanParser {
                 }
             }
 
-//            "assign" -> {
-//                if(words.size == 4 && words[2] == "to") {
-//                    AssignmentLine(lineNo, words[1], words[3])
-//                } else {
-//                    throwError(fileName, lineNo, "invalid syntax for assigning a variable")
-//                    BlankLine(lineNo)
-//                }
-//            }
-
             //Function calls
             "tell" -> {
                 if(words.size >= 4 && words[2] == "to") {
@@ -127,6 +118,26 @@ object VulcanParser {
                     ActionLine(lineNo, words[1], words[3], args.toTypedArray())
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for telling an object to perform an action")
+                    BlankLine(lineNo)
+                }
+            }
+
+            //If statement
+            "if" -> {
+                if(words.size == 3 && words[2] == "then") {
+                    IfLine(lineNo, words[1])
+                } else {
+                    throwError(fileName, lineNo, "invalid syntax for an if statement")
+                    BlankLine(lineNo)
+                }
+            }
+
+            //Terminator
+            "end" -> {
+                if(words.size == 2) {
+                    TerminatorLine(lineNo, words[1])
+                } else {
+                    throwError(fileName, lineNo, "invalid syntax for a terminator statement")
                     BlankLine(lineNo)
                 }
             }

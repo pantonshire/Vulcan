@@ -94,6 +94,7 @@ object FieldManager {
                     VulcanBoolean   ("daytime",         "$javaName.isDaytime()"                     ),
                     VulcanInteger   ("build_limit",     "$javaName.getHeight()"                     ),
                     VulcanInteger   ("sea_level",       "$javaName.getSeaLevel()"                   ),
+                    VulcanInteger   ("time",            "((int)$javaName.getWorldTime())"           ),
                     VulcanString    ("name",            "$javaName.getWorldInfo().getWorldName()"   ),
                     VulcanVector3   ("spawn",           "$javaName.getSpawnPoint()"                 )
             )

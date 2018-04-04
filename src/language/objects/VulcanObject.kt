@@ -2,7 +2,7 @@ package language.objects
 
 import language.DataType
 
-abstract class VulcanObject(val type: DataType, val name: String, val java: String = name, val mutable: Boolean = false) {
+abstract class VulcanObject(val type: DataType, val name: String, val java: String = name, val mutable: Boolean = false, var depth: Int = 0) {
 
     abstract val actions: Map<String, Int>
 
