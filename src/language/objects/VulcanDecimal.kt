@@ -2,12 +2,7 @@ package language.objects
 
 import language.DataType
 
-class VulcanDecimal(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.FLOAT, name, java, mutable,
-
-        VulcanInteger   ("integer_part",       "((int)$java)"           )
-//        VulcanDecimal   ("decimal_part",       "($java - (int)$java)"   )
-
-) {
+class VulcanDecimal(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.FLOAT, name, java, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("increase", 2),

@@ -2,33 +2,7 @@ package language.objects
 
 import language.DataType
 
-class Player(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.PLAYER, name, java, mutable,
-
-        VulcanBoolean   ("in_creative_mode","$java.capabilities.isCreativeMode" ),
-        VulcanBoolean   ("flying",          "$java.capabilities.isFlying"       ),
-        VulcanBoolean   ("airborne",        "$java.isAirBorne"                  ),
-        VulcanBoolean   ("burning",         "$java.isBurning()"                 ),
-        VulcanBoolean   ("sneaking",        "$java.isSneaking()"                ),
-        VulcanBoolean   ("sprinting",       "$java.isSprinting()"               ),
-        VulcanBoolean   ("swimming",        "$java.isInWater()"                 ),
-        VulcanBoolean   ("wet",             "$java.isWet()"                     ),
-        VulcanBoolean   ("flammable",       "(!$java.isImmuneToFire())"         ),
-        VulcanInteger   ("level",           "$java.experienceLevel"             ),
-        VulcanInteger   ("health",          "$java.getHealth()"                 ),
-        VulcanInteger   ("max_health",      "$java.getMaxHealth()"              ),
-        VulcanInteger   ("age",             "$java.ticksExisted"                ),
-        VulcanInteger   ("dimension",       "$java.dimension"                   ),
-        VulcanDecimal   ("x_position",      "$java.posX"                        ),
-        VulcanDecimal   ("y_position",      "$java.posY"                        ),
-        VulcanDecimal   ("z_position",      "$java.posZ"                        ),
-        VulcanDecimal   ("x_motion",        "$java.motionX"                     ),
-        VulcanDecimal   ("y_motion",        "$java.motionY"                     ),
-        VulcanDecimal   ("z_motion",        "$java.motionZ"                     ),
-        VulcanVector3   ("position",        "$java.getPosition()"               ),
-        VulcanString    ("name",            "$java.getName()"                   ),
-        World           ("world",           "$java.world"                       )
-
-) {
+class Player(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.PLAYER, name, java, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("jump", 0),        //Make player jump

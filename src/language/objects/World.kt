@@ -2,20 +2,7 @@ package language.objects
 
 import language.DataType
 
-class World(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.WORLD, name, java, mutable,
-
-        VulcanBoolean   ("remote",          "$java.isRemote"                        ),
-        //Should water vaporise when placed?
-        VulcanBoolean   ("boiling",         "$java.provider.doesWaterVaporize()"    ),
-        VulcanBoolean   ("raining",         "$java.isRaining()"                     ),
-        VulcanBoolean   ("thundering",      "$java.isThundering()"                  ),
-        VulcanBoolean   ("daytime",         "$java.isDaytime()"                     ),
-        VulcanInteger   ("build_limit",     "$java.getHeight()"                     ),
-        VulcanInteger   ("sea_level",       "$java.getSeaLevel()"                   ),
-        VulcanString    ("name",            "$java.getWorldInfo().getWorldName()"   ),
-        VulcanVector3   ("spawn",           "$java.getSpawnPoint()"                 )
-
-) {
+class World(name: String, java: String = name, mutable: Boolean = false): VulcanObject(DataType.WORLD, name, java, mutable) {
 
     override val actions: Map<String, Int> = mapOf(
             Pair("sunshine", 3),

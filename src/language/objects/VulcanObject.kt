@@ -2,16 +2,17 @@ package language.objects
 
 import language.DataType
 
-abstract class VulcanObject(val type: DataType, val name: String, val java: String = name, val mutable: Boolean = false,
-                            vararg fieldObjects: VulcanObject) {
+abstract class VulcanObject(val type: DataType, val name: String, val java: String = name, val mutable: Boolean = false) {
 
-    val fields: Map<String, VulcanObject>
     abstract val actions: Map<String, Int>
 
-    init {
-        val mutableFieldMap: HashMap<String, VulcanObject> = hashMapOf()
-        fieldObjects.asSequence().forEach { mutableFieldMap[it.name] = it }
-        fields = mutableFieldMap.toMap()
+    fun getFields(): Map<String, VulcanObject> {
+        val fields: HashMap<String, VulcanObject> = hashMapOf()
+        val fieldsArray = FieldManager.getFields(this)
+        fieldsArray.asSequence().forEach {
+            fields[it.name] = it
+        }
+        return fields.toMap()
     }
 
     fun isValidMessage(message: String): Boolean = message in actions.keys

@@ -45,7 +45,7 @@ object VulcanUtils {
             return null
         }
 
-        val root = container.fields[parts[0]]
+        val root: VulcanObject? = container.getFields()[parts[0]]
 
         return when {
             parts.size == 1 -> root
