@@ -134,6 +134,13 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     nest += "if"
                 }
 
+                //While loops
+                else if(line is WhileLine) {
+                    val condition = DataType.BOOLEAN.toJava(line.condition, visibleVariables)
+                    behaviourContent[context]?.add("while($condition) {")
+                    nest += "while"
+                }
+
                 //Terminators
                 else if(line is TerminatorLine) {
                     if(nest.isNotEmpty() && line.type == nest.last()) {

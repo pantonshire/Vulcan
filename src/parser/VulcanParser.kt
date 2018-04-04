@@ -132,6 +132,16 @@ object VulcanParser {
                 }
             }
 
+            //While loop
+            "while" -> {
+                if(words.size == 3 && words[2] == "do") {
+                    WhileLine(lineNo, words[1])
+                } else {
+                    throwError(fileName, lineNo, "invalid syntax for a while loop")
+                    BlankLine(lineNo)
+                }
+            }
+
             //Terminator
             "end" -> {
                 if(words.size == 2) {
