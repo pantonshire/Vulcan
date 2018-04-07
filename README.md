@@ -56,7 +56,7 @@ _The latest version of Vulcan which may include lots of bugs._
 
 ## Older
 _Older versions of Vulcan._  
-[Vulcan Alpha 0.1.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.1 "Alpha 0.1.1")
+[Vulcan Alpha 0.1.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.1 "Alpha 0.1.1")  
 [Vulcan Alpha 0.1.0](https://www.dropbox.com/s/tmao9ud098zpcuy/vulcan-alpha-0.1.0.jar?dl=0 "Alpha 0.1.0")  
 [Vulcan Alpha 0.0.5](https://www.dropbox.com/s/rxtucd8ltzkf70i/vulcan-alpha-0.0.5.jar?dl=0 "Alpha 0.0.5")  
 [Vulcan Alpha 0.0.4](https://www.dropbox.com/s/1yqm8c2v0yxzgaz/vulcan-alpha-0.0.4.jar?dl=0 "Alpha 0.0.4")  
