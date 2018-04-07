@@ -20,18 +20,14 @@ rather than the more traditional `player.jump()`. The syntax for passing argumen
 The programmer will have no way to create new methods, so the only methods that they will be able to call are in-built ones.
 
 # Planned features
-* If statements `if condition then ... end`
 * Else and else if `if condition then ... otherwise if condition ... otherwise ... end`
-* While loops `while condition do ... end`
-* For loops `repeat x times ... end`
 * "player" type for changing player attributes and recieving player-based events
 * "world" type for doing worldgen stuff
-* "block" type for adding custom blocks into the game
 * An event handler to recieve Forge events
 * A way to add crafting recipes
 * Ability to reference items and blocks by name, item and block object types
 * Method to add potion effects to entities
-* Types for item subclasses: "food" and "tool"
+* Types for item subclasses e.g. "tool"
 * A "throwable" type to make throwable items that spawn projectiles when used
 * "biome" type for adding new biomes into the overworld
 * "dimension" type for adding new dimensions (don't expect this any time soon!)
