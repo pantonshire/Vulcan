@@ -1,6 +1,6 @@
 # Changelog
 ## Alpha 0.2.0
-In development
+Released on 7th April 2018
 * Added the ability to declare and assign variables
 * Declaring variables has the syntax `new [type] variable [name] = [value]` (constant can be written instead of variable to make it immutable)
 * Assigning variables has the same syntax as setting attributes: `set [name] to [value]`
@@ -13,7 +13,7 @@ In development
 * Lines starting with invalid words will now throw an error
 
 ## Alpha 0.1.2
-Not yet publicly released due to lack of internet connection
+Released on 7th April 2018
 * Added food
 * Food has three behaviours: eaten, held and hit_entity
 * Food has all of the same attributes as item, plus a few extras: heal_amount, saturation, meat and eat_time

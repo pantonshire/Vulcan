@@ -20,18 +20,14 @@ rather than the more traditional `player.jump()`. The syntax for passing argumen
 The programmer will have no way to create new methods, so the only methods that they will be able to call are in-built ones.
 
 # Planned features
-* If statements `if condition then ... end`
 * Else and else if `if condition then ... otherwise if condition ... otherwise ... end`
-* While loops `while condition do ... end`
-* For loops `repeat x times ... end`
 * "player" type for changing player attributes and recieving player-based events
 * "world" type for doing worldgen stuff
-* "block" type for adding custom blocks into the game
 * An event handler to recieve Forge events
 * A way to add crafting recipes
 * Ability to reference items and blocks by name, item and block object types
 * Method to add potion effects to entities
-* Types for item subclasses: "food" and "tool"
+* Types for item subclasses e.g. "tool"
 * A "throwable" type to make throwable items that spawn projectiles when used
 * "biome" type for adding new biomes into the overworld
 * "dimension" type for adding new dimensions (don't expect this any time soon!)
@@ -48,14 +44,16 @@ I try to update the changelog whenever I release a new version.
 # Downloads
 ## Recommended
 _The recommended version of Vulcan that's most likely to work properly._  
-[Vulcan Alpha 0.0.4](https://www.dropbox.com/s/1yqm8c2v0yxzgaz/vulcan-alpha-0.0.4.jar?dl=0 "Alpha 0.0.4")  
+[Vulcan Alpha 0.1.2](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.2 "Alpha 0.1.2")  
 
 ## Latest
 _The latest version of Vulcan which may include lots of bugs._  
-[Vulcan Alpha 0.1.0](https://www.dropbox.com/s/tmao9ud098zpcuy/vulcan-alpha-0.1.0.jar?dl=0 "Alpha 0.1.0")  
+[Vulcan Alpha 0.2.0](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.0 "Alpha 0.2.0")  
 
 ## Older
 _Older versions of Vulcan._  
+[Vulcan Alpha 0.1.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.1 "Alpha 0.1.1")  
+[Vulcan Alpha 0.1.0](https://www.dropbox.com/s/tmao9ud098zpcuy/vulcan-alpha-0.1.0.jar?dl=0 "Alpha 0.1.0")  
 [Vulcan Alpha 0.0.5](https://www.dropbox.com/s/rxtucd8ltzkf70i/vulcan-alpha-0.0.5.jar?dl=0 "Alpha 0.0.5")  
 [Vulcan Alpha 0.0.4](https://www.dropbox.com/s/1yqm8c2v0yxzgaz/vulcan-alpha-0.0.4.jar?dl=0 "Alpha 0.0.4")  
 [Vulcan Alpha 0.0.3](https://www.dropbox.com/s/wyozvpzyv8je4nw/vulcan-alpha-0.0.3.jar?dl=0 "Alpha 0.0.3")  
