@@ -32,96 +32,107 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
         //TODO: && and || are the wrong way around
         //TODO: Brackets e.g. (a or b) and (i < j)
         if(this == BOOLEAN) {
+
+            //or
+            val splitOr = value.split("||")
+            if (splitOr.size > 1) {
+                var statementJava = "("
+                splitOr.asSequence().forEach {
+                    if (statementJava.length > 1) {
+                        statementJava += " || "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                statementJava += ")"
+                return statementJava
+            }
+
             //and
             val splitAnd = value.split("&&")
-            if(splitAnd.size > 1) {
+            if (splitAnd.size > 1) {
                 var statementJava = "("
                 splitAnd.asSequence().forEach {
-                    if(statementJava.length > 1) {
+                    if (statementJava.length > 1) {
                         statementJava += " && "
                     }
                     statementJava += toJava(it.trim(), variables)
                 }
                 statementJava += ")"
                 return statementJava
-            } else {
-                //or
-                val splitOr = value.split("||")
-                if(splitOr.size > 1) {
-                    var statementJava = "("
-                    splitOr.asSequence().forEach {
-                        if(statementJava.length > 1) {
-                            statementJava += " || "
-                        }
-                        statementJava += toJava(it.trim(), variables)
-                    }
-                    statementJava += ")"
-                    return statementJava
-                } else {
-                    //isn't
-                    val splitIsNot = value.split("!=")
-                    if(splitIsNot.size == 2) {
-                        val typeA = VulcanUtils.inferType(splitIsNot[0], variables)
-                        val typeB = VulcanUtils.inferType(splitIsNot[1], variables)
-                        if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
-                            val left = typeA.toJava(splitIsNot[0].trim(), variables)
-                            val right = typeB.toJava(splitIsNot[1].trim(), variables)
-                            return "($left != $right)"
-                        } else {
-                            throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
-                        }
-                    } else if(splitIsNot.size > 2) {
-                        throw IllegalArgumentException("invalid syntax")
-                    } else {
-                        //is
-                        val splitIs = value.split("==")
-                        if(splitIs.size == 2) {
-                            val typeA = VulcanUtils.inferType(splitIs[0], variables)
-                            val typeB = VulcanUtils.inferType(splitIs[1], variables)
-                            if(typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
-                                val left = typeA.toJava(splitIs[0].trim(), variables)
-                                val right = typeB.toJava(splitIs[1].trim(), variables)
-                                return "($left == $right)"
-                            } else {
-                                throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
-                            }
-                        } else if(splitIs.size > 2) {
-                            throw IllegalArgumentException("invalid syntax")
-                        } else {
-                            //less than
-                            val splitLess = value.split("<")
-                            if(splitLess.size == 2) {
-                                val typeA = VulcanUtils.inferType(splitLess[0], variables)
-                                val typeB = VulcanUtils.inferType(splitLess[1], variables)
-                                if(typeA.isNumerical() && typeB.isNumerical()) {
-                                    val left = typeA.toJava(splitLess[0].trim(), variables)
-                                    val right = typeB.toJava(splitLess[1].trim(), variables)
-                                    return "($left < $right)"
-                                } else {
-                                    throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
-                                }
-                            } else if(splitLess.size > 2) {
-                                throw IllegalArgumentException("invalid syntax")
-                            } else {
-                                //greater than
-                                val splitGreater = value.split(">")
-                                if(splitLess.size == 2) {
-                                    val typeA = VulcanUtils.inferType(splitGreater[0], variables)
-                                    val typeB = VulcanUtils.inferType(splitGreater[1], variables)
-                                    if(typeA.isNumerical() && typeB.isNumerical()) {
-                                        val left = typeA.toJava(splitGreater[0].trim(), variables)
-                                        val right = typeB.toJava(splitGreater[1].trim(), variables)
-                                        return "($left > $right)"
-                                    } else {
-                                        throw IllegalArgumentException("left and right hand side of > must both be numerical (integers or decimals)")
-                                    }
-                                } else if(splitGreater.size > 2) {
-                                    throw IllegalArgumentException("invalid syntax")
-                                }
-                            }
-                        }
-                    }
+            }
+
+            //not
+            val splitNot = value.split("!!")
+            if (splitNot.size == 2) {
+                if(splitNot[0].isNotEmpty()) {
+                    throw IllegalArgumentException("invalid syntax")
                 }
+                val statementJava = toJava(splitNot[1].trim(), variables)
+                return "!($statementJava)"
+            } else if (splitNot.size > 2) {
+                throw IllegalArgumentException("invalid syntax")
+            }
+
+            //isn't
+            val splitIsNot = value.split("!=")
+            if (splitIsNot.size == 2) {
+                val typeA = VulcanUtils.inferType(splitIsNot[0], variables)
+                val typeB = VulcanUtils.inferType(splitIsNot[1], variables)
+                if (typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
+                    val left = typeA.toJava(splitIsNot[0].trim(), variables)
+                    val right = typeB.toJava(splitIsNot[1].trim(), variables)
+                    return "($left != $right)"
+                } else {
+                    throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
+                }
+            } else if (splitIsNot.size > 2) {
+                throw IllegalArgumentException("invalid syntax")
+            }
+
+            //is
+            val splitIs = value.split("==")
+            if (splitIs.size == 2) {
+                val typeA = VulcanUtils.inferType(splitIs[0], variables)
+                val typeB = VulcanUtils.inferType(splitIs[1], variables)
+                if (typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
+                    val left = typeA.toJava(splitIs[0].trim(), variables)
+                    val right = typeB.toJava(splitIs[1].trim(), variables)
+                    return "($left == $right)"
+                } else {
+                    throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
+                }
+            } else if (splitIs.size > 2) {
+                throw IllegalArgumentException("invalid syntax")
+            }
+
+            //less than
+            val splitLess = value.split("<")
+            if (splitLess.size == 2) {
+                val typeA = VulcanUtils.inferType(splitLess[0], variables)
+                val typeB = VulcanUtils.inferType(splitLess[1], variables)
+                if (typeA.isNumerical() && typeB.isNumerical()) {
+                    val left = typeA.toJava(splitLess[0].trim(), variables)
+                    val right = typeB.toJava(splitLess[1].trim(), variables)
+                    return "($left < $right)"
+                } else {
+                    throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
+                }
+            }
+
+            //greater than
+            val splitGreater = value.split(">")
+            if (splitLess.size == 2) {
+                val typeA = VulcanUtils.inferType(splitGreater[0], variables)
+                val typeB = VulcanUtils.inferType(splitGreater[1], variables)
+                if (typeA.isNumerical() && typeB.isNumerical()) {
+                    val left = typeA.toJava(splitGreater[0].trim(), variables)
+                    val right = typeB.toJava(splitGreater[1].trim(), variables)
+                    return "($left > $right)"
+                } else {
+                    throw IllegalArgumentException("left and right hand side of > must both be numerical (integers or decimals)")
+                }
+            } else if (splitGreater.size > 2) {
+                throw IllegalArgumentException("invalid syntax")
             }
         }
 

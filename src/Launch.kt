@@ -1,4 +1,6 @@
 import application.VulcanBuild
+import parser.VulcanParserV2
+import parser.VulcanParserV3
 
 const val VERSION = "alpha 0.2.0"
 
@@ -16,64 +18,23 @@ fun main(args: Array<String>) {
 //        }
 //    }
 
-    //Whitespace optional e.g. < or >
-    "player's health is 10 and player's y_position is 64".split(Regex("(\\s*)(and)(\\s*)")).asSequence().forEach { println(it) }
-    //Whitespace mandatory e.g. and
-    "player's health is 10 and player's y_position is 64".split(Regex("(\\s+)(and)(\\s+)")).asSequence().forEach { println(it) }
-}
+//    val inp = "not x"
+//    val split = inp.replace(Regex("(\\s+|^)(not)(\\s+)"), "!!").split("!!")
+//    println(split.size)
 
-//private fun build(sourceDirectory: String) {
-//    val source = Directories.parseExternalDirectory(sourceDirectory)
-//    val sourceFiles = FileReader.getFilesInFolder(source)
-//    val vmod = "settings.vmod"
-//
-//    if(sourceFiles.contains(vmod)) {
-//        val settings = FileReader.readTextFile(Directories.getDirectory(source, vmod))
-//        ModCompiler.instance.setModSettings(settings)
-//    } else {
-//        VConsole.out("Warning: no settings.vmod file was found. This file is necessary for setting your mod\'s name and id. Default values will be used.")
+//    val inp = "if then == true then"
+//    val split = VulcanParserV2.splitLine(inp)
+//    split.asSequence().forEach {
+//        println(it)
 //    }
-//
-//    sourceFiles.asSequence().filter { it.endsWith(".vlcn") }.forEach {
-//        parseVulcanFile(Directories.getDirectory(source, it))
+
+//    val inp = "tell \tself's player\t\tto    jump up in the air like they just don\'t care"
+//    VulcanParserV3.splitLine(inp).asSequence().forEach {
+//        println(it)
 //    }
-//
-//    ModCompiler.instance.compileMod()
-//    VConsole.out("Successfully built mod!")
-//}
-//
-//private fun parseVulcanFile(vulcanFileDirectory: String) {
-//    val directory = vulcanFileDirectory.split(File.separator)
-//    var fileName = ""
-//    if(directory.isNotEmpty()) {
-//        fileName = directory[directory.size - 1]
-//    }
-//
-//    var lineNo = 0
-//    var validEvents = Behaviours.none
-//    var type = ""
-//    val lineList: MutableList<Line> = mutableListOf()
-//
-//    FileReader.readTextFile(vulcanFileDirectory).forEach {
-//        if(lineNo == 0) {
-//            val words = it.split(Regex("\\s+"))
-//            if(words.size == 2 && words[0] == "type:") {
-//                type = words[1].toLowerCase().trim()
-//                validEvents = Behaviours.getValidBehaviours(type)
-//            }
-//        } else {
-//            val line = VulcanParser.parseLine(fileName, lineNo, it, validEvents)
-//            if(line !is BlankLine) {
-//                lineList += line
-//            }
-//        }
-//        ++lineNo
-//    }
-//
-//    val lines = lineList.toTypedArray()
-//
-//    when(type) {
-//        "item" -> ItemBuilder(fileName, lines).build()
-//        else -> VConsole.out("Unrecognised type: \"$type\". Skipping...")
-//    }
-//}
+
+    val inp = "set name to \"Nice to meet you, world!\""
+    VulcanParserV3.splitLine(inp).asSequence().forEach {
+        println(it)
+    }
+}

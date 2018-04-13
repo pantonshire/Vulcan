@@ -22,6 +22,8 @@ object VulcanParser {
                 .replace(Regex("(\\s+)(and)(\\s+)"), "&&")
                 //Or
                 .replace(Regex("(\\s+)(or)(\\s+)"), "||")
+                //Not
+                .replace(Regex("(\\s+|^)(not)(\\s+)"), "!!")
                 //Remove comments
                 .replace(Regex("(//)(.*)"), "")
                 //Remove unnecessary whitespace
@@ -103,7 +105,7 @@ object VulcanParser {
                     DeclarationLine(lineNo, newVariable!!, words[6])
 
                 } else {
-                    throwError(fileName, lineNo, "invalid syntax for declaring a variable")
+                    throwError(fileName, lineNo, "invalid syntax for declaring a variable: $initialParsed")
                     BlankLine(lineNo)
                 }
             }
