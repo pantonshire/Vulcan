@@ -20,7 +20,6 @@ rather than the more traditional `player.jump()`. The syntax for passing argumen
 The programmer will have no way to create new methods, so the only methods that they will be able to call are in-built ones.
 
 # Planned features
-* Else and else if `if condition then ... otherwise if condition ... otherwise ... end`
 * "player" type for changing player attributes and recieving player-based events
 * "world" type for doing worldgen stuff
 * An event handler to recieve Forge events
@@ -44,7 +43,7 @@ I try to update the changelog whenever I release a new version.
 # Downloads
 ## Latest
 _The latest version of Vulcan which may include lots of bugs._  
-[Vulcan Alpha 0.2.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.1 "Alpha 0.2.1")  
+[Vulcan Alpha 0.2.2](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.2 "Alpha 0.2.2")  
 
 ## Recommended
 _The recommended version of Vulcan that's most likely to work properly._  
@@ -52,6 +51,7 @@ _The recommended version of Vulcan that's most likely to work properly._
 
 ## Older
 _Older versions of Vulcan._  
+[Vulcan Alpha 0.2.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.1 "Alpha 0.2.1")  
 [Vulcan Alpha 0.2.0](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.0 "Alpha 0.2.0")  
 [Vulcan Alpha 0.1.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.1 "Alpha 0.1.1")  
 [Vulcan Alpha 0.1.0](https://www.dropbox.com/s/tmao9ud098zpcuy/vulcan-alpha-0.1.0.jar?dl=0 "Alpha 0.1.0")  

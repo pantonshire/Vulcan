@@ -78,7 +78,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     val target = VulcanUtils.getVariable(line.target, visibleVariables)
                     if(target != null) {
                         if(target.isValidMessage(line.method)) {
-                            var javaFunctionCall = ""
+                            val javaFunctionCall: String
                             try {
                                 //Convert line to java code
                                 javaFunctionCall = target.messageToJava(line.method, line.arguments, visibleVariables)
