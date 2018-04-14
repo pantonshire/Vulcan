@@ -1,6 +1,5 @@
 package parser
 
-import application.UIHandler
 import language.*
 import language.objects.*
 
@@ -53,7 +52,7 @@ object VulcanParserV3 {
                     }
 
                 } else {
-                    throw VCException(fileName, lineNo, "Invalid syntax")
+                    throw VCException(fileName, lineNo, "invalid syntax")
                 }
             }
 
@@ -85,11 +84,11 @@ object VulcanParserV3 {
                         }
 
                     } else {
-                        throw VCException(fileName, lineNo, "Invalid syntax")
+                        throw VCException(fileName, lineNo, "invalid syntax: no boolean condition is provided")
                     }
 
                 } else {
-                    throw VCException(fileName, lineNo, "Invalid syntax")
+                    throw VCException(fileName, lineNo, "invalid syntax")
                 }
             }
 
@@ -100,12 +99,12 @@ object VulcanParserV3 {
                     if(condition.isNotEmpty()) {
                         return ElseIfLine(fileName, lineNo, condition)
                     } else {
-                        throw VCException(fileName, lineNo, "Invalid syntax")
+                        throw VCException(fileName, lineNo, "invalid syntax: no boolean condition is provided")
                     }
                 } else if(finalParse.isEmpty()) {
                     return ElseLine(fileName, lineNo)
                 } else {
-                    throw VCException(fileName, lineNo, "Invalid syntax")
+                    throw VCException(fileName, lineNo, "invalid syntax")
                 }
             }
 
@@ -118,7 +117,7 @@ object VulcanParserV3 {
                     if(loops.isNotEmpty()) {
                         return ForLine(fileName, lineNo, loops, null)
                     } else {
-                        throw VCException(fileName, lineNo, "Invalid syntax")
+                        throw VCException(fileName, lineNo, "invalid syntax: number of loops is not specified")
                     }
                 }
                 //For loop with explicit counter
@@ -130,10 +129,10 @@ object VulcanParserV3 {
                         if(loops.isNotEmpty()) {
                             return ForLine(fileName, lineNo, loops, split.second)
                         } else {
-                            throw VCException(fileName, lineNo, "Invalid syntax")
+                            throw VCException(fileName, lineNo, "invalid syntax: number of loops is not specified")
                         }
                     } else {
-                        throw VCException(fileName, lineNo, "Invalid syntax")
+                        throw VCException(fileName, lineNo, "invalid syntax")
                     }
                 }
             }
@@ -143,7 +142,7 @@ object VulcanParserV3 {
                 if(finalParse.isNotEmpty()) {
                     return TerminatorLine(fileName, lineNo, finalParse)
                 } else {
-                    throw VCException(fileName, lineNo, "Invalid syntax")
+                    throw VCException(fileName, lineNo, "invalid syntax: terminator type is not specified")
                 }
             }
 
@@ -151,13 +150,12 @@ object VulcanParserV3 {
             "new" -> {
                 val split1 = splitByFirst(finalParse, "=", whitespace = false)
                 val value = parseVariable(split1.second).trim()
-//                UIHandler.message("\"$value\"")
                 val split2 = splitByFirst(split1.first, "called")
                 val name = split2.second
                 val mutability = when {
                     split2.first.endsWith("variable") -> "variable"
                     split2.first.endsWith("constant") -> "constant"
-                    else -> throw VCException(fileName, lineNo, "Invalid syntax")
+                    else -> throw VCException(fileName, lineNo, "invalid syntax: must be either variable or constant")
                 }
                 val mutable = mutability == "variable"
                 val typeName = split2.first.removeSuffix(mutability).trim()
@@ -198,7 +196,7 @@ object VulcanParserV3 {
                     )
 
                 } else {
-                    throw VCException(fileName, lineNo, "Invalid syntax")
+                    throw VCException(fileName, lineNo, "invalid syntax")
                 }
             }
 
@@ -218,13 +216,13 @@ object VulcanParserV3 {
                     } else if(behaviour in behaviourNames) {
                         BehaviourLine(fileName, lineNo, behaviourNames[behaviour]!!)
                     } else {
-                        throw VCException(fileName, lineNo, "Invalid syntax")
+                        throw VCException(fileName, lineNo, "invalid syntax: \"$behaviour\" is not a valid behaviour")
                     }
 
                 }
                 //Invalid line
                 else {
-                    throw VCException(fileName, lineNo, "Invalid syntax")
+                    throw VCException(fileName, lineNo, "invalid syntax")
                 }
             }
 
@@ -328,127 +326,4 @@ object VulcanParserV3 {
                 .trim()
     }
 
-
-//    fun splitLine(raw: String): Array<String> {
-//
-//        //Parse 1: remove prefixing and suffixing whitespace
-//        val parse1 = raw.trim()
-//        //Get first word, used to identify what type of line this is
-//        val firstWord = parse1.split(Regex("\\s+"))[0].trim()
-//        //Parse 2: remove first word and trim whitespace
-//        val parse2 = parse1.removePrefix(firstWord).trim()
-//        //Parse 3: compress whitespace
-//        val finalParse = parse2.replace(Regex("\\s+"), " ")
-//
-//        when(firstWord) {
-//
-//            "tell", "set" -> {
-//                val operation = splitByFirst(finalParse, "to")
-//                if(operation.first.isNotEmpty() && operation.second.isNotEmpty()) {
-//                    return arrayOf(firstWord, operation.first, "to", operation.second)
-//                } else {
-//                    throw IllegalArgumentException("Invalid syntax")
-//                }
-//            }
-//
-//            "if", "while" -> {
-//                val suffix = if(firstWord == "if") "then" else "do"
-//                if(finalParse.endsWith(suffix)) {
-//                    val condition = finalParse.removeSuffix(suffix).trim()
-//                    if(condition.isNotEmpty()) {
-//                        return arrayOf(firstWord, condition, suffix)
-//                    } else {
-//                        throw IllegalArgumentException("Invalid syntax")
-//                    }
-//                } else {
-//                    throw IllegalArgumentException("Invalid syntax")
-//                }
-//            }
-//
-//            "otherwise" -> {
-//                if(finalParse.startsWith("if") && finalParse.endsWith("then")) {
-//                    val condition = finalParse.removePrefix("if").removeSuffix("then").trim()
-//                    if(condition.isNotEmpty()) {
-//                        return arrayOf(firstWord, "if", condition, "then")
-//                    } else {
-//                        throw IllegalArgumentException("Invalid syntax")
-//                    }
-//                } else if(finalParse.isEmpty()) {
-//                    return arrayOf(firstWord)
-//                } else {
-//                    throw IllegalArgumentException("Invalid syntax")
-//                }
-//            }
-//
-//            "repeat" -> {
-//                //For loop with implicit counter
-//                val suffix = "times"
-//                if(finalParse.endsWith(suffix)) {
-//                    val loops = finalParse.removeSuffix(suffix).trim()
-//                    if(loops.isNotEmpty()) {
-//                        return arrayOf(firstWord, loops, suffix)
-//                    } else {
-//                        throw IllegalArgumentException("Invalid syntax")
-//                    }
-//                }
-//                //For loop with explicit counter
-//                else {
-//                    val counterSeparator = "using a counter variable called"
-//                    val split = splitByFirst(finalParse, counterSeparator)
-//                    if(split.first.isNotEmpty() && split.first.endsWith(suffix) && split.second.isNotEmpty()) {
-//                        val loops = split.first.removeSuffix(suffix).trim()
-//                        if(loops.isNotEmpty()) {
-//                            return arrayOf(firstWord, loops, suffix, counterSeparator, split.second)
-//                        } else {
-//                            throw IllegalArgumentException("Invalid syntax")
-//                        }
-//                    } else {
-//                        throw IllegalArgumentException("Invalid syntax")
-//                    }
-//                }
-//            }
-//
-//            "end" -> {
-//                if(finalParse.isNotEmpty()) {
-//                    return arrayOf(firstWord, finalParse)
-//                } else {
-//                    throw IllegalArgumentException("Invalid syntax")
-//                }
-//            }
-//
-//            "new" -> {
-//                val split1 = splitByFirst(finalParse, "=")
-//                val value = split1.second
-//                val split2 = splitByFirst(split1.first, "called")
-//                val name = split2.second
-//                val mutability = when {
-//                    split2.first.endsWith("variable") -> "variable"
-//                    split2.first.endsWith("constant") -> "constant"
-//                    else -> throw IllegalArgumentException("Invalid syntax")
-//                }
-//                val mutable = mutability == "variable"
-//                val type = split2.first.removeSuffix(mutability).trim()
-//
-//                if(type.isNotEmpty() && name.isNotEmpty() && value.isNotEmpty()) {
-//                    return arrayOf(firstWord, type, mutability, "called", name, "=", value)
-//                } else {
-//                    throw IllegalArgumentException("Invalid syntax")
-//                }
-//            }
-//
-//            else -> {
-//                if(firstWord.isEmpty() && finalParse.isEmpty()) {
-//                    return arrayOf()
-//                } else if(firstWord.endsWith(":") && finalParse.isEmpty()) {
-//                    val behaviour = firstWord.removeSuffix(":").trim()
-//                    return arrayOf(behaviour)
-//                } else {
-//                    throw IllegalArgumentException("Invalid syntax")
-//                }
-//            }
-//
-//        }
-//
-//        return arrayOf()
-//    }
 }
