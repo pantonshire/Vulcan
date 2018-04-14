@@ -1,4 +1,11 @@
 # Changelog
+## Alpha 0.2.1
+In development
+* Rebuilt the parser from the ground-up in order to tackle some annoying edge cases. The parser is the first layer of the compiler, responsible for working out what kind of line each line is and extracting important information from them
+* Added support for smart quotes; smart quotes can now be used to denote strings
+* Revised syntax for "repeat" loops using an explicit counter variable: `repeat n times using a counter variable called foo`
+* Added the "not" operator, which is a much neater way to get the complement of a boolean value, e.g. `not baa`. However, `baa's complement` should still work
+
 ## Alpha 0.2.0
 Released on 7th April 2018
 * Added the ability to declare and assign variables

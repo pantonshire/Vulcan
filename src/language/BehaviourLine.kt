@@ -1,6 +1,6 @@
 package language
 
-class BehaviourLine(lineNo: Int, val behaviour: Behaviour): Line(lineNo) {
+class BehaviourLine(fileName: String, lineNo: Int, val behaviour: Behaviour): Line(fileName, lineNo) {
 
     override fun pseudocode(): String = "override function ${behaviour.name}"
 }

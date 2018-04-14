@@ -34,8 +34,12 @@ fun main(args: Array<String>) {
 //    }
 
 //    val inp = "repeat a million times using a counter variable called bob using"
-    val inp = "while condition == true do"
-    VulcanParserV3.splitLine(inp).asSequence().forEach {
-        println(it)
-    }
+//    val inp = "while condition == true do"
+//    VulcanParserV3.splitLine(inp).asSequence().forEach {
+//        println(it)
+//    }
+
+//    VulcanParserV3.splitActionArguments("explode with strength (10 + 2) at [x: 3, y: 5, z: -1208.6]").asSequence().forEach {
+//        println("\"$it\"")
+//    }
 }

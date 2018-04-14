@@ -39,19 +39,19 @@ object VulcanParser {
 
         //Ignore blank lines
         if(words.isEmpty()) {
-            return BlankLine(lineNo)
+            return BlankLine(fileName, lineNo)
         }
 
-        val eventNameMap = Behaviours.toNameMap(validEvents)
+        val eventNameMap = Behaviours.toNameMapOld(validEvents)
 
         return when(getWord(words, 0)) {
             //Setting attributes and assigning variables
             "set" -> {
                 if(words.size == 4 && words[2] == "to") {
-                    SetLine(lineNo, words[1], words[3])
+                    SetLine(fileName, lineNo, words[1], words[3])
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for setting a variable")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
@@ -102,11 +102,11 @@ object VulcanParser {
                     }
 
                     //Return new line object
-                    DeclarationLine(lineNo, newVariable!!, words[6])
+                    DeclarationLine(fileName, lineNo, newVariable!!, words[6])
 
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for declaring a variable: $initialParsed")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
@@ -117,30 +117,30 @@ object VulcanParser {
                     for(word in 4 until words.size) {
                         args += words[word]
                     }
-                    ActionLine(lineNo, words[1], words[3], args.toTypedArray())
+                    ActionLine(fileName, lineNo, words[1], words[3], args.toTypedArray())
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for telling an object to perform an action")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
             //If statement
             "if" -> {
                 if(words.size == 3 && words[2] == "then") {
-                    IfLine(lineNo, words[1])
+                    IfLine(fileName, lineNo, words[1])
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for an if statement")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
             //While loop
             "while" -> {
                 if(words.size == 3 && words[2] == "do") {
-                    WhileLine(lineNo, words[1])
+                    WhileLine(fileName, lineNo, words[1])
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for a while loop")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
@@ -148,38 +148,38 @@ object VulcanParser {
             "repeat" -> {
                 //Implicit counter variable
                 if(words.size == 3 && words[2] == "times") {
-                    ForLine(lineNo, words[1], null)
+                    ForLine(fileName, lineNo, words[1], null)
                 }
                 //Explicit counter variable
                 else if(words.size == 8 && words[2] == "times" && words[3] == "using"
                         && words[4] == "counter" && words[5] == "variable" && words[6] == "called") {
-                    ForLine(lineNo, words[1], words[7])
+                    ForLine(fileName, lineNo, words[1], words[7])
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for a repeat loop")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
             //Terminator
             "end" -> {
                 if(words.size == 2) {
-                    TerminatorLine(lineNo, words[1])
+                    TerminatorLine(fileName, lineNo, words[1])
                 } else {
                     throwError(fileName, lineNo, "invalid syntax for a terminator statement")
-                    BlankLine(lineNo)
+                    BlankLine(fileName, lineNo)
                 }
             }
 
             //Constructor
-            "attributes:" -> ConstructorLine(lineNo)
+            "attributes:" -> ConstructorLine(fileName, lineNo)
 
             //Behaviours
-            in eventNameMap -> BehaviourLine(lineNo, eventNameMap[words[0]]!!)
+            in eventNameMap -> BehaviourLine(fileName, lineNo, eventNameMap[words[0]]!!)
 
             //Invalid line
             else -> {
                 throwError(fileName, lineNo, "invalid syntax")
-                BlankLine(lineNo)
+                BlankLine(fileName, lineNo)
             }
         }
     }

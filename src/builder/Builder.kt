@@ -55,7 +55,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                 try {
                     attributes[line.field]!!.set(line.value)
                 } catch (exception: IllegalArgumentException) {
-                    line.throwError(fileName, exception.message ?: "no error message provided")
+                    line.throwError(exception.message ?: "no error message provided")
                 }
             }
         }
@@ -75,24 +75,24 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                                 //Convert line to java code
                                 javaFunctionCall = target.messageToJava(line.method, line.arguments, visibleVariables)
                             } catch(exception: IllegalArgumentException) {
-                                line.throwError(fileName,exception.message ?: "no error message was provided")
+                                line.throwError(exception.message ?: "no error message was provided")
                             }
 
                             if(javaFunctionCall.isNotEmpty()) {
                                 behaviourContent[context]?.add(javaFunctionCall)
                             }
                         } else {
-                            line.throwError(fileName,"invalid message \"${line.method}\"")
+                            line.throwError("invalid message \"${line.method}\"")
                         }
                     } else {
-                        line.throwError(fileName,"invalid target for message \"${line.target}\"")
+                        line.throwError("invalid target for message \"${line.target}\"")
                     }
                 }
 
                 //Declaring variables
                 else if(line is DeclarationLine) {
                     if(line.variable.name in visibleVariables) {
-                        line.throwError(fileName, "another variable called ${line.variable.name} already exists")
+                        line.throwError("another variable called ${line.variable.name} already exists")
                     } else {
                         try {
 
@@ -104,7 +104,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                             behaviourContent[context]?.add("$prefix${type.javaTypeName} ${line.variable.java} = $initialValueJava;")
 
                         } catch (exception: IllegalArgumentException) {
-                            line.throwError(fileName, exception.message ?: "no error message provided")
+                            line.throwError(exception.message ?: "no error message provided")
                         }
                     }
                 }
@@ -127,13 +127,13 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                                 behaviourContent[context]?.add(assignment)
 
                             } catch (exception: IllegalArgumentException) {
-                                line.throwError(fileName, exception.message ?: "no error message provided")
+                                line.throwError(exception.message ?: "no error message provided")
                             }
                         } else {
-                            line.throwError(fileName,"\"${line.field}\" is read-only; it cannot be reassigned")
+                            line.throwError("\"${line.field}\" is read-only; it cannot be reassigned")
                         }
                     } else {
-                        line.throwError(fileName,"the variable \"${line.field}\" does not exist")
+                        line.throwError("the variable \"${line.field}\" does not exist")
                     }
                 }
 
@@ -156,7 +156,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     val loops = DataType.INTEGER.toJava(line.loops, visibleVariables)
                     val counter: String = line.counter ?: "_FOR_COUNTER_${nest.size}"
                     if(line.counter in visibleVariables) {
-                        line.throwError(fileName, "another variable called ${line.counter} already exists")
+                        line.throwError("another variable called ${line.counter} already exists")
                     } else {
                         if(line.counter != null) {
                             val counterObject = VulcanInteger(counter)
@@ -176,7 +176,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                         nest.removeAt(nest.size - 1)
                         updateLocalVariables()
                     } else {
-                        line.throwError(fileName, "invalid use of \"end\"")
+                        line.throwError("invalid use of \"end\"")
                     }
                 }
             }
@@ -185,19 +185,19 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
     private fun checkForErrors(line: Line) {
         if(line is BlankLine) {
-            line.throwError(fileName,"internal error (this is bad!)")
+            line.throwError("internal error (this is bad!)")
         }
 
         else when(context) {
             "default" -> {
                 if(!(line is ConstructorLine || line is BehaviourLine)) {
-                    line.throwError(fileName,"no behaviour defined")
+                    line.throwError("no behaviour defined")
                 }
             }
 
             "constructor" -> {
                 if(line is ActionLine) {
-                    line.throwError(fileName,"cannot send messages in the current behaviour")
+                    line.throwError("cannot send messages in the current behaviour")
                 }
             }
 
@@ -220,7 +220,7 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                 //Remove local variables from previous context
                 localVariables.clear()
             } else {
-                line.throwError(fileName,"unrecognised behaviour \"$behaviour\"")
+                line.throwError("unrecognised behaviour \"$behaviour\"")
             }
         }
     }

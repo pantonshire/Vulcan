@@ -1,6 +1,6 @@
 package language
 
-class BlankLine(lineNo: Int): Line(lineNo) {
+class BlankLine(fileName: String, lineNo: Int): Line(fileName, lineNo) {
 
     override fun pseudocode(): String = "-"
 }

@@ -1,6 +1,6 @@
 package language
 
-class AssignmentLine(lineNo: Int, val variable: String, val value: String): Line(lineNo) {
+class AssignmentLine(fileName: String, lineNo: Int, val variable: String, val value: String): Line(fileName, lineNo) {
 
     override fun pseudocode(): String = "set $variable to $value"
 }

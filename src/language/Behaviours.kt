@@ -63,9 +63,16 @@ object Behaviours {
         return nameList.toTypedArray()
     }
 
-    fun toNameMap(events: Array<Behaviour>): Map<String, Behaviour> {
+    @Deprecated("Only really exists for V1 parser")
+    fun toNameMapOld(events: Array<Behaviour>): Map<String, Behaviour> {
         val map = hashMapOf<String, Behaviour>()
         events.asSequence().forEach { map[it.name + ":"] = it }
+        return map
+    }
+
+    fun toNameMap(events: Array<Behaviour>): Map<String, Behaviour> {
+        val map = hashMapOf<String, Behaviour>()
+        events.asSequence().forEach { map[it.name] = it }
         return map
     }
 }

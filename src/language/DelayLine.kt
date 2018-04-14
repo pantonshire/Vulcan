@@ -1,6 +1,6 @@
 package language
 
-class DelayLine(lineNo: Int, val delay: String): Line(lineNo) {
+class DelayLine(fileName: String, lineNo: Int, val delay: String): Line(fileName, lineNo) {
 
     override fun pseudocode(): String = "delay $delay"
 }

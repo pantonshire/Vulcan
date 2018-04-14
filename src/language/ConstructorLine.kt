@@ -1,6 +1,6 @@
 package language
 
-class ConstructorLine(lineNo: Int): Line(lineNo) {
+class ConstructorLine(fileName: String, lineNo: Int): Line(fileName, lineNo) {
 
     override fun pseudocode(): String = "constructor"
 }

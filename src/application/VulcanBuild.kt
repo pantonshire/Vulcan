@@ -9,10 +9,15 @@ import io.FileReader
 import language.BlankLine
 import language.Behaviours
 import language.Line
+import language.VCException
 import parser.VulcanParser
+import parser.VulcanParserV3
 import java.io.File
 
 object VulcanBuild {
+
+    var stacktrace = true
+    var parserVersion = 3
 
     fun build(sourceDirectory: String) {
         try {
@@ -54,6 +59,14 @@ object VulcanBuild {
 
         } catch(exception: IllegalArgumentException) {
             UIHandler.error(exception.message ?: "No error description was provided :(")
+            if(stacktrace) {
+                exception.printStackTrace()
+            }
+        } catch(exception: VCException) {
+            UIHandler.error(exception.message ?: "No error description was provided :(")
+            if(stacktrace) {
+                exception.printStackTrace()
+            }
         }
     }
 
@@ -77,7 +90,12 @@ object VulcanBuild {
                     validEvents = Behaviours.getValidBehaviours(type)
                 }
             } else {
-                val line = VulcanParser.parseLine(fileName, lineNo, it, validEvents)
+                val line = when(parserVersion) {
+                    1 ->    VulcanParser.parseLine(fileName, lineNo, it, validEvents)
+                    3 ->    VulcanParserV3.parseLine(fileName, lineNo, it, validEvents)
+                    else -> throw IllegalArgumentException("INVALID PARSER VERSION: $parserVersion")
+                }
+
                 if(line !is BlankLine) {
                     lineList += line
                 }
@@ -86,6 +104,15 @@ object VulcanBuild {
         }
 
         val lines = lineList.toTypedArray()
+
+        var debugOut = ""
+        lines.asSequence().forEach {
+            if(debugOut.isNotEmpty()) {
+                debugOut += "\n"
+            }
+            debugOut += "\"${it.pseudocode()}\""
+        }
+        UIHandler.message(debugOut)
 
         when(type) {
             "item" -> ItemBuilder(fileName, lines).build()
