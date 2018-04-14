@@ -6,9 +6,9 @@ import builder.ItemBuilder
 import builder.ModCompiler
 import io.Directories
 import io.FileReader
-import language.BlankLine
+import language.lines.BlankLine
 import language.Behaviours
-import language.Line
+import language.lines.Line
 import language.VCException
 import parser.VulcanParser
 import parser.VulcanParserV3

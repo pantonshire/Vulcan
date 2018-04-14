@@ -1,6 +1,7 @@
 package builder
 
 import language.*
+import language.lines.Line
 
 class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food", lines) {
 

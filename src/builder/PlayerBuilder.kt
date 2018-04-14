@@ -1,8 +1,7 @@
 package builder
 
-import language.*
+import language.lines.Line
 import language.objects.Player
-import language.objects.VulcanObject
 
 class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines,
         Player("self")

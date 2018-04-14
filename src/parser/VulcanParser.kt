@@ -1,6 +1,7 @@
 package parser
 
 import language.*
+import language.lines.*
 import language.objects.*
 import utils.VulcanUtils
 

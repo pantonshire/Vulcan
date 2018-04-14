@@ -1,6 +1,7 @@
 package builder
 
 import language.*
+import language.lines.Line
 
 class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
 

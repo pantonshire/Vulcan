@@ -1,6 +1,7 @@
 package builder
 
 import language.*
+import language.lines.*
 import language.objects.VulcanInteger
 import language.objects.VulcanObject
 import utils.VulcanUtils

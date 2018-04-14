@@ -1,6 +1,7 @@
 package builder
 
 import language.*
+import language.lines.Line
 
 class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"block", lines) {
 
