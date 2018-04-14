@@ -16,8 +16,9 @@ import java.io.File
 
 object VulcanBuild {
 
-    var stacktrace = true
+    var stacktrace = false
     var parserVersion = 3
+    var showPseudocode = false
 
     fun build(sourceDirectory: String) {
         try {
@@ -105,14 +106,16 @@ object VulcanBuild {
 
         val lines = lineList.toTypedArray()
 
-        var debugOut = ""
-        lines.asSequence().forEach {
-            if(debugOut.isNotEmpty()) {
-                debugOut += "\n"
+        if(showPseudocode) {
+            var pseudocode = ""
+            lines.asSequence().forEach {
+                if (pseudocode.isNotEmpty()) {
+                    pseudocode += "\n"
+                }
+                pseudocode += "\"${it.pseudocode()}\""
             }
-            debugOut += "\"${it.pseudocode()}\""
+            UIHandler.message(pseudocode)
         }
-        UIHandler.message(debugOut)
 
         when(type) {
             "item" -> ItemBuilder(fileName, lines).build()
