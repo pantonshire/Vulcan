@@ -11,7 +11,7 @@ otherwise
     ...
 end if
 ```
-* Fixed a bug where "is greater than" would be compiler to < rather than >
+* Fixed a bug where "is greater than" would be compiled to < rather than >
 * Fixed a bug where compilation would succeed if there were statements that had not been closed using  "end"
 
 ## Alpha 0.2.1
