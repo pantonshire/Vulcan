@@ -48,6 +48,10 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
             processLine(line)
         }
 
+        if(nest.isNotEmpty()) {
+            throw VCException(fileName, lines.last().lineNo, "unclosed statement, must be closed using \"end\"")
+        }
+
         passToNext()
     }
 
@@ -236,18 +240,32 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
 
 
     private fun updateContext(line: Line) {
+        var updatedContext = false
+
+        //Constructor
         if(line is ConstructorLine) {
             context = "constructor"
-        } else if(line is BehaviourLine) {
+            updatedContext = true
+        }
+
+        //Behaviours
+        else if(line is BehaviourLine) {
             val behaviour = line.behaviour.name
             if(behaviour in validBehaviours) {
-                //Update context
                 context = behaviour
-                //Remove local variables from previous context
-                localVariables.clear()
+                updatedContext = true
             } else {
                 line.throwError("unrecognised behaviour \"$behaviour\"")
             }
+        }
+
+        if(updatedContext) {
+            //Check that all statements have been terminated
+            if(nest.isNotEmpty()) {
+                line.throwError("all statements must be closed using \"end\" before a new behaviour is defined")
+            }
+            //Remove local variables from previous context
+            localVariables.clear()
         }
     }
 

@@ -1,4 +1,18 @@
 # Changelog
+## Alpha 0.2.2
+Released on 14th April 2018
+* Added two new statements: `otherwise` and `otherwise if`. These act as "else" and "else if" statements. Syntax:  
+```
+if condition_a then
+    ...
+otherwise if condition_b then
+    ...
+otherwise
+    ...
+end if
+```
+* Fixed a bug where "is greater than" would be compiler to < rather than >
+
 ## Alpha 0.2.1
 Released on 14th April 2018
 * Rebuilt the parser from the ground-up in order to tackle some annoying edge cases. The parser is the first layer of the compiler, responsible for working out what kind of line each line is and extracting important information from them
