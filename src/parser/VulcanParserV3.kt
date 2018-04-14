@@ -311,11 +311,11 @@ object VulcanParserV3 {
                 //Field references
                 .replace(Regex("(\'s)(\\s+)"), ".")
                 //Less than
-                .replace(Regex("(\\s+)(is less than|is smaller than)(\\s+)"), "<")
                 .replace(Regex("(\\s*)(<)(\\s*)"), "<")
+                .replace(Regex("(\\s+)(is less than|is smaller than)(\\s+)"), "<")
                 //Greater than
+                .replace(Regex("(\\s*)(>)(\\s*)"), ">")
                 .replace(Regex("(\\s+)(is more than|is greater than)(\\s+)"), ">")
-                .replace(Regex("(\\s*)(>)(\\s*)"), "<")
                 //Not equal
                 .replace(Regex("(\\s+)(isn\'t equal to|does not equal)(\\s+)"), "!=")
                 //Equal

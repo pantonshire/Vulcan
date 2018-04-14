@@ -1,6 +1,9 @@
 package builder
 
-import language.*
+import language.Attribute
+import language.Behaviour
+import language.Behaviours
+import language.DataType
 import language.lines.*
 import language.objects.VulcanInteger
 import language.objects.VulcanObject
@@ -145,6 +148,27 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                     nest += "if"
                 }
 
+                //Else if statements
+                else if(line is ElseIfLine) {
+                    if(nest.isNotEmpty() && nest.last() == "if") {
+                        val condition = DataType.BOOLEAN.toJava(line.condition, visibleVariables)
+                        behaviourContent[context]?.add("} else if($condition) {")
+                        clearCurrentDepth()
+                    } else {
+                        line.throwError("no if statement found before otherwise statement")
+                    }
+                }
+
+                //Else statements
+                else if(line is ElseLine) {
+                    if(nest.isNotEmpty() && nest.last() == "if") {
+                        behaviourContent[context]?.add("} else {")
+                        clearCurrentDepth()
+                    } else {
+                        line.throwError("no if statement found before otherwise statement")
+                    }
+                }
+
                 //While loops
                 else if(line is WhileLine) {
                     val condition = DataType.BOOLEAN.toJava(line.condition, visibleVariables)
@@ -202,13 +226,14 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
                 }
             }
 
-            in validBehaviours -> {
+//            in validBehaviours -> {
 //                if(line is SetLine) {
 //                    line.throwError(fileName,"cannot set attributes in the current behaviour")
 //                }
-            }
+//            }
         }
     }
+
 
     private fun updateContext(line: Line) {
         if(line is ConstructorLine) {
@@ -226,10 +251,13 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
         }
     }
 
-    //* Returns all of the Vulcan Objects that can be referenced in the current behaviour. */
+
+    /** Returns all of the Vulcan Objects that can be referenced in the current behaviour. */
     private fun getVisibleVariables(currentBehaviour: Behaviour): Map<String, VulcanObject> =
             globalVariables + localVariables + currentBehaviour.parameters
 
+
+    /** Updates which variables are in the local variables list base on the current depth. */
     private fun updateLocalVariables() {
         val depth = nest.size
         val toRemove: MutableList<String> = mutableListOf()
@@ -242,4 +270,19 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
             localVariables.remove(it)
         }
     }
+
+
+    private fun clearCurrentDepth() {
+        val depth = nest.size
+        val toRemove: MutableList<String> = mutableListOf()
+        localVariables.values.asSequence().forEach {
+            if(it.depth >= depth) {
+                toRemove += it.name
+            }
+        }
+        toRemove.asSequence().forEach {
+            localVariables.remove(it)
+        }
+    }
+
 }
