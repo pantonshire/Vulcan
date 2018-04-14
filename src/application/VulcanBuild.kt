@@ -1,15 +1,11 @@
 package application
 
-import builder.BlockBuilder
-import builder.FoodBuilder
-import builder.ItemBuilder
-import builder.ModCompiler
+import builder.*
 import io.Directories
 import io.FileReader
-import language.lines.BlankLine
 import language.Behaviours
+import language.lines.BlankLine
 import language.lines.Line
-import language.VCException
 import parser.VulcanParser
 import parser.VulcanParserV3
 import java.io.File

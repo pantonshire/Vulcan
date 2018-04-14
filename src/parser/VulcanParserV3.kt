@@ -1,6 +1,9 @@
 package parser
 
-import language.*
+import builder.VCException
+import language.Behaviour
+import language.Behaviours
+import language.DataType
 import language.lines.*
 import language.objects.*
 
