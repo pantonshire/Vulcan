@@ -33,7 +33,8 @@ fun main(args: Array<String>) {
 //        println(it)
 //    }
 
-    val inp = "set name to \"Nice to meet you, world!\""
+//    val inp = "repeat a million times using a counter variable called bob using"
+    val inp = "while condition == true do"
     VulcanParserV3.splitLine(inp).asSequence().forEach {
         println(it)
     }
