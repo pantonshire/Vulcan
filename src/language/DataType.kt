@@ -117,11 +117,13 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                 } else {
                     throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
                 }
+            } else if (splitLess.size > 2) {
+                throw IllegalArgumentException("invalid syntax")
             }
 
             //greater than
             val splitGreater = value.split(">")
-            if (splitLess.size == 2) {
+            if (splitGreater.size == 2) {
                 val typeA = VulcanUtils.inferType(splitGreater[0], variables)
                 val typeB = VulcanUtils.inferType(splitGreater[1], variables)
                 if (typeA.isNumerical() && typeB.isNumerical()) {
