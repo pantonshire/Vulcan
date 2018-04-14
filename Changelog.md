@@ -1,6 +1,6 @@
 # Changelog
 ## Alpha 0.2.1
-In development
+Released on 14th April 2018
 * Rebuilt the parser from the ground-up in order to tackle some annoying edge cases. The parser is the first layer of the compiler, responsible for working out what kind of line each line is and extracting important information from them
 * Added support for smart quotes; smart quotes can now be used to denote strings
 * Revised syntax for "repeat" loops using an explicit counter variable: `repeat n times using a counter variable called foo`

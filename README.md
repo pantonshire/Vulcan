@@ -42,16 +42,17 @@ Changelog is available [here](https://github.com/Pantonshire/Vulcan/blob/master/
 I try to update the changelog whenever I release a new version.
 
 # Downloads
+## Latest
+_The latest version of Vulcan which may include lots of bugs._  
+[Vulcan Alpha 0.2.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.1 "Alpha 0.2.1")  
+
 ## Recommended
 _The recommended version of Vulcan that's most likely to work properly._  
 [Vulcan Alpha 0.1.2](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.2 "Alpha 0.1.2")  
 
-## Latest
-_The latest version of Vulcan which may include lots of bugs._  
-[Vulcan Alpha 0.2.0](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.0 "Alpha 0.2.0")  
-
 ## Older
 _Older versions of Vulcan._  
+[Vulcan Alpha 0.2.0](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.0 "Alpha 0.2.0")  
 [Vulcan Alpha 0.1.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.1 "Alpha 0.1.1")  
 [Vulcan Alpha 0.1.0](https://www.dropbox.com/s/tmao9ud098zpcuy/vulcan-alpha-0.1.0.jar?dl=0 "Alpha 0.1.0")  
 [Vulcan Alpha 0.0.5](https://www.dropbox.com/s/rxtucd8ltzkf70i/vulcan-alpha-0.0.5.jar?dl=0 "Alpha 0.0.5")  
