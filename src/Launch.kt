@@ -16,5 +16,6 @@ fun main(args: Array<String>) {
 //        }
 //    }
 
-    println(VulcanParserV3.parseVariableV2("not foo and not(baa + 200 < 7 % 10^5.5) or lorem does not equal 70"))
+    println(VulcanParserV3.parseVariableV2("-(-12.4 - 18) < -4 or -12 <-3 and 8 + 12 ^ 10 mod 6 is not equal to -1"))
+//    println(VulcanParserV3.parseVariableV2("[x: 0.5, y: 64, z: -0.5]"))
 }

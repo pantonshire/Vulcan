@@ -354,6 +354,7 @@ object VulcanParserV3 {
         var parsed = ""
         var currentPart = ""
         var quote = false
+        var last: Char? = null
 
         rawVariable.asSequence().forEach {
             if(it == '\"' || it == '“' || it == '”') {
@@ -391,17 +392,22 @@ object VulcanParserV3 {
                     currentPart == "not "                             -> "!!"
                     currentPart == "not("                             -> "!!("
                     //Addition
-                    currentPart.endsWith("+")                   -> "${currentPart.removeSuffix("+")}++"
-                    //Subtraction
-                    currentPart.endsWith("-")                   -> "${currentPart.removeSuffix("-")}--"
+                    it == '+'                                         -> "${currentPart.removeSuffix("+")}++"
                     //Multiplication
-                    currentPart.endsWith("*")                   -> "${currentPart.removeSuffix("*")}**"
+                    it == '*'                                         -> "${currentPart.removeSuffix("*")}**"
                     //Division
-                    currentPart.endsWith("*")                   -> "${currentPart.removeSuffix("/")}//"
+                    it == '/'                                         -> "${currentPart.removeSuffix("/")}//"
                     //Powers
-                    currentPart.endsWith("^")                   -> "${currentPart.removeSuffix("^")}^^"
+                    it == '^'                                         -> "${currentPart.removeSuffix("^")}^^"
                     //Modulo
-                    currentPart.endsWith("%")                   -> "${currentPart.removeSuffix("%")}%%"
+                    currentPart.endsWith(" mod ")               -> "${currentPart.removeSuffix(" mod ")}%%"
+                    //Subtraction
+                    currentPart.endsWith("-")
+                        && last != null
+                        && (last!!.isDigit()
+                            || last!!.isLetter()
+                            || last == ')'
+                            || last == '_')                           -> "${currentPart.removeSuffix("-")}--"
                     //Anything else
                     else                                              -> ""
                 }.replace(Regex("\\s+"), "")
@@ -410,8 +416,13 @@ object VulcanParserV3 {
                     println("PART: \"$currentPart\" -> \"$newPart\"")
                     parsed += newPart
                     currentPart = ""
+                    last = null
                 }
 
+            }
+
+            if(!it.isWhitespace()) {
+                last = it
             }
         }
 
