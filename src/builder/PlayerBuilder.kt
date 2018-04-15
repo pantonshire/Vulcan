@@ -17,6 +17,10 @@ class PlayerBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"ite
     private var attackDamage = 1
     private var jumpMultiplier = 1.0
 
+    override fun validateAttributes() {
+
+    }
+
     override fun passToNext() {
         //TODO: Pass data to mod builder
 //        ModBuilder.registerItem(Item(name, texture, description, stackSize, shiny, makeOverrideMap()))

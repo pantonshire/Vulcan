@@ -1,11 +1,27 @@
 package builder
 
-class Block(val name: String, val texture: String, val hardness: Double, val resistance: Double, val unbreakable: Boolean,
-            val destroyedByExplosion: Boolean, val flammable: Boolean, val burnForever: Boolean, val redstoneSignal: Int,
-            val slipperiness: Double, val light: Double, val tool: String, val harvestLevel: Int, val gravity: Boolean,
-            val overrides: Map<String, String>) {
+class Block(
+        val name: String,
+        val id: String,
+        val texture: String,
+        val hardness: Double,
+        val resistance: Double,
+        val unbreakable: Boolean,
+        val destroyedByExplosion: Boolean,
+        val flammable: Boolean,
+        val burnForever: Boolean,
+        val redstoneSignal: Int,
+        val slipperiness: Double,
+        val light: Double,
+        val tool: String,
+        val harvestLevel: Int,
+        val gravity: Boolean,
+        val overrides: Map<String, String>
+) {
 
-    fun registryName(): String = name.replace(" ", "_").toLowerCase()
+    private fun defaultID(): String = name.replace(Regex("\\s+"), "_").toLowerCase()
+
+    fun registryName(): String = if(id.isEmpty()) defaultID() else id
 
     fun toJava(): String {
         val blockClass = if(gravity) "VulcanBlockFalling" else "VulcanBlock"

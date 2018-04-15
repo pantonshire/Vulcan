@@ -1,6 +1,8 @@
 package builder
 
-import language.*
+import language.BooleanAttribute
+import language.IntegerAttribute
+import language.StringAttribute
 import language.lines.Line
 
 class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item", lines) {
@@ -10,19 +12,39 @@ class ItemBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"item"
     private val hitEntity = "public boolean hitEntity(ItemStack _stack, EntityLivingBase target, EntityLivingBase attacker)"
 
     //Strings
-    private var name            = StringAttribute(this, "name", "???")
-    private var texture         = StringAttribute(this, "texture", "")
-    private var description     = StringAttribute(this, "description", "")
+    private val name            = StringAttribute(this, "name", "")
+    private val id              = StringAttribute(this, "id", "")
+    private val texture         = StringAttribute(this, "texture", "")
+    private val description     = StringAttribute(this, "description", "")
     //Booleans
-    private var shiny           = BooleanAttribute(this, "shiny", false)
+    private val shiny           = BooleanAttribute(this, "shiny", false)
     //Integers
-    private var stackSize       = IntegerAttribute(this, "stack", 64)
-    private var burnTime        = IntegerAttribute(this, "burn_time", 0)
+    private val stackSize       = IntegerAttribute(this, "stack", 64)
+    private val burnTime        = IntegerAttribute(this, "burn_time", 0)
+
+    override fun validateAttributes() {
+        if(name.get().isEmpty()) {
+            throw VCException(fileName, -1, "no name was provided")
+        }
+
+        if(id.get().isNotEmpty()) {
+            id.get().asSequence().forEach {
+                if(it.isWhitespace()) {
+                    throw VCException(fileName, -1, "whitespace characters are not allowed in the id")
+                } else if(it.isUpperCase()) {
+                    throw VCException(fileName, -1, "upper-case characters are not allowed in the id")
+                } else if(!it.isLetter() && !it.isDigit() && it != '_' && it != '-') {
+                    throw VCException(fileName, -1, "the character \"$it\" is not allowed in the id")
+                }
+            }
+        }
+    }
 
     override fun passToNext() {
         ModCompiler.instance.registerItem(Item(
 
                 name            .get(),
+                id              .get(),
                 texture         .get(),
                 description     .get(),
                 stackSize       .get(),

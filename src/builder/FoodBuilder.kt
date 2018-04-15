@@ -1,6 +1,9 @@
 package builder
 
-import language.*
+import language.BooleanAttribute
+import language.FloatAttribute
+import language.IntegerAttribute
+import language.StringAttribute
 import language.lines.Line
 
 class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food", lines) {
@@ -10,7 +13,8 @@ class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food"
     private val hitEntity = "public boolean hitEntity(ItemStack _stack, EntityLivingBase target, EntityLivingBase attacker)"
 
     //Strings
-    private var name            = StringAttribute(this, "name", "???")
+    private var name            = StringAttribute(this, "name", "")
+    private var id              = StringAttribute(this, "id", "")
     private var texture         = StringAttribute(this, "texture", "")
     private var description     = StringAttribute(this, "description", "")
     //Booleans
@@ -24,10 +28,30 @@ class FoodBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"food"
     //Floats
     private var saturation      = FloatAttribute(this, "saturation", 0.3)
 
+
+    override fun validateAttributes() {
+        if(name.get().isEmpty()) {
+            throw VCException(fileName, -1, "no name was provided")
+        }
+
+        if(id.get().isNotEmpty()) {
+            id.get().asSequence().forEach {
+                if(it.isWhitespace()) {
+                    throw VCException(fileName, -1, "whitespace characters are not allowed in the id")
+                } else if(it.isUpperCase()) {
+                    throw VCException(fileName, -1, "upper-case characters are not allowed in the id")
+                } else if(!it.isLetter() && !it.isDigit() && it != '_' && it != '-') {
+                    throw VCException(fileName, -1, "the character \"$it\" is not allowed in the id")
+                }
+            }
+        }
+    }
+
     override fun passToNext() {
         ModCompiler.instance.registerItem(Food(
 
                 name            .get(),
+                id              .get(),
                 texture         .get(),
                 description     .get(),
                 stackSize       .get(),

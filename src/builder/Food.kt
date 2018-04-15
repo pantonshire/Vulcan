@@ -1,8 +1,8 @@
 package builder
 
-class Food(name: String, texture: String, description: String, stackSize: Int, shiny: Boolean,
+class Food(name: String, id: String, texture: String, description: String, stackSize: Int, shiny: Boolean,
            burnTime: Int, val foodValue: Int, val saturation: Double, val meat: Boolean, val eatTime: Int,
-           overrides: Map<String, String>): Item(name, texture, description, stackSize, shiny, burnTime, overrides) {
+           overrides: Map<String, String>): Item(name, id, texture, description, stackSize, shiny, burnTime, overrides) {
 
     override fun toJava(): String {
         var java = "VulcanMod.items.addItem(\"${registryName()}\", new VulcanFood(\"$description\", $foodValue, $saturation, $meat, $eatTime, $stackSize, $shiny, $burnTime)"

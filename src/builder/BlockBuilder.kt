@@ -1,6 +1,9 @@
 package builder
 
-import language.*
+import language.BooleanAttribute
+import language.FloatAttribute
+import language.IntegerAttribute
+import language.StringAttribute
 import language.lines.Line
 
 class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"block", lines) {
@@ -11,28 +14,48 @@ class BlockBuilder(fileName: String, lines: Array<Line>): Builder(fileName,"bloc
     private val placed = "public void onBlockPlacedBy(World world, BlockPos _position, IBlockState _state, EntityLivingBase placer, ItemStack _stack)"
 
     //Strings
-    private var name                    = StringAttribute(this, "name", "???")
-    private var texture                 = StringAttribute(this, "texture", "")
-    private var tool                    = StringAttribute(this, "tool", "")
+    private val name                    = StringAttribute(this, "name", "")
+    private val id                      = StringAttribute(this, "id", "")
+    private val texture                 = StringAttribute(this, "texture", "")
+    private val tool                    = StringAttribute(this, "tool", "")
     //Booleans
-    private var unbreakable             = BooleanAttribute(this, "unbreakable", false)
-    private var destroyedByExplosion    = BooleanAttribute(this, "fragile", false)
-    private var flammable               = BooleanAttribute(this, "flammable", false)
-    private var burnForever             = BooleanAttribute(this, "burn_forever", false)
-    private var gravity                 = BooleanAttribute(this, "gravity", false)
+    private val unbreakable             = BooleanAttribute(this, "unbreakable", false)
+    private val destroyedByExplosion    = BooleanAttribute(this, "fragile", false)
+    private val flammable               = BooleanAttribute(this, "flammable", false)
+    private val burnForever             = BooleanAttribute(this, "burn_forever", false)
+    private val gravity                 = BooleanAttribute(this, "gravity", false)
     //Integers
-    private var redstoneSignal          = IntegerAttribute(this, "redstone_signal", 0)
-    private var harvestLevel            = IntegerAttribute(this, "tool_level", 0)
+    private val redstoneSignal          = IntegerAttribute(this, "redstone_signal", 0)
+    private val harvestLevel            = IntegerAttribute(this, "tool_level", 0)
     //Floats
-    private var hardness                = FloatAttribute(this, "hardness", 1.0)
-    private var resistance              = FloatAttribute(this, "resistance", 1.0)
-    private var slipperiness            = FloatAttribute(this, "slipperiness", 0.0)
-    private var light                   = FloatAttribute(this, "light", 0.0)
+    private val hardness                = FloatAttribute(this, "hardness", 1.0)
+    private val resistance              = FloatAttribute(this, "resistance", 1.0)
+    private val slipperiness            = FloatAttribute(this, "slipperiness", 0.0)
+    private val light                   = FloatAttribute(this, "light", 0.0)
+
+    override fun validateAttributes() {
+        if(name.get().isEmpty()) {
+            throw VCException(fileName, -1, "no name was provided")
+        }
+
+        if(id.get().isNotEmpty()) {
+            id.get().asSequence().forEach {
+                if(it.isWhitespace()) {
+                    throw VCException(fileName, -1, "whitespace characters are not allowed in the id")
+                } else if(it.isUpperCase()) {
+                    throw VCException(fileName, -1, "upper-case characters are not allowed in the id")
+                } else if(!it.isLetter() && !it.isDigit() && it != '_' && it != '-') {
+                    throw VCException(fileName, -1, "the character \"$it\" is not allowed in the id")
+                }
+            }
+        }
+    }
 
     override fun passToNext() {
         ModCompiler.instance.registerBlock(Block(
 
                 name                 .get(),
+                id                   .get(),
                 texture              .get(),
                 hardness             .get(),
                 resistance           .get(),

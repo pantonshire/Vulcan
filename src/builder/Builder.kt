@@ -52,8 +52,11 @@ abstract class Builder(val fileName: String, type: String, val lines: Array<Line
             throw VCException(fileName, lines.last().lineNo, "unclosed statement, must be closed using \"end\"")
         }
 
+        validateAttributes()
         passToNext()
     }
+
+    abstract fun validateAttributes()
 
     abstract fun passToNext()
 

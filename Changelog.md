@@ -1,4 +1,11 @@
 # Changelog
+## Alpha 0.2.3
+In development
+* Added arithmetic operators: +, *, /, ^ and mod
+* Fixed an issue where entity's health attribute would not be cast to an int in compiled code
+* Added an "id" attribute for items and blocks
+* Compilation will now fail if no name was provided for an item or block
+
 ## Alpha 0.2.2
 Released on 14th April 2018
 * Added two new statements: `otherwise` and `otherwise if`. These act as "else" and "else if" statements. Syntax:  
