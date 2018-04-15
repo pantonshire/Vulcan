@@ -43,7 +43,7 @@ I try to update the changelog whenever I release a new version.
 # Downloads
 ## Latest
 _The latest version of Vulcan which may include lots of bugs._  
-[Vulcan Alpha 0.2.2](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.2 "Alpha 0.2.2")  
+[Vulcan Alpha 0.2.3](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.3 "Alpha 0.2.3")  
 
 ## Recommended
 _The recommended version of Vulcan that's most likely to work properly._  
@@ -51,6 +51,7 @@ _The recommended version of Vulcan that's most likely to work properly._
 
 ## Older
 _Older versions of Vulcan._  
+[Vulcan Alpha 0.2.2](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.2 "Alpha 0.2.2")  
 [Vulcan Alpha 0.2.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.1 "Alpha 0.2.1")  
 [Vulcan Alpha 0.2.0](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.2.0 "Alpha 0.2.0")  
 [Vulcan Alpha 0.1.1](https://github.com/Pantonshire/Vulcan/releases/tag/alpha-0.1.1 "Alpha 0.1.1")  
