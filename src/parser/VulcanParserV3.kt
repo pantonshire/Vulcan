@@ -326,6 +326,20 @@ object VulcanParserV3 {
                 .replace(Regex("(\\s+)(or)(\\s+)"), "||")
                 //Not
                 .replace(Regex("(\\s+|^)(not)(\\s+)"), "!!")
+                //Addition
+                .replace(Regex("(\\s*)(\\+)(\\s*)"), "++")
+                //Subtraction
+                //TODO: Currently breaks negative numbers
+//                .replace(Regex("(\\s*)(-)(\\s*)"), "--")
+                //Multiplication
+                .replace(Regex("(\\s*)(\\*)(\\s*)"), "**")
+                //Division
+                .replace(Regex("(\\s*)(/)(\\s*)"), "//")
+                .replace(Regex("(\\s*)(÷)(\\s*)"), "//")
+                //Powers
+                .replace(Regex("(\\s*)(\\^)(\\s*)"), "^^")
+                //Modulo
+                .replace(Regex("(\\s+)(mod)(\\s+)"), "%%")
                 //Remove unnecessary whitespace
                 .trim()
     }

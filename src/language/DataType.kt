@@ -23,12 +23,97 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
 
     fun toJava(value: String, variables: Map<String, VulcanObject>): String {
         //Arithmetic
-        if(this == INTEGER || this == FLOAT) {
+        if(this.isNumerical()) {
+
+            //Powers
+            val splitPow = value.split("^^")
+            if(splitPow.size == 2) {
+
+                val typeA = VulcanUtils.inferType(splitPow[0], variables)
+                val typeB = VulcanUtils.inferType(splitPow[1], variables)
+
+                if(typeA.isNumerical() && typeB.isNumerical()) {
+                    val left = typeA.toJava(splitPow[0].trim(), variables)
+                    val right = typeB.toJava(splitPow[1].trim(), variables)
+                    return "Math.pow($left, $right)"
+                }
+
+                else {
+                    throw IllegalArgumentException("cannot raise ${typeA.typeName} to ${typeB.typeName}")
+                }
+            } else if(splitPow.size > 2) {
+
+            }
+
+            //Multiplication
+            val splitMply = value.split("**")
+            if(splitMply.size > 1) {
+                var statementJava = ""
+                splitMply.asSequence().forEach {
+                    if(statementJava.isNotEmpty()) {
+                        statementJava += " * "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                return statementJava
+            }
+
+            //Division
+            val splitDiv = value.split("//")
+            if(splitDiv.size > 1) {
+                var statementJava = ""
+                splitDiv.asSequence().forEach {
+                    if(statementJava.isNotEmpty()) {
+                        statementJava += " / "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                return statementJava
+            }
+
+            //Modulo
+            val splitMod = value.split("%%")
+            if(splitMod.size > 1) {
+                var statementJava = "("
+                splitMod.asSequence().forEach {
+                    if(statementJava.length > 1) {
+                        statementJava += " % "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                statementJava += ")"
+                return statementJava
+            }
+
+            //Addition
+            val splitAdd = value.split("++")
+            if(splitAdd.size > 1) {
+                var statementJava = ""
+                splitAdd.asSequence().forEach {
+                    if(statementJava.isNotEmpty()) {
+                        statementJava += " + "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                return statementJava
+            }
+
+            //Subtraction
+            val splitSub = value.split("++")
+            if(splitSub.size > 1) {
+                var statementJava = ""
+                splitSub.asSequence().forEach {
+                    if(statementJava.isNotEmpty()) {
+                        statementJava += " - "
+                    }
+                    statementJava += toJava(it.trim(), variables)
+                }
+                return statementJava
+            }
 
         }
 
-        //Boolean expressions (world's messiest code)
-        //TODO: CLEAN THIS UP
+        //Boolean expressions
         //TODO: && and || are the wrong way around
         //TODO: Brackets e.g. (a or b) and (i < j)
         if(this == BOOLEAN) {
