@@ -31,7 +31,12 @@ object VulcanParserV3 {
 
                     //Actions (tell x to y)
                     return if(firstWord == "tell") {
-                        val actionAndArgs = splitActionArguments(parseVariableV2(operation.second))
+
+                        val actionAndArgs: MutableList<String> = mutableListOf()
+                        splitActionArguments(operation.second.trim()).asSequence()
+                                .mapTo(actionAndArgs, { rawVariable: String -> parseVariableV2(rawVariable) })
+
+//                        val actionAndArgs = splitActionArguments(parseVariableV2(operation.second))
                         val action = actionAndArgs[0]
                         val args = actionAndArgs.subList(1, actionAndArgs.size).toTypedArray()
 
@@ -373,11 +378,11 @@ object VulcanParserV3 {
                     //Less than
                     currentPart.endsWith(" is less than ")      -> "${currentPart.removeSuffix(" is less than ")}<"
                     currentPart.endsWith(" is smaller than ")   -> "${currentPart.removeSuffix(" is smaller than ")}<"
-                    it == '<'                                         -> "${currentPart.removeSuffix("<")}<"
+                    it == '<'                                         -> "${currentPart.removeSuffix("<").trim()}<"
                     //Greater than
                     currentPart.endsWith(" is greater than ")   -> "${currentPart.removeSuffix(" is greater than ")}>"
                     currentPart.endsWith(" is more than ")      -> "${currentPart.removeSuffix(" is more than ")}>"
-                    it == '>'                                         -> "${currentPart.removeSuffix(">")}>"
+                    it == '>'                                         -> "${currentPart.removeSuffix(">").trim()}>"
                     //Not equal
                     currentPart.endsWith(" is not equal to ")   -> "${currentPart.removeSuffix(" is not equal to ")}!="
                     currentPart.endsWith(" does not equal ")    -> "${currentPart.removeSuffix(" does not equal ")}!="
@@ -392,28 +397,28 @@ object VulcanParserV3 {
                     currentPart == "not "                             -> "!!"
                     currentPart == "not("                             -> "!!("
                     //Addition
-                    it == '+'                                         -> "${currentPart.removeSuffix("+")}++"
+                    it == '+'                                         -> "${currentPart.removeSuffix("+").trim()}++"
                     //Multiplication
-                    it == '*'                                         -> "${currentPart.removeSuffix("*")}**"
+                    it == '*'                                         -> "${currentPart.removeSuffix("*").trim()}**"
                     //Division
-                    it == '/'                                         -> "${currentPart.removeSuffix("/")}//"
+                    it == '/'                                         -> "${currentPart.removeSuffix("/").trim()}//"
                     //Powers
-                    it == '^'                                         -> "${currentPart.removeSuffix("^")}^^"
+                    it == '^'                                         -> "${currentPart.removeSuffix("^").trim()}^^"
                     //Modulo
                     currentPart.endsWith(" mod ")               -> "${currentPart.removeSuffix(" mod ")}%%"
                     //Subtraction
-                    currentPart.endsWith("-")
+                    it == '-'
                         && last != null
                         && (last!!.isDigit()
                             || last!!.isLetter()
                             || last == ')'
-                            || last == '_')                           -> "${currentPart.removeSuffix("-")}--"
+                            || last == '_')                           -> "${currentPart.removeSuffix("-").trim()}--"
                     //Anything else
                     else                                              -> ""
-                }.replace(Regex("\\s+"), "")
+                }.trim()
 
                 if(newPart.isNotEmpty()) {
-                    println("PART: \"$currentPart\" -> \"$newPart\"")
+//                    println("PART: \"$currentPart\" -> \"$newPart\"")
                     parsed += newPart
                     currentPart = ""
                     last = null
@@ -426,8 +431,8 @@ object VulcanParserV3 {
             }
         }
 
-        parsed += currentPart.replace(Regex("\\s+"), "")
-        return parsed
+        parsed += currentPart.trim()
+        return parsed.trim()
     }
 
 }
