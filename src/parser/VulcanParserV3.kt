@@ -31,14 +31,14 @@ object VulcanParserV3 {
 
                     //Actions (tell x to y)
                     return if(firstWord == "tell") {
-                        val actionAndArgs = splitActionArguments(parseVariable(operation.second))
+                        val actionAndArgs = splitActionArguments(parseVariableV2(operation.second))
                         val action = actionAndArgs[0]
                         val args = actionAndArgs.subList(1, actionAndArgs.size).toTypedArray()
 
                         ActionLine(
                                 fileName,
                                 lineNo,
-                                parseVariable(operation.first),
+                                parseVariableV2(operation.first),
                                 action,
                                 args
                         )
@@ -49,8 +49,8 @@ object VulcanParserV3 {
                         SetLine(
                                 fileName,
                                 lineNo,
-                                parseVariable(operation.first),
-                                parseVariable(operation.second)
+                                parseVariableV2(operation.first),
+                                parseVariableV2(operation.second)
                         )
                     }
 
@@ -64,7 +64,7 @@ object VulcanParserV3 {
                 val suffix = if(firstWord == "if") "then" else "do"
                 if(finalParse.endsWith(suffix)) {
 
-                    val condition = parseVariable(finalParse.removeSuffix(suffix).trim())
+                    val condition = parseVariableV2(finalParse.removeSuffix(suffix).trim())
 
                     if(condition.isNotEmpty()) {
 
@@ -98,7 +98,7 @@ object VulcanParserV3 {
             //Else if and else
             "otherwise" -> {
                 if(finalParse.startsWith("if") && finalParse.endsWith("then")) {
-                    val condition = parseVariable(finalParse.removePrefix("if").removeSuffix("then").trim())
+                    val condition = parseVariableV2(finalParse.removePrefix("if").removeSuffix("then").trim())
                     if(condition.isNotEmpty()) {
                         return ElseIfLine(fileName, lineNo, condition)
                     } else {
@@ -116,7 +116,7 @@ object VulcanParserV3 {
                 //For loop with implicit counter
                 val suffix = "times"
                 if(finalParse.endsWith(suffix)) {
-                    val loops = parseVariable(finalParse.removeSuffix(suffix).trim())
+                    val loops = parseVariableV2(finalParse.removeSuffix(suffix).trim())
                     if(loops.isNotEmpty()) {
                         return ForLine(fileName, lineNo, loops, null)
                     } else {
@@ -128,7 +128,7 @@ object VulcanParserV3 {
                     val counterSeparator = "using a counter variable called"
                     val split = splitByFirst(finalParse, counterSeparator)
                     if(split.first.isNotEmpty() && split.first.endsWith(suffix) && split.second.isNotEmpty()) {
-                        val loops = parseVariable(split.first.removeSuffix(suffix).trim())
+                        val loops = parseVariableV2(split.first.removeSuffix(suffix).trim())
                         if(loops.isNotEmpty()) {
                             return ForLine(fileName, lineNo, loops, split.second)
                         } else {
@@ -152,7 +152,7 @@ object VulcanParserV3 {
             //Declaration
             "new" -> {
                 val split1 = splitByFirst(finalParse, "=", whitespace = false)
-                val value = parseVariable(split1.second).trim()
+                val value = parseVariableV2(split1.second).trim()
                 val split2 = splitByFirst(split1.first, "called")
                 val name = split2.second
                 val mutability = when {
@@ -305,6 +305,7 @@ object VulcanParserV3 {
     }
 
 
+    @Deprecated("Does not support subtraction, will match strings")
     private fun parseVariable(rawVariable: String): String {
         return rawVariable
                 //Field references
@@ -350,7 +351,6 @@ object VulcanParserV3 {
 
     fun parseVariableV2(rawVariable: String): String {
 
-//        val parts: MutableList<String> = mutableListOf()
         var parsed = ""
         var currentPart = ""
         var quote = false
