@@ -1,4 +1,10 @@
 # Changelog
+## Alpha 0.2.4
+Released on 15th April 2018
+* Added a "-" operator
+* Fixed a bug where arithmetic and boolean operators would be matched even if they were inside strings
+* Minor syntax change for boolean expressions: `isn't equal to` is now `is not equal to`
+
 ## Alpha 0.2.3
 Released on 15th April 2018
 * Added arithmetic operators: +, *, /, ^ and mod
