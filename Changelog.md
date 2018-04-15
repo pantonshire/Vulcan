@@ -1,6 +1,6 @@
 # Changelog
 ## Alpha 0.2.3
-In development
+Released on 15th April 2018
 * Added arithmetic operators: +, *, /, ^ and mod
 * Fixed an issue where entity's health attribute would not be cast to an int in compiled code
 * Added an "id" attribute for items and blocks
