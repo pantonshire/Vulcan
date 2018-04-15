@@ -9,7 +9,6 @@ import language.objects.*
 
 object VulcanParserV3 {
 
-
     fun parseLine(fileName: String, lineNo: Int, raw: String, validBehaviours: Array<Behaviour>): Line {
 
         //Parse 0: remove comments
@@ -346,6 +345,78 @@ object VulcanParserV3 {
                 .replace(Regex("(\\s+)(mod)(\\s+)"), "%%")
                 //Remove unnecessary whitespace
                 .trim()
+    }
+
+
+    fun parseVariableV2(rawVariable: String): String {
+
+//        val parts: MutableList<String> = mutableListOf()
+        var parsed = ""
+        var currentPart = ""
+        var quote = false
+
+        rawVariable.asSequence().forEach {
+            if(it == '\"' || it == '“' || it == '”') {
+                quote = !quote
+            }
+
+            if(!it.isWhitespace() || currentPart.isNotEmpty()) {
+                currentPart += it
+            }
+
+            if(!quote) {
+
+                val newPart = when {
+                    //Field references
+                    currentPart.endsWith("\'s ")                -> "${currentPart.removeSuffix("\'s ")}."
+                    //Less than
+                    currentPart.endsWith(" is less than ")      -> "${currentPart.removeSuffix(" is less than ")}<"
+                    currentPart.endsWith(" is smaller than ")   -> "${currentPart.removeSuffix(" is smaller than ")}<"
+                    it == '<'                                         -> "${currentPart.removeSuffix("<")}<"
+                    //Greater than
+                    currentPart.endsWith(" is greater than ")   -> "${currentPart.removeSuffix(" is greater than ")}>"
+                    currentPart.endsWith(" is more than ")      -> "${currentPart.removeSuffix(" is more than ")}>"
+                    it == '>'                                         -> "${currentPart.removeSuffix(">")}>"
+                    //Not equal
+                    currentPart.endsWith(" is not equal to ")   -> "${currentPart.removeSuffix(" is not equal to ")}!="
+                    currentPart.endsWith(" does not equal ")    -> "${currentPart.removeSuffix(" does not equal ")}!="
+                    //Equal
+                    currentPart.endsWith(" is equal to ")       -> "${currentPart.removeSuffix(" is equal to ")}=="
+                    currentPart.endsWith(" equals ")            -> "${currentPart.removeSuffix(" equals ")}=="
+                    //And
+                    currentPart.endsWith(" and ")               -> "${currentPart.removeSuffix(" and ")}&&"
+                    //Or
+                    currentPart.endsWith(" or ")                -> "${currentPart.removeSuffix(" or ")}||"
+                    //Not
+                    currentPart == "not "                             -> "!!"
+                    currentPart == "not("                             -> "!!("
+                    //Addition
+                    currentPart.endsWith("+")                   -> "${currentPart.removeSuffix("+")}++"
+                    //Subtraction
+                    currentPart.endsWith("-")                   -> "${currentPart.removeSuffix("-")}--"
+                    //Multiplication
+                    currentPart.endsWith("*")                   -> "${currentPart.removeSuffix("*")}**"
+                    //Division
+                    currentPart.endsWith("*")                   -> "${currentPart.removeSuffix("/")}//"
+                    //Powers
+                    currentPart.endsWith("^")                   -> "${currentPart.removeSuffix("^")}^^"
+                    //Modulo
+                    currentPart.endsWith("%")                   -> "${currentPart.removeSuffix("%")}%%"
+                    //Anything else
+                    else                                              -> ""
+                }.replace(Regex("\\s+"), "")
+
+                if(newPart.isNotEmpty()) {
+                    println("PART: \"$currentPart\" -> \"$newPart\"")
+                    parsed += newPart
+                    currentPart = ""
+                }
+
+            }
+        }
+
+        parsed += currentPart.replace(Regex("\\s+"), "")
+        return parsed
     }
 
 }

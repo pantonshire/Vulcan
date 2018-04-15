@@ -1,4 +1,4 @@
-import utils.VulcanUtils
+import parser.VulcanParserV3
 
 const val VERSION = "alpha 0.2.0"
 
@@ -16,32 +16,5 @@ fun main(args: Array<String>) {
 //        }
 //    }
 
-//    val inp = "not x"
-//    val split = inp.replace(Regex("(\\s+|^)(not)(\\s+)"), "!!").split("!!")
-//    println(split.size)
-
-//    val inp = "if then == true then"
-//    val split = VulcanParserV2.splitLine(inp)
-//    split.asSequence().forEach {
-//        println(it)
-//    }
-
-//    val inp = "tell \tself's player\t\tto    jump up in the air like they just don\'t care"
-//    VulcanParserV3.splitLine(inp).asSequence().forEach {
-//        println(it)
-//    }
-
-//    val inp = "repeat a million times using a counter variable called bob using"
-//    val inp = "while condition == true do"
-//    VulcanParserV3.splitLine(inp).asSequence().forEach {
-//        println(it)
-//    }
-
-//    VulcanParserV3.splitActionArguments("explode with strength (10 + 2) at [x: 3, y: 5, z: -1208.6]").asSequence().forEach {
-//        println("\"$it\"")
-//    }
-
-    VulcanUtils.split("foo+baa)+(7+", "+").asSequence().forEach {
-        println("\"$it\"")
-    }
+    println(VulcanParserV3.parseVariableV2("not foo and not(baa + 200 < 7 % 10^5.5) or lorem does not equal 70"))
 }
