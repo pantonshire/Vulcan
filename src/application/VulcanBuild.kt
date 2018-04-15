@@ -14,7 +14,7 @@ object VulcanBuild {
 
     var stacktrace = false
     var parserVersion = 3
-    var showPseudocode = false
+    var showPseudocode = true
 
     fun build(sourceDirectory: String) {
         try {

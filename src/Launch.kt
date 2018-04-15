@@ -1,6 +1,4 @@
-import application.VulcanBuild
-import parser.VulcanParserV2
-import parser.VulcanParserV3
+import utils.VulcanUtils
 
 const val VERSION = "alpha 0.2.0"
 
@@ -42,4 +40,8 @@ fun main(args: Array<String>) {
 //    VulcanParserV3.splitActionArguments("explode with strength (10 + 2) at [x: 3, y: 5, z: -1208.6]").asSequence().forEach {
 //        println("\"$it\"")
 //    }
+
+    VulcanUtils.split("foo+baa)+(7+", "+").asSequence().forEach {
+        println("\"$it\"")
+    }
 }

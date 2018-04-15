@@ -97,4 +97,36 @@ object VulcanUtils {
 
         return containsLetter
     }
+
+    /** Splits the string by the given separator. Split points will always be outside of quotes,
+     * parentheses and brackets. */
+    fun split(toSplit: String, separator: String): List<String> {
+        val args: MutableList<String> = mutableListOf()
+        var quote = false
+        var vector = 0
+        var parenthesis = 0
+        var currentString = ""
+
+        toSplit.asSequence().forEach {
+            when(it) {
+                '\"', '“', '”'  -> quote = !quote
+                '['             -> ++vector
+                ']'             -> --vector
+                '('             -> ++parenthesis
+                ')'             -> --parenthesis
+            }
+
+            currentString += it
+
+            if(currentString.endsWith(separator) && !quote && vector == 0 && parenthesis == 0) {
+                args += currentString.removeSuffix(separator)
+                currentString = ""
+            }
+        }
+
+        args += currentString
+
+        return args
+    }
+
 }

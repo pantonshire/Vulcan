@@ -5,6 +5,8 @@ In development
 * Fixed an issue where entity's health attribute would not be cast to an int in compiled code
 * Added an "id" attribute for items and blocks
 * Compilation will now fail if no name was provided for an item or block
+* Added support for parentheses
+* Fixed a bug that prevented "not" from working when it immediately followed "and" or "or"
 
 ## Alpha 0.2.2
 Released on 14th April 2018

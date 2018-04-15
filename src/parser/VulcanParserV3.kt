@@ -320,12 +320,16 @@ object VulcanParserV3 {
                 .replace(Regex("(\\s+)(isn\'t equal to|does not equal)(\\s+)"), "!=")
                 //Equal
                 .replace(Regex("(\\s+)(is equal to|equals)(\\s+)"), "==")
+                //And not
+                .replace(Regex("(\\s+)(and)(\\s+)(not)(\\s+)"), "&&!!")
+                //Or not
+                .replace(Regex("(\\s+)(or)(\\s+)(not)(\\s+)"), "||!!")
+                //Not
+                .replace(Regex("(\\s+|^)(not)(\\s+)"), "!!")
                 //And
                 .replace(Regex("(\\s+)(and)(\\s+)"), "&&")
                 //Or
                 .replace(Regex("(\\s+)(or)(\\s+)"), "||")
-                //Not
-                .replace(Regex("(\\s+|^)(not)(\\s+)"), "!!")
                 //Addition
                 .replace(Regex("(\\s*)(\\+)(\\s*)"), "++")
                 //Subtraction

@@ -13,20 +13,21 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
     ENTITY      ("entity", "EntityLivingBase"),
     PLAYER      ("player", "EntityPlayer"),
     WORLD       ("world", "World"),
-    //TODO: Add support for the following
-    POTION      ("effect", "PotionEffect"),
     ITEM        ("item", "Item"),
-    BLOCK       ("block", "Block")
+    BLOCK       ("block", "Block"),
+    //TODO: Add support for the following
+    POTION      ("effect", "PotionEffect")
     ;
 
     private val vectorPrefixes: Array<String> = arrayOf("x:", "y:", "z:")
 
     fun toJava(value: String, variables: Map<String, VulcanObject>): String {
+
         //Arithmetic
         if(this.isNumerical()) {
 
             //Powers
-            val splitPow = value.split("^^")
+            val splitPow = VulcanUtils.split(value, "^^")
             if(splitPow.size == 2) {
 
                 val typeA = VulcanUtils.inferType(splitPow[0], variables)
@@ -42,11 +43,11 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
                     throw IllegalArgumentException("cannot raise ${typeA.typeName} to ${typeB.typeName}")
                 }
             } else if(splitPow.size > 2) {
-
+                throw IllegalArgumentException("invalid syntax: cannot chain exponents")
             }
 
             //Multiplication
-            val splitMply = value.split("**")
+            val splitMply = VulcanUtils.split(value, "**")
             if(splitMply.size > 1) {
                 var statementJava = ""
                 splitMply.asSequence().forEach {
@@ -59,7 +60,7 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //Division
-            val splitDiv = value.split("//")
+            val splitDiv = VulcanUtils.split(value, "//")
             if(splitDiv.size > 1) {
                 var statementJava = ""
                 splitDiv.asSequence().forEach {
@@ -72,7 +73,7 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //Modulo
-            val splitMod = value.split("%%")
+            val splitMod = VulcanUtils.split(value, "%%")
             if(splitMod.size > 1) {
                 var statementJava = "("
                 splitMod.asSequence().forEach {
@@ -86,7 +87,7 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //Addition
-            val splitAdd = value.split("++")
+            val splitAdd = VulcanUtils.split(value, "++")
             if(splitAdd.size > 1) {
                 var statementJava = ""
                 splitAdd.asSequence().forEach {
@@ -99,7 +100,7 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //Subtraction
-            val splitSub = value.split("++")
+            val splitSub = VulcanUtils.split(value, "++")
             if(splitSub.size > 1) {
                 var statementJava = ""
                 splitSub.asSequence().forEach {
@@ -114,40 +115,36 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
         }
 
         //Boolean expressions
-        //TODO: && and || are the wrong way around
-        //TODO: Brackets e.g. (a or b) and (i < j)
         if(this == BOOLEAN) {
 
             //or
-            val splitOr = value.split("||")
+            val splitOr = VulcanUtils.split(value, "||")
             if (splitOr.size > 1) {
-                var statementJava = "("
+                var statementJava = ""
                 splitOr.asSequence().forEach {
-                    if (statementJava.length > 1) {
+                    if (statementJava.isNotEmpty()) {
                         statementJava += " || "
                     }
                     statementJava += toJava(it.trim(), variables)
                 }
-                statementJava += ")"
                 return statementJava
             }
 
             //and
-            val splitAnd = value.split("&&")
+            val splitAnd = VulcanUtils.split(value, "&&")
             if (splitAnd.size > 1) {
-                var statementJava = "("
+                var statementJava = ""
                 splitAnd.asSequence().forEach {
-                    if (statementJava.length > 1) {
+                    if (statementJava.isNotEmpty()) {
                         statementJava += " && "
                     }
                     statementJava += toJava(it.trim(), variables)
                 }
-                statementJava += ")"
                 return statementJava
             }
 
             //not
-            val splitNot = value.split("!!")
+            val splitNot = VulcanUtils.split(value, "!!")
             if (splitNot.size == 2) {
                 if(splitNot[0].isNotEmpty()) {
                     throw IllegalArgumentException("invalid syntax")
@@ -159,14 +156,14 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //isn't
-            val splitIsNot = value.split("!=")
+            val splitIsNot = VulcanUtils.split(value, "!=")
             if (splitIsNot.size == 2) {
                 val typeA = VulcanUtils.inferType(splitIsNot[0], variables)
                 val typeB = VulcanUtils.inferType(splitIsNot[1], variables)
                 if (typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
                     val left = typeA.toJava(splitIsNot[0].trim(), variables)
                     val right = typeB.toJava(splitIsNot[1].trim(), variables)
-                    return "($left != $right)"
+                    return "$left != $right"
                 } else {
                     throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
                 }
@@ -175,14 +172,14 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //is
-            val splitIs = value.split("==")
+            val splitIs = VulcanUtils.split(value, "==")
             if (splitIs.size == 2) {
                 val typeA = VulcanUtils.inferType(splitIs[0], variables)
                 val typeB = VulcanUtils.inferType(splitIs[1], variables)
                 if (typeA.comparableWith(typeB) && typeB.comparableWith(typeA)) {
                     val left = typeA.toJava(splitIs[0].trim(), variables)
                     val right = typeB.toJava(splitIs[1].trim(), variables)
-                    return "($left == $right)"
+                    return "$left == $right"
                 } else {
                     throw IllegalArgumentException("cannot compare ${typeA.typeName} with ${typeB.typeName}")
                 }
@@ -191,14 +188,14 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //less than
-            val splitLess = value.split("<")
+            val splitLess = VulcanUtils.split(value, "<")
             if (splitLess.size == 2) {
                 val typeA = VulcanUtils.inferType(splitLess[0], variables)
                 val typeB = VulcanUtils.inferType(splitLess[1], variables)
                 if (typeA.isNumerical() && typeB.isNumerical()) {
                     val left = typeA.toJava(splitLess[0].trim(), variables)
                     val right = typeB.toJava(splitLess[1].trim(), variables)
-                    return "($left < $right)"
+                    return "$left < $right"
                 } else {
                     throw IllegalArgumentException("left and right hand side of < must both be numerical (integers or decimals)")
                 }
@@ -207,20 +204,26 @@ enum class DataType(val typeName: String, val javaTypeName: String) {
             }
 
             //greater than
-            val splitGreater = value.split(">")
+            val splitGreater = VulcanUtils.split(value, ">")
             if (splitGreater.size == 2) {
                 val typeA = VulcanUtils.inferType(splitGreater[0], variables)
                 val typeB = VulcanUtils.inferType(splitGreater[1], variables)
                 if (typeA.isNumerical() && typeB.isNumerical()) {
                     val left = typeA.toJava(splitGreater[0].trim(), variables)
                     val right = typeB.toJava(splitGreater[1].trim(), variables)
-                    return "($left > $right)"
+                    return "$left > $right"
                 } else {
                     throw IllegalArgumentException("left and right hand side of > must both be numerical (integers or decimals)")
                 }
             } else if (splitGreater.size > 2) {
                 throw IllegalArgumentException("invalid syntax")
             }
+        }
+
+        //Parentheses
+        if(value.startsWith("(") && value.endsWith(")")) {
+            val contentJava = toJava(value.removePrefix("(").removeSuffix(")").trim(), variables)
+            return "($contentJava)"
         }
 
         //Search for variable names and check data type
