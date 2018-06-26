@@ -1,4 +1,4 @@
-package com.~MODID~;
+package com.my_mod;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.EntityLivingBase;
@@ -48,5 +48,16 @@ public final class MessageUtils {
 
             entity.getEntityWorld().createExplosion(entity, entity.posX, entity.posY, entity.posZ, strength, true);
         }
+    }
+    
+    public static void launch(EntityPlayer player, double speed) {
+    	double pitch = Math.toRadians(player.rotationPitch);
+    	double yaw = -Math.toRadians(player.rotationYawHead);
+    	
+    	double x = speed * Math.cos(pitch) * Math.sin(yaw);
+    	double y = -speed * Math.sin(pitch);
+    	double z = speed * Math.cos(pitch) * Math.cos(yaw);
+    	
+    	player.setVelocity(x, y, z);
     }
 }
