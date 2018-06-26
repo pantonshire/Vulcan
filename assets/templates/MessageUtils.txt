@@ -1,4 +1,4 @@
-package com.my_mod;
+package com.~MODID~;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.EntityLivingBase;
