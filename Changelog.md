@@ -1,4 +1,8 @@
 # Changelog
+## Alpha 0.2.5
+Released on 26th June 2018  
+* Added a launch action to projectile the player
+
 ## Alpha 0.2.4
 Released on 15th April 2018
 * Added a "-" operator
