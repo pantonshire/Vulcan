@@ -14,7 +14,8 @@ class Player(name: String, java: String = name, cas: String? = null, mutable: Bo
             Pair("heal", 2),        //Recover health
             Pair("die", 0),         //Take unblockable fatal damage
             Pair("ride", 1),        //Ride an entity
-            Pair("explode", 3)      //Explode the player
+            Pair("explode", 3),     //Explode the player
+            Pair("launch", 3)       //Launch the player in the direction they're looking
     )
 
     override fun convertMessage(message: String, parameters: Array<String>, variables: Map<String, VulcanObject>): String {
@@ -90,6 +91,16 @@ class Player(name: String, java: String = name, cas: String? = null, mutable: Bo
                 if(parameters[0] == "with" && parameters[1] == "strength") {
                     val strength = DataType.FLOAT.toJava(parameters[2], variables)
                     return "MessageUtils.explode($java, $strength);"
+                }
+
+                throw IllegalArgumentException("invalid syntax")
+            }
+            
+            //Launch the player
+            "launch" -> {
+                if(parameters[0] == "with" && parameters[1] == "speed") {
+                    val speed = DataType.FLOAT.toJava(parameters[2], variables)
+                    return "MessageUtils.launch($java, $speed);"
                 }
 
                 throw IllegalArgumentException("invalid syntax")
